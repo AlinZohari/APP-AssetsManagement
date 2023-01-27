@@ -1,5 +1,5 @@
 {
-  "name": "cege0043-app",
+  "name": "pwd",
   "version": "1.0.0",
   "description": "Template repository for the app (front end) code for CEGE0043",
   "main": "app.js",
@@ -20,5 +20,12 @@
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
-  }
+  },
+  "keywords": [
+    "npm",
+    "install",
+    "express",
+    "--save"
+  ],
+  "devDependencies": {}
 }
