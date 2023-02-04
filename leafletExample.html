@@ -68,6 +68,22 @@ let myPolygon = L.polygon([
 }).addTo(mymap).bindPopup("I am a polygon in 2022.");
 console.log("added a polygon");
 
+//3.creating a geoJSON feature
+let geojsonFeature = {
+	"type":"Feature",
+	"properties":{
+		"name":"London",
+		"popupContent":"This is where UCL is based. We have on campus and off campus activity"
+	},
+	"geometry":{
+		"type":"Point",
+		"coordinates":[-0.118092,51.509865]
+	} 
+};
+//adding geoJSON feature to the map
+L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>")
+console.log("added a pinpoint with bold text");
+
 } //end of code lines adding the basic marker
 console.log("base map, circle and polygon had been created");
 
