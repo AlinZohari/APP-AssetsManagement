@@ -11,6 +11,12 @@ crossorigin=""></script>
 <style type="text/css">
 #mapid {height:180px;}
 </style>
+
+<!--The following links incorporate the CSS required for custom icon creation-->
+<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+<script src="js/leaflet.awesome-markers.js"></script>
+
 </head>
 
 <body>
@@ -66,7 +72,14 @@ addBasicMarkers();
 
 console.log("function to create markers in the map");
 function addBasicMarkers(){
-//1.add a circle
+
+//adding a custom marker
+let testMarkerPink = L.AwesomeMarkers.icon({
+	icon:'play',
+	markerColor:'pink'
+});
+
+//add a circle
 	L.circle([51.508,0.11],5000,{
 		color:'green',
 		fillColor:'#f03',
@@ -74,7 +87,7 @@ function addBasicMarkers(){
 	}).addTo(mymap).bindPopup("I am a circle.");
 console.log("added a circle");
 
-//2.add a polygon
+//add a polygon
 let myPolygon = L.polygon([
 	[51.709,-0.10],
 	[51.703,0.07],
@@ -87,7 +100,7 @@ let myPolygon = L.polygon([
 }).addTo(mymap).bindPopup("I am a polygon in 2022.");
 console.log("added a polygon");
 
-//3.creating a geoJSON feature
+//creating a geoJSON feature
 let geojsonFeature = {
 	"type":"Feature",
 	"properties":{
@@ -99,9 +112,14 @@ let geojsonFeature = {
 		"coordinates":[-0.133583,51.524776]
 	} 
 };
+
 //adding geoJSON feature to the map
-L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>")
-console.log("added a pinpoint with bold text");
+L.geoJSON(geojsonFeature,{
+	pointToLayer:function(feature,latlng){
+		return L.marker(latlng,{icon:testMarkerPink});
+	}
+}).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>");
+console.log("added a UCL pinpoint (custom pink) with bold text");
 
 } //end of code lines adding the basic marker
 console.log("base map, circle and polygon had been created");
