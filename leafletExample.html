@@ -27,13 +27,29 @@ crossorigin=""></script>
 <div id="mapid" style="width:600px;height:400px;"></div>
 
 
+
 <!--the following script will load the map and set the default view and zoom, as wel as loading the basemap title -->
 
 <script>
 "use strict";
 let mymap; //global variable to store the map
 
-console.log("function to initialise and create the map. Also call on another function that contain markers in the map");
+//create a custom popup as a global variable
+let popup = L.popup();
+
+//create an event detector to wait for the user's click event and then use the popup to show them where they clicked
+//note that you don't need to do any complicated maths to convert screen coordinated to real world coordinates - the Leaflet API does this for you
+
+console.log("function to show the coordinates latlong on click event");
+function onMapClick(e){
+	popup
+		.setLatLng(e.latlng)
+		.setContent("You clicked the map at " + e.latlng.toString())
+		.openOn(mymap);
+
+}
+
+console.log("function to initialise and create the basemap. Also call on other functions - onMapClick(), addBasicMarkers()");
 function loadLeafletMap(){
 mymap = L.map('mapid').setView([51.505,-0.09],13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
@@ -41,11 +57,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 	attribution:'&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(mymap);
 
+//now add the click event detector to the map- call on the function onMapClick
+mymap.on('click',onMapClick);
+
 //now call the code to add the markers
 addBasicMarkers();
 } //end of code lines adding the leaflet map
 
-console.log("function to create markers in the map - circle and polygon");
+console.log("function to create markers in the map");
 function addBasicMarkers(){
 //1.add a circle
 	L.circle([51.508,0.11],5000,{
@@ -84,7 +103,7 @@ let geojsonFeature = {
 L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>")
 console.log("added a pinpoint with bold text");
 
-};//end of code lines adding the basic marker
+} //end of code lines adding the basic marker
 console.log("base map, circle and polygon had been created");
 
 window.onload=loadLeafletMap //to call on the loadLeafletMap while the webpage is loaded
