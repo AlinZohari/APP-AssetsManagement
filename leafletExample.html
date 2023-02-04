@@ -77,14 +77,14 @@ let geojsonFeature = {
 	},
 	"geometry":{
 		"type":"Point",
-		"coordinates":[-0.118092,51.509865]
+		"coordinates":[-0.133583,51.524776]
 	} 
 };
 //adding geoJSON feature to the map
 L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+" "+geojsonFeature.properties.popupContent+"<b>")
 console.log("added a pinpoint with bold text");
 
-} //end of code lines adding the basic marker
+};//end of code lines adding the basic marker
 console.log("base map, circle and polygon had been created");
 
 window.onload=loadLeafletMap //to call on the loadLeafletMap while the webpage is loaded
