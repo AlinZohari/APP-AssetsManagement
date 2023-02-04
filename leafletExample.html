@@ -33,6 +33,7 @@ crossorigin=""></script>
 "use strict";
 let mymap; //global variable to store the map
 
+console.log("function to initialise and create the map. Also call on another function that contain markers in the map");
 function loadLeafletMap(){
 mymap = L.map('mapid').setView([51.505,-0.09],13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
@@ -44,15 +45,15 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 addBasicMarkers();
 } //end of code lines adding the leaflet map
 
-function addBasicmarkers(){
+console.log("function to create markers in the map - circle and polygon");
+function addBasicMarkers(){
 //1.add a circle
 	L.circle([51.508,0.11],5000,{
 		color:'green',
 		fillColor:'#f03',
 		fillOpacity:0.8
 	}).addTo(mymap).bindPopup("I am a circle.");
-
-	console.log("added a circle");
+console.log("added a circle");
 
 //2.add a polygon
 let myPolygon = L.polygon([
@@ -65,7 +66,12 @@ let myPolygon = L.polygon([
 	fillColor:'#f03',
 	fillOpacity:0.5
 }).addTo(mymap).bindPopup("I am a polygon in 2022.");
+console.log("added a polygon");
+
 } //end of code lines adding the basic marker
+console.log("base map, circle and polygon had been created");
+
+window.onload=loadLeafletMap //to call on the loadLeafletMap while the webpage is loaded
 
 </script>
 </body>
