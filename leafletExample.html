@@ -17,6 +17,12 @@ crossorigin=""></script>
 <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
 <script src="js/leaflet.awesome-markers.js"></script>
 
+<!--JQuery: is an Javascript library that makes writing Javascript easier by allowing you to use pre-written code to download data via AJAX -->
+<script
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -124,7 +130,38 @@ console.log("added a UCL pinpoint (custom pink) with bold text");
 } //end of code lines adding the basic marker
 console.log("base map, circle and polygon had been created");
 
-window.onload=loadLeafletMap //to call on the loadLeafletMap while the webpage is loaded
+
+//function to request and map Earthquake data
+let earthquakeLayer; //global variable
+
+function getEarthquakeData(){
+	let layerURL = 
+	"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
+	$.ajax({url:layerURL,crossDomain:true,success:function(result){
+			console.log(result);//check the data is correct
+
+			//add the JSON layer onto the map - it will appear using the default icons
+			earthquakeLayer = L.geoJson(result).addTo(mymap);
+
+			//change the map zoom so that all the data is shown
+			mymap.fitBounds(earthquakeLayer.getBounds());
+
+		} //end of the inner function
+	
+	}); //end of the ajax request
+
+} //end of the getEarthquakeData function
+
+
+//loading the leaflet map and Eartquake (AFTER)
+document.addEventListener('DOMContentLoaded', function(){
+	loadMap();
+},false);
+
+function loadMap(){
+	loadLeafletMap();
+	getEarthquakeData();
+}
 
 </script>
 </body>
