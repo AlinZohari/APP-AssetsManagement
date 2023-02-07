@@ -38,7 +38,11 @@ crossorigin="anonymous"></script>
 <!--the mapid div will hold the map-->
 <div id="mapid" style="width:600px;height:400px;"></div>
 
+<!--loading the Earthquake daata on demand-->
 <button id="loadEarthquakeData" name="loadEarthquakeData" onclick="getEarthquakeData()">Click here to load the Earthquake data</button>
+
+<!--removing the map data on demand-->
+<button id="removeEarthquakeData" name="removeEarthquakeData" onclick="removeEarthquakeData()">Click here to remove the Earthquake data</button>
 
 
 <!--the following script will load the map and set the default view and zoom, as wel as loading the basemap title -->
@@ -183,6 +187,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function loadMap(){
 	loadLeafletMap();
+}
+
+function removeEarthquakeData(){
+	alert("remove the earthquake data here");
 }
 
 </script>
