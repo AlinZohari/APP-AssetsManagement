@@ -24,10 +24,11 @@ src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"></script>
 
-<!--calling on the basicMap.js, earthquakes.js and busstops.js file in js sub-directory-->
+<!--calling on the basicMap.js, earthquakes.js, busstops.js and ethernet.js file in js sub-directory-->
 <script src="js/basicMap.js"></script>
 <script src="js/earthquakes.js"></script>
 <script src="js/busstops.js"></script>
+<script src="js/ethernet.js"></script>
 
 
 </head>
@@ -56,6 +57,12 @@ crossorigin="anonymous"></script>
 
 <!--removing the busstops data on demand-->
 <button id="removeBusstops" name="removeBusstops" onclick="removeBusstopsData()">Click here to remove the Busstops data</button>
+
+<!--loading the ethernet on demand-->
+<button id="loadEthernet" name="loadEthernet" onclick="getEthernetData()">Click here to load the Ethernet data</button>
+
+<!--removing the busstops data on demand-->
+<button id="removeEthernet" name="removeEthernet" onclick="removeEthernetData()">Click here to remove the Busstops data</button>
 
 <!--the following script will load the map and set the default view and zoom, as wel as loading the basemap title -->
 <script>
