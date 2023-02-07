@@ -1,5 +1,6 @@
 <html>
 <head>
+
 <!--code for Leaflet-->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
 integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
@@ -23,18 +24,19 @@ src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"></script>
 
-<!--calling on the basicMap.js and earthquakes.js file in js sub-directory-->
+<!--calling on the basicMap.js, earthquakes.js and busstops.js file in js sub-directory-->
 <script src="js/basicMap.js"></script>
 <script src="js/earthquakes.js"></script>
+<script src="js/busstops.js"></script>
 
 
 </head>
 
 <body>
+
 <!--basic information DIV-->
 <div>
 	This is my first HTML Page
-
 	My name is: Alin Zohari
 	My UCL username is: uceszoh
 	My GitHub username is: AlinZohari
@@ -49,11 +51,15 @@ crossorigin="anonymous"></script>
 <!--removing the map data on demand-->
 <button id="removeEarthquakeData" name="removeEarthquakeData" onclick="removeEarthquakeData()">Click here to remove the Earthquake data</button>
 
+<!--loading the busstops on demand-->
+<button id="loadBusstops" name="loadBusstops" onclick="getBusstopsData()">Click here to load the Bus Stops data</button>
+
+<!--removing the busstops data on demand-->
+<button id="removeBusstops" name="removeBusstops" onclick="removeBusstopsData()">Click here to remove the Busstops data</button>
+
 <!--the following script will load the map and set the default view and zoom, as wel as loading the basemap title -->
 <script>
 "use strict";
-
-
 //code to load the map when the page is loaded
 //loading the leaflet map and Eartquake (AFTER)
 document.addEventListener('DOMContentLoaded', function(){
@@ -64,7 +70,7 @@ function loadMap(){
 	loadLeafletMap();
 }//end of loadMap
 
-
 </script>
+
 </body>
 </html>
