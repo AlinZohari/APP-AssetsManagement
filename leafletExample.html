@@ -189,8 +189,15 @@ function loadMap(){
 	loadLeafletMap();
 }
 
+//function to remove Earthquake data
 function removeEarthquakeData(){
-	alert("remove the earthquake data here");
+	try{
+		alert("Earthquake data will be removed");
+		mymap.removeLayer(earthquakeLayer);
+	}
+	catch(err){
+		alert("Layer doesn't exist:" + err);
+	}
 }
 
 </script>
