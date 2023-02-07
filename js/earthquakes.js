@@ -1,7 +1,5 @@
 "use strict";
 
-let mymap; //global variable to store the map
-
 //function to request and map Earthquake data
 let earthquakeLayer; //global variable
 
@@ -43,5 +41,16 @@ function getEarthquakeData(){
 		icon:'play',
 		markerColor:'pink'
 	});
-
 } //end of the getEarthquakeData function
+
+
+//function to remove Earthquake data
+function removeEarthquakeData(){
+	try{
+		alert("Earthquake data will be removed");
+		mymap.removeLayer(earthquakeLayer);
+	}
+	catch(err){
+		alert("Layer doesn't exist:" + err);
+	}
+}
