@@ -62,6 +62,8 @@ let myPolygon = L.polygon([
 }).addTo(mymap).bindPopup("I am a polygon in 2022.");
 console.log("added a polygon");
 
+
+
 //creating a geoJSON feature
 let geojsonFeature = {
 	"type":"Feature",
@@ -85,3 +87,7 @@ console.log("added a UCL pinpoint (custom pink) with bold text");
 
 } //end of code lines adding the basic marker
 console.log("base map, circle and polygon had been created");
+
+
+
+
