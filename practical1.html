@@ -31,6 +31,7 @@ crossorigin="anonymous"></script>
 <script src="js/ethernet.js"></script>
 <script src="js/air_quality_sensors.js"></script>
 <script src="js/waiting_room.js"></script>
+<script src="js/bus_station.js"></script>
 
 
 </head>
@@ -79,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function(){
 function loadMap(){
 	loadLeafletMap()
 	getAirQualitySensorsData()
-	getWaitingRoomData();
+	getWaitingRoomData()
+	getBusStationData();
 }//end of loadMap
 
 </script>
