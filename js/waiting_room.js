@@ -11,8 +11,6 @@ function getWaitingRoomData(){
 			//add the JSON layer onto the map
 			waitingRoomLayer = L.geoJson(result).addTo(mymap);
 
-			//change the map zoom so that all the data is shown
-			mymap.fitBounds(waitingRoomLayer.getBounds());
 		}//end of the inner function
 
 	});//end of the ajax request

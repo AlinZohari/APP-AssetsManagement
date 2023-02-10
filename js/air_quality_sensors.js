@@ -8,11 +8,18 @@ function getAirQualitySensorsData(){
 	$.ajax({url:layerURL,crossDomain:true,success:function(result){
 			console.log(result);//check the data is correct
 
-			//add the JSON layer onto the map
-			airQualitySensorsLayer = L.geoJson(result).addTo(mymap);
+			let testMarkerBlack = L.AwesomeMarkers.icon({
+				icon:'play',
+				markerColor:'black'
+			});
 
-			//change the map zoom so that all the data is shown
-			mymap.fitBounds(airQualitySensorsLayer.getBounds());
+			//add the JSON layer onto the map
+			airQualitySensorsLayer = L.geoJson(result,{
+				pointToLayer:function(feature,latlng){
+					return L.marker(latlng,{icon:testMarkerBlack})
+				}//end of pointToLayer
+			}).addTo(mymap);
+
 		}//end of the inner function
 
 	});//end of the ajax request
