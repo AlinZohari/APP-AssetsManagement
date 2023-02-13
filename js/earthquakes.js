@@ -9,6 +9,15 @@ function getEarthquakeData(){
 	$.ajax({url:layerURL,crossDomain:true,success:function(result){
 			console.log(result);//check the data is correct
 
+			let testMarkerGreen = L.AwesomeMarkers.icon({
+				icon:'play',
+				markerColor:'green'
+			});
+			let testMarkerPink = L.AwesomeMarkers.icon({
+				icon:'play',
+				markerColor:'pink'
+			});
+
 			//add the JSON layer onto the map - using custom icon
 			earthquakeLayer = L.geoJson(result,{
 
@@ -33,14 +42,7 @@ function getEarthquakeData(){
 		 }//end of the inner function
 		}); //end of the ajax request
 
-	let testMarkerGreen = L.AwesomeMarkers.icon({
-		icon:'play',
-		markerColor:'green'
-	});
-	let testMarkerPink = L.AwesomeMarkers.icon({
-		icon:'play',
-		markerColor:'pink'
-	});
+
 } //end of the getEarthquakeData function
 
 
