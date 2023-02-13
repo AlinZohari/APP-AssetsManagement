@@ -16,7 +16,7 @@ function getAirQualitySensorsData(){
 			//add the JSON layer onto the map
 			airQualitySensorsLayer = L.geoJson(result,{
 				pointToLayer:function(feature,latlng){
-					return L.marker(latlng,{icon:testMarkerBlack})
+					return L.marker(latlng,{icon:testMarkerBlack}).bindPopup("<b>"+"air quality sensor id: "+ feature.properties.sensor_id + "<b>");
 				}//end of pointToLayer
 			}).addTo(mymap);
 

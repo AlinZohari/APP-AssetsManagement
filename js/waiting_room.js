@@ -9,8 +9,11 @@ function getWaitingRoomData(){
 			console.log(result);//check the data is correct
 
 			//add the JSON layer onto the map
-			waitingRoomLayer = L.geoJson(result).addTo(mymap);
-
+			waitingRoomLayer = L.geoJson(result,{
+				color:'orange',
+				fillcolor: '#f03',
+				fillOpacity: 0.5
+			}).addTo(mymap)
 		}//end of the inner function
 
 	});//end of the ajax request
