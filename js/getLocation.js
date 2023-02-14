@@ -8,7 +8,7 @@ function getLocation(){
 function getPosition(position){
 	document.getElementById('showLocation').innerHTML =
 	"Latitude: " + position.coords.latitude +
-	"<b>Longitude: " + position.coords.longitude +
+	"<br>Longitude: " + position.coords.longitude +
 	"<br>Horizontal Accuracy: " + position.coords.accuracy +
 	"<br>Altitude Accuracy: " + position.coords.altitudeAccuracy +
 	"<br>Heading: " + position.coords.heading +
