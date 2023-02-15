@@ -50,8 +50,13 @@ function showPositionData(position){
 				}//end of pointToLayer
 			}).addTo(mymap);
 
+			//change the map zom so that all the data is shown
+			mymap.fitBounds(showPositionLayer.getBounds());
+
 			// Add the new point to the GeoJSON layer
 			showPositionLayer.addData(newPoint);
+
+
 
 }//end of showPosition function
 
