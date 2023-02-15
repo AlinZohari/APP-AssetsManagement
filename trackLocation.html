@@ -1,7 +1,31 @@
 <html>
+
 <head>
-	<title>Test HTML Location Functionality</title>
-	<script src="js/trackLocation.js"></script>
+<title>Test HTML Location Functionality</title>
+
+
+<!--code for Leaflet-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+crossorigin=""></script>
+
+<style type="text/css">
+#mapid {height:180px;}
+</style>
+
+<!--The following links incorporate the CSS required for custom icon creation-->
+<link rel="stylesheet" href="css/ionicons.min.css">
+<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+<script src="js/leaflet.awesome-markers.js"></script>
+
+
+<!--calling on the basicMap.js, earthquakes.js, busstops.js and ethernet.js file in js sub-directory-->
+<script src="js/basicMap.js"></script>
+<script src="js/trackLocation.js"></script>
+
 </head>
 
 <body>
