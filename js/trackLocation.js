@@ -47,6 +47,8 @@ function showPositionData(position) {
 	// the 'push' command
 	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
 				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
+	mymap.setView([position.coords.latitude, position.coords.longitude], 16);
+
 	console.log("marker");
 }
 
