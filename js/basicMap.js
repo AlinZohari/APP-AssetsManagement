@@ -28,4 +28,5 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 //now add the click event detector to the map- call on the function onMapClick
 mymap.on('click',onMapClick);
 
+
 } //end of code lines adding the leaflet map
