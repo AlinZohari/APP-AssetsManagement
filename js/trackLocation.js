@@ -25,7 +25,9 @@ let showPositionLayer; //global variable
 function showPositionData(position){
 			console.log("checking position")
 
-
+			if (showPositionLayer) {
+				showPositionLayer.clearLayers();
+			}
 
 			let testMarkerGreen= L.AwesomeMarkers.icon({
 				icon:'play',
