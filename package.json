@@ -26,5 +26,8 @@
     "install",
     "express",
     "--save"
-  ]
+  ],
+  "directories": {
+    "lib": "lib"
+  }
 }
