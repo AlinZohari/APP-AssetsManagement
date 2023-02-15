@@ -180,7 +180,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="img/icon.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">UCL username: uceszoh</span>
+                            <span class="d-none d-lg-inline-flex">UCL Username: uceszoh</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -197,11 +197,11 @@
             <!--    <div class="col-md-6 col-sm-12 map-container rounded flex-fill" id="mapid"></div>  -->
 
 
-        <b>This code will display your current location</b>
-        <div id='showLocation'>Location will be displayed here</div>
-        <button id='trackLocation' onclick='trackLocation()'>Click Me to Get Your Location</button>
-
-</div> <!-- content end-->
+<!--Menu button for switch tracking on and of-->
+        <div id="menu">
+        <button id="start-tracking" onclick="trackLocation()">Switch tracking on</button>
+        <button id="stop-tracking" onclick="removePositionPoints()">Switch tracking off</button>
+        </div>
 
 
 

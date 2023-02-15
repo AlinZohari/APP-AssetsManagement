@@ -7,6 +7,11 @@ let trackLocationLayer = [];
 // store the ID of the location tracker so that it can be used to switch the location tracking off
 let geoLocationID;
 
+function switchOn(){
+	alert("Switch On tracking")
+		trackLocation();
+}
+
 function trackLocation(){
 
 	if(navigator.geolocation){
@@ -47,7 +52,7 @@ function showPositionData(position) {
 	// the 'push' command
 	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
 				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
-	mymap.setView([position.coords.latitude, position.coords.longitude], 16);
+	mymap.setView([position.coords.latitude, position.coords.longitude], 19);
 
 	console.log("marker");
 }
