@@ -18,6 +18,7 @@ function showPosition(position){
 	showPositionData(position);
 }
 
+
 //function to request and map showPosition data
 let showPositionLayer; //global variable
 
@@ -37,6 +38,23 @@ function showPositionData(position){
 					return L.marker(latlng,{icon:testMarkerGreen}).bindPopup("<b>"+"This is your location: " + position + "<b>");
 				}//end of pointToLayer
 			}).addTo(mymap);
+
+
+			// Create a GeoJSON point for the new location
+			let newPoint = {
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [position.coords.longitude, position.coords.latitude]
+				},
+				"properties": {
+					"name": "New Location"
+				}
+			};
+			
+			// Add the new point to the GeoJSON layer
+			showPositionLayer.addData(newPoint);
+
 
 		}//end of the inner function
 
