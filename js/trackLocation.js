@@ -23,6 +23,12 @@ function showPosition(position){
 let showPositionLayer; //global variable
 
 function showPositionData(position){
+			concole.log(result)
+
+			if (showPositionLayer) {
+				showPositionLayer.clearLayers();
+			}
+
 
 			let testMarkerGreen= L.AwesomeMarkers.icon({
 				icon:'play',
@@ -34,7 +40,7 @@ function showPositionData(position){
 				"type": "Feature",
 				"geometry": {
 					"type": "Point",
-					"coordinates": [position.coords.longitude, position.coords.latitude]
+					"coordinates": [position.coords.latitude, position.coords.longitude]
 				},
 				"properties": {
 					"name": "New Location"
@@ -49,13 +55,13 @@ function showPositionData(position){
 					"<br>Longitude: " + position.coords.longitude + "<b>");
 				}//end of pointToLayer
 			}).addTo(mymap);
+			console.log("added green marker")
 
 			//change the map zom so that all the data is shown
 			mymap.fitBounds(showPositionLayer.getBounds());
 
 			// Add the new point to the GeoJSON layer
 			showPositionLayer.addData(newPoint);
-
 
 
 }//end of showPosition function

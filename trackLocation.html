@@ -43,13 +43,18 @@ document.addEventListener('DOMContentLoaded', function(){
 },false);
 
 function loadMap(){
-	loadLeafletMap();
+	loadLeafletMap()
+	showPositionData()
+	showPosition()
+	trackLocation();
 }//end of loadMap
 </script>
 
 
-	<b>This code will display your current location</b>
-	<div id='showLocation'>Location will be displayed here</div>
-	<button id='trackLocation' onclick='trackLocation()'>Click Me to Get Your Location</button>
+<b>This code will display your current location</b>
+<div id='showLocation'>Location will be displayed here</div>
+<button id='trackLocation' onclick='trackLocation()'>Click Me to Get Your Location</button>
+
 
 </body>
+</html>
