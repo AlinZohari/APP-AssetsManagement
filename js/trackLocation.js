@@ -23,22 +23,11 @@ function showPosition(position){
 let showPositionLayer; //global variable
 
 function showPositionData(position){
-	let layerURL = document.location.origin + "/app/data/showPosition.geojson";
-	$.ajax({url:layerURL,crossDomain:true,success:function(result){
-			console.log(result);//check the data is correct
 
 			let testMarkerGreen= L.AwesomeMarkers.icon({
 				icon:'play',
 				markerColor:'green'
 			});
-
-			//add the JSON layer onto the map
-			showPositionLayer = L.geoJson(result,{
-				pointToLayer:function(feature,latlng){
-					return L.marker(latlng,{icon:testMarkerGreen}).bindPopup("<b>"+"This is your location: " + position + "<b>");
-				}//end of pointToLayer
-			}).addTo(mymap);
-
 
 			// Create a GeoJSON point for the new location
 			let newPoint = {
@@ -52,13 +41,17 @@ function showPositionData(position){
 				}
 			};
 			
+			//add the JSON layer onto the map
+			showPositionLayer = L.geoJson(newPoint,{
+				pointToLayer:function(feature,latlng){
+					return L.marker(latlng,{icon:testMarkerGreen})
+					.bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
+					"<br>Longitude: " + position.coords.longitude + "<b>");
+				}//end of pointToLayer
+			}).addTo(mymap);
+
 			// Add the new point to the GeoJSON layer
 			showPositionLayer.addData(newPoint);
-
-
-		}//end of the inner function
-
-	});//end of the ajax request
 
 }//end of showPosition function
 
