@@ -1,16 +1,13 @@
 "use strict"
 
 
+
 // create an array to store all the location tracking points
 let trackLocationLayer = [];
 
 // store the ID of the location tracker so that it can be used to switch the location tracking off
 let geoLocationID;
 
-function switchOn(){
-	alert("Switch On tracking")
-		trackLocation();
-}
 
 function trackLocation(){
 
@@ -50,9 +47,10 @@ function errorPosition(error) {
 function showPositionData(position) {
 	// add the new point into the array
 	// the 'push' command
+
 	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
 				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
-	mymap.setView([position.coords.latitude, position.coords.longitude], 19);
+	mymap=mymap.setView([position.coords.latitude, position.coords.longitude], 19);
 
 	console.log("marker");
 }
@@ -79,5 +77,79 @@ function removeTracks() {
 		trackLocationLayer.pop();
 		}
 
+}
+
+
+
+/*
+let trackLocationLayer=[]; //array to store location
+let geoLocationID; // store id of location tracker
+
+function trackLocation() {
+
+	if (navigator.geolocation){
+		// test to see if there is an active tracking and clear if so to avoid multiple tracking
+		try {
+			(navigator.geolocation.clearWatch(geoLocationID));
+		}
+		catch(e){
+			console.log(e);
+		}
+		
+		removeTracks(); // clear any existing data from map
+		
+		// Parameters
+		const options = {
+			enableHighAccuracy:true,
+			maximumAge: 30000,
+			timeout: 27000
+		};
+		// Action:showPostion; Error:errorPostion; Parameters:Options
+		geoLocationID = navigator.geolocation.watchPosition(showPosition,errorPosition, options);
+	}
+	
+	else {
+		document.getElementByID('showLocation').innerHTML="Geolocation is not supported by dis browser.";
+	}
+}
+
+function errorPosition(error){
+	alert(error)
+}
+
+function showPosition(position){
+	
+	// customise marker
+	let testMarkerGreen = L.AwesomeMarkers.icon({
+        icon: 'play',
+        markerColor: 'green'
+        });
+		
+	// add new point into array with 'push'
+	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude],{icon:testMarkerGreen}).addTo(mymap));
+	// set bound to user location 
+	mymap=mymap.setView([position.coords.latitude, position.coords.longitude],13);
 
 }
+
+function removePositionPoints(){
+	
+	// disable location tracking so new point wont be added with removing old points
+	navigator.geolocation.clearWatch(geoLocationID);
+	
+	removeTracks();
+}
+
+function removeTracks(){
+	// Loop through arrawy to remove any points
+	for (let i=trackLocationLayer.length-1;i>-1;i--){
+		
+		console.log("removing point"+i +"which has coordinates"+trackLocationLayer[i].getLatLng());
+		
+		mymap.removeLayer(trackLocationLayer[i]);
+		
+		//Remove points using pop
+		trackLocationLayer.pop();
+	}
+}
+*/
