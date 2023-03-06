@@ -1,4 +1,5 @@
 "use strict";
+//Building, Ethernet cabes, Rooms, Temperature Sensors
 
 //Buildings
 let buildingsLayer;
