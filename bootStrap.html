@@ -53,6 +53,7 @@
     <script src="js/getLocation.js"></script>
     <script src="js/getDistance.js"></script>
     <script src="js/trackLocation.js"></script>
+    <script src="js/centennial.js"></script>
 
 </head>
 
@@ -144,14 +145,14 @@
         <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Centennial</a>            
             <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu6" onclick="showAlert(id)">Load buildings</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Remove buildings</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Load ethernet cables</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Remove ethernet cables</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Load rooms</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Remove rooms</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Load sensors</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Load sensors</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadBuildings" onclick="getBuildingsData()">Load buildings</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeBuildings" onclick="removeBuildingsData()">Remove buildings</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadCables" onclick="getEthernetCablesdData()">Load ethernet cables</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeCables" onclick="removeEthernetCablesData()">Remove ethernet cables</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadRooms" onclick="getRoomsData()">Load rooms</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeRooms" onclick="removeRoomsData()">Remove rooms</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadSensors" onclick="getSensorsData()">Load sensors</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="mremoveSensors" onclick="removeSensorsData()">Remove sensors</a>
             </div>
           </div>
 
