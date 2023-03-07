@@ -55,6 +55,7 @@
     <script src="js/trackLocation.js"></script>
     <script src="js/centennial.js"></script>
 
+
 </head>
 
 <body onload="loadMap()" > 
@@ -141,7 +142,7 @@
           </div>
 
 
-        <!--Nav Item - Pages Collapse Menu (Menu5 - default always gonna be there)-->
+        <!--Nav Item - Pages Collapse Menu (Centennial - default always gonna be there - this need to be adjust to only open in maximised and phone)-->
         <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Centennial</a>            
             <div class="dropdown-menu bg-transparent border-0">
@@ -155,6 +156,16 @@
               <a class="dropdown-item" class="dropdown-item" href="#" id="mremoveSensors" onclick="removeSensorsData()">Remove sensors</a>
             </div>
           </div>
+
+        <!-- Nav Item - Pages Collapse Menu (Graph - screen maximised,laptop/desktop)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Graph</a>            
+            <div class="dropdown-menu bg-transparent border-0">
+              <a class="dropdown-item" class="dropdown-item" href="#" id="menu12" onclick="showAlert(id)">Show Graph</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="menu13" onclick="showAlert(id)">Remove Graph</a>
+            </div>
+        </div>
+
 
         </nav>
         </div>
@@ -207,7 +218,9 @@
 
                 </div>
             </nav><!-- Navbar End -->
-                <div id="mapid" class="vh-100 vw-100" style="z-index: 0;"  ></div>
+
+
+                <div id="mapid" class="vh-100 vw-100" style="z-index: 0;"  ></div> 
               <!-- z-index = 0 is required to ensure that the menu items from the template
                 appear on top of the map -->
             <!--    <div class="col-md-6 col-sm-12 map-container rounded flex-fill" id="mapid"></div>  -->
