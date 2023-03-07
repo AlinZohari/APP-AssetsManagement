@@ -21,17 +21,6 @@ function loadGraph(){
 
 		showGraph();
 
-		// code to create the graph goes here – see below
-		let widtha = document.getElementById("assetDataWrapper").clientWidth*2;
-		let heighta = document.getElementById("assetDataWrapper").offsetHeight;
-		console.log(widtha+" "+heighta);
-
-		// Add the close button and an SVG element for the graph
-		document.getElementById("assetDataWrapper").innerHTML=`<div class="h-100 w-100">
-		<button type="button" class="btn-close float-end" aria-label="Close" onclick="closeAssetData()"></button>
-		<svg fill="blue" width="`+widtha+`" height="`+heighta+`" id="svg1">
-		</svg>
-		</div>`
 
 }
 
@@ -140,6 +129,30 @@ g.append("g")
 });
 
 
+}
+
+function wrap(text, width) {
+  text.each(function() {
+    let text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
 }
 
 //function to remove the DIV from the screen
