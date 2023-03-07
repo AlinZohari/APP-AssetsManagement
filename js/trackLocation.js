@@ -48,6 +48,11 @@ function showPositionData(position) {
 	// add the new point into the array
 	// the 'push' command
 
+	//remove the previous marker from map
+	if (trackLocationLayer.length >0){
+		mymap.removeLayer(trackLocationLayer[trackLocationLayer.length-1]);
+	}
+
 	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
 				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
 	mymap=mymap.setView([position.coords.latitude, position.coords.longitude], 19);
