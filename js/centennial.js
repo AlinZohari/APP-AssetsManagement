@@ -1,38 +1,57 @@
 "use strict";
 //Building, Ethernet cabes, Rooms, Temperature Sensors
 
+let listOfThings = []
+
 //Buildings
 let buildingsLayer;
-function getBuildingsData(){
-	/*
-	for (i=0;i<listOfThings.length ;i++){
+
+function getBuildingsData(thingname){
+	
+	for (let i=0;i<listOfThings.length ;i++){
 		if (listOfThings[i].thingName == thingname){
 			console.log("equal");
 			alert("Buildings already loaded");
 			return;
 		} 
-	} */
-	let layerURL = document.location.origin +"/api/geojson/ucfscde/buildings/building_id/location";
+	} 
+	let layerURL = document.location.origin +"/api/geojson/ucfscde/buildings/building_id/location/";
 	$.ajax({url:layerURL,crossDomain:true,success:function(result){
 		console.log(result)
+
 
 	buildingsLayer = L.geoJSON(result).addTo(mymap);
 	buildingsLayer.addData(result);
 	mymap.fitBounds(buildingsLayer.getBounds());
 
+
+	let newThing = result; 
+	listOfThings.push(newThing);
+
 	}//end of the inner function
 });//end of the ajax request
 }//end of the getBuildingsData function
 
-function removeBuildingsData(){
-	try{
-		alert("Buildings data will be removed");
-		mymap.removeLayer(buildingsLayer);
+function listAllThings() {
+	console.log("*********************************");
+	console.log("********Current Things *********");
+	for (let i=0;i<listOfThings.length;i++){
+		console.log(listOfThings[i].thingName);
 	}
-	catch(err){
-		alert("Layer doesn't exist:" + err);
+	console.log("*********************************");
+}
+
+function removeBuildingsData(thingname){
+	for (let i=0;i<listOfThings.length ;i++){
+		if (listOfThings[i].thingName == thingname){
+			console.log("equal");
+			listOfThings.splice(i,1);
+			break;
+		}
 	}
 }
+
+
 
 //Ethernet Cables
 let ethernetCablesLayer;
@@ -132,3 +151,5 @@ function removeSensorsData(){
 		alert("Layer doesn't exist:" + err);
 	}
 }
+
+
