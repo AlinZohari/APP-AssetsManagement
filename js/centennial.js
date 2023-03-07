@@ -44,12 +44,20 @@ function listAllThings() {
 function removeBuildingsData(thingname){
 	for (let i=0;i<listOfThings.length ;i++){
 		if (listOfThings[i].thingName == thingname){
-			console.log("equal");
+			try{
+				alert("Buildings data will be removed");
+			mymap.removeLayer(buildingsLayer);
+			}
+			catch(err){
+				alert("Layer doesn't exist:" + err);
+			}
+			console.log("remove data");
 			listOfThings.splice(i,1);
 			break;
 		}
 	}
 }
+
 
 
 
