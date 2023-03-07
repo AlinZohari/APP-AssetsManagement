@@ -220,7 +220,20 @@
             </nav><!-- Navbar End -->
 
 
-                <div id="mapid" class="vh-100 vw-100" style="z-index: 0;"  ></div> 
+            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="margin-top:65px;z-order:0">
+                <div id="mapid" style="height:calc(100% - 65px);">
+                </div>
+                <!-- map id -->
+                </div>
+                <!-- map wrapper -->
+
+            <div id="assetDataWrapperWrapper" class="col vh-100 collapse hide" style="background-color:lightgray; margin-top:65px;z-order:0">
+                <div id="assetDataWrapper" style="height:calc(100% - 65px);">  
+                </div> <!-- asset data wrapper -->
+            </div> <!-- asset data wrapper wrapper wrapper -->
+
+
+            <!-- <div id="mapid" class="vh-100 vw-100" style="z-index: 0;"  ></div> -->
               <!-- z-index = 0 is required to ensure that the menu items from the template
                 appear on top of the map -->
             <!--    <div class="col-md-6 col-sm-12 map-container rounded flex-fill" id="mapid"></div>  -->
