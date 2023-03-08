@@ -36,14 +36,7 @@ function showGraph(){
                 </svg>
                 </div>`
 
-      // create an SVG container for the graph
-     // g is a grouping element
-     let marginTop = 30;
-     let marginBottom = 60;
-     let marginLeft = 50;
-     let marginRight=20;
-
-
+//adapt from Week6 Lesson 1 Lecture and PDF- Creating a graph for the Eartquake data, using svg1 to store the graph
 const svg =d3.select("#svg1"),
 	margin ={top:20,right:20,bottom:30,left:50},
 	width = +svg.attr("width") - margin.left - margin.right,
