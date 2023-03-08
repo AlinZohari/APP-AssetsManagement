@@ -57,7 +57,8 @@
     <script src="js/graph.js"></script>
     <script src="js/utilities.js"></script>
 
-    <script src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"></script>  
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
 
 </head>
 
@@ -72,7 +73,7 @@
         <!-- Spinner End -->
 
 <body onresize="processWindowResize()">
-        <div class="container-fluid position-relative bg-warning p-0">
+    <div class="container-fluid position-relative bg-warning p-0">
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
@@ -224,29 +225,25 @@
                 </div>
             </nav><!-- Navbar End -->
 
+
 <div class="container-fluid px-0">
   <div class="row d-flex">
     <div class="col d-flex">
 
             <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="margin-top:65px;z-order:0">
                 <div id="mapid" style="height:calc(100% - 65px);">
-                </div>
-                <!-- map id -->
-                </div>
-                <!-- map wrapper -->
+                </div><!-- map id -->
+                </div><!-- map wrapper -->
 
             <div id="assetDataWrapperWrapper" class="col vh-100 collapse hide" style="background-color:lightgray; margin-top:65px;z-order:0">
-                <div id="assetDataWrapper" style="height:calc(100% - 65px);">  </div> <!-- asset data wrapper -->
+                <div id="assetDataWrapper" style="height:calc(100% - 65px);">
+                </div> <!-- asset data wrapper -->
             </div> <!-- asset data wrapper wrapper wrapper -->
-
+ 
     </div> <!-- col d-flex -->
 </div> <!-- row d-flex -->
 </div> <!-- container-fluid-->
 
-            <!-- <div id="mapid" class="vh-100 vw-100" style="z-index: 0;"  ></div> -->
-              <!-- z-index = 0 is required to ensure that the menu items from the template
-                appear on top of the map -->
-            <!--    <div class="col-md-6 col-sm-12 map-container rounded flex-fill" id="mapid"></div>  -->
 
 
 
