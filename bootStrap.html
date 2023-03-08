@@ -53,6 +53,12 @@
     <script src="js/getLocation.js"></script>
     <script src="js/getDistance.js"></script>
     <script src="js/trackLocation.js"></script>
+    <script src="js/centennial.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/utilities.js"></script>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
 
 </head>
 
@@ -66,6 +72,8 @@
         </div>
         <!-- Spinner End -->
 
+<body onresize="processWindowResize()">
+    <div class="container-fluid position-relative bg-warning p-0">
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
@@ -132,16 +140,41 @@
 
         <!-- Nav Item - Pages Collapse Menu (Menu Track Location - small screen, mobile device)-->
         <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu Track Location</a>            
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Track Location</a>            
             <div class="dropdown-menu bg-transparent border-0">
               <a class="dropdown-item" class="dropdown-item" href="#" id="switchOn" onclick="trackLocation()">Switch Tracking On</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="swithOff" onclick="removePositionPoints()">Switch Tracking Off</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="swithOff" onclick="removeTracks()">Switch Tracking Off</a>
             </div>
           </div>
-        </nav>
+
+
+        <!--Nav Item - Pages Collapse Menu (Centennial - default always gonna be there - this need to be adjust to only open in maximised and phone)-->
+        <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Centennial</a>            
+            <div class="dropdown-menu bg-transparent border-0">
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadBuildings" onclick="getBuildingsData()">Load buildings</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeBuildings" onclick="removeBuildingsData()">Remove buildings</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadCables" onclick="getEthernetCablesData()">Load ethernet cables</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeCables" onclick="removeEthernetCablesData()">Remove ethernet cables</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadRooms" onclick="getRoomsData()">Load rooms</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeRooms" onclick="removeRoomsData()">Remove rooms</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="loadSensors" onclick="getSensorsData()">Load sensors</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="mremoveSensors" onclick="removeSensorsData()">Remove sensors</a>
+            </div>
+          </div>
+
+        <!-- Nav Item - Pages Collapse Menu (Graph - screen maximised,laptop/desktop)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Graph</a>            
+            <div class="dropdown-menu bg-transparent border-0">
+              <a class="dropdown-item" class="dropdown-item" href="#" id="menu12" onclick="loadGraph()">Show Graph</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="menu13" onclick="closeAssetData()">Remove Graph</a>
+            </div>
         </div>
 
 
+        </nav>
+        </div>
         <!-- Sidebar End -->
 
 
@@ -180,7 +213,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="img/icon.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Your UCL Username</span>
+                            <span class="d-none d-lg-inline-flex">uceszoh</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -191,10 +224,26 @@
 
                 </div>
             </nav><!-- Navbar End -->
-                <div id="mapid" class="vh-100 vw-100" style="z-index: 0;"  ></div>
-              <!-- z-index = 0 is required to ensure that the menu items from the template
-                appear on top of the map -->
-            <!--    <div class="col-md-6 col-sm-12 map-container rounded flex-fill" id="mapid"></div>  -->
+
+
+<div class="container-fluid px-0">
+  <div class="row d-flex">
+    <div class="col d-flex">
+
+            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="margin-top:65px;z-order:0">
+                <div id="mapid" style="height:calc(100% - 65px);">
+                </div><!-- map id -->
+                </div><!-- map wrapper -->
+
+            <div id="assetDataWrapperWrapper" class="col vh-100 collapse hide" style="background-color:lightgray; margin-top:65px;z-order:0">
+                <div id="assetDataWrapper" style="height:calc(100% - 65px);">
+                </div> <!-- asset data wrapper -->
+            </div> <!-- asset data wrapper wrapper wrapper -->
+ 
+    </div> <!-- col d-flex -->
+</div> <!-- row d-flex -->
+</div> <!-- container-fluid-->
+
 
 
 
@@ -227,6 +276,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function loadMap(){
     loadLeafletMap();
 }//end of loadMap
+
 </script>
 
 
