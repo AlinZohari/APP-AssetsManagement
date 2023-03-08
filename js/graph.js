@@ -44,7 +44,8 @@ const svg =d3.select("#svg1"),
 	x = d3.scaleBand().rangeRound([0,width]).padding(0.2),
 	y = d3.scaleLinear().rangeRound([height,0]),
 	g = svg.append("g")
-		.attr("transform",'translate(${margin.left},${margin.top})');
+		.attr("transform", `translate(${margin.left},${margin.top})`);
+
 
 
 // download the data and create the graph
@@ -56,7 +57,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
 
 g.append("g")
 	.attr("class","axis axis-x")
-	.attr("transform", 'translate(0,${height})')
+	.attr("transform", `translate(0,${height})`)
 	.call(d3.axisBottom(x));
 
 g.append("g")
