@@ -19,6 +19,12 @@ function onMapClick(e){
 
 console.log("function to initialise and create the basemap. Also call on other functions - onMapClick(), addBasicMarkers()");
 function loadLeafletMap(){
+	  if (mymap) {
+    // If a map already exists, remove it from the DOM
+    mymap.remove();
+  }
+
+  //initialize a new map
 mymap = L.map('mapid').setView([51.505,-0.09],13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 	maxZoom:19,
