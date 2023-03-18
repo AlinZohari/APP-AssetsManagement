@@ -17,7 +17,6 @@ function saveNewAsset() {
 		if (document.getElementById("check"+i).checked === true) {
 			checkString = checkString + document.getElementById("check"+i).value + "||"
 		}
-
 	}
 		
 	// now get the select box values
@@ -45,24 +44,7 @@ function saveNewAsset() {
 
 }
 
-function deleteRecord() {
-	let deleteID = document.getElementById("deleteID").value;
-	let deleteString = "id="+deleteID;
-	let serviceUrl= document.location.origin + "/api/testCRUD";
-	$.ajax({
-	    url: serviceUrl,
-	    crossDomain: true,
-	    type: "POST",
-	    success: function(data){console.log(data); deleteSingleAsset(data);},
-	    data: deleteString
-	});	
-}
-
-function deleteSingleAsset(data){
-    document.getElementById("deleteAssetResponse").innerHTML = JSON.stringify(data);
-}
-
-
+//upload
 function processData(postString) {
 	alert(postString);
 
@@ -84,3 +66,22 @@ function dataUploaded(data) {
 }
 
 
+
+
+//delete
+function deleteRecord() {
+	let deleteID = document.getElementById("deleteID").value;
+	let deleteString = "id="+deleteID;
+	let serviceUrl= document.location.origin + "/api/testCRUD";
+	$.ajax({
+	    url: serviceUrl,
+	    crossDomain: true,
+	    type: "POST",
+	    success: function(data){console.log(data); deleteSingleAsset(data);},
+	    data: deleteString
+	});	
+}
+
+function deleteSingleAsset(data){
+    document.getElementById("deleteAssetResponse").innerHTML = JSON.stringify(data);
+}

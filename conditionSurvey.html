@@ -10,19 +10,41 @@
 <div>
 
 
-<label for="name">asset_name</label><input type="text" size="25" id="asset_name"/><br />
-<label for="surname">installation_name</label><input type="text" size="25" id="installation_name"/><br />
-<label for="module">user_id</label><input type="text" size="25" id="user_id"/><br />
+<label for="asset_name">asset_name</label><input type="text" size="25" id="asset_name"/><br />
+<label for="installation_name">installation_name</label><input type="text" size="25" id="installation_name"/><br />
+<label for="user_id">user_id</label><input type="text" size="25" id="user_id"/><br />
 
 
 <p>Condition Value</p>
-	1- As new or in good serviceable condition: <input type="radio" name="condition_value" id="1" /><br />
-	2- Deteriorating, evidence of high usage, age, additional maintenance costs and inefficiency: <input type="radio" name="condition_value" id ="2"/><br />
-	3- Requires replacement within 5 years: <input type="radio" name="condition_value" id="3" /><br />
-	4- In poor condition, overdue for replacement: <input type="radio" name="condition_value" id="4" /><br />
-	5- Unable to determine condition (e.g. as item is hidden): <input type="radio" name="condition_value" id="5" /><br />
-	1- As new or in good serviceable condition6- Item does not exist: <input type="radio" name="condition_value" id="6" /><br />
+	<input type="radio" name="conditionValue" id="1" />1- As new or in good serviceable condition<br /> 
+	<input type="radio" name="conditionValue" id ="2"/>2- Deteriorating, evidence of high usage, age, additional maintenance costs and inefficiency<br />
+	<input type="radio" name="conditionValue" id="3" />3- Requires replacement within 5 years<br />
+	<input type="radio" name="conditionValue" id="4" />4- In poor condition, overdue for replacement<br />
+	<input type="radio" name="conditionValue" id="5" />5- Unable to determine condition (e.g. as item is hidden)<br />
+	<input type="radio" name="conditionValue" id="6" />6- Item does not exist<br />
+<br />
+<br />
+
+<!-- 2 hidden field, 1)to hold previous condition value(for comparison) 2)hold ID of the asset-->
+<div id="previousConditionValue" style="display: none;">1</div>
+<div id="assetID" style="display: none;">2</div>
+
+
+<p>Click here to upload the data</p>
+<button id="saveCondition" onclick="saveConditionInformation()">Submit</button>
+<br />
+<br />
+<div id="conditionResult">The result of the upload goes here</div>
 <br />
 <br />
 
 
+
+
+</div>
+</body>
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script> 
+<script src="js/conditionSurvey.js"> </script>

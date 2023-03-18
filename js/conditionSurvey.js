@@ -10,48 +10,52 @@ function saveConditionInformation() {
 	
 	let postString = "asset_name="+asset_name +"&installation_name="+installation_name+"&user_id="+user_id;
 	
-	
-	// now get the checkbox values - separate them with a | so that they can be // split later on if necessary
-	let checkString = "";
-	for (let i = 1;i< 5;i++){
-		if (document.getElementById("check"+i).checked === true) {
-			checkString = checkString + document.getElementById("check"+i).value + "||"
-		}
-
-	}
 
 // now get the radio button values
+	let conditionValue;
 	if (document.getElementById("1").checked) {
- 		 postString=postString+"&condition_value=1";
+		conditionValue = 1
+ 		postString=postString+"&conditionValue=1";
 	}
-	if (document.getElementById("2").checked) {
- 		 postString=postString+"&condition_value=2";
+	else if (document.getElementById("2").checked) {
+		conditionValue = 2
+		postString=postString+"&conditionValue=2";
 	}
-		if (document.getElementById("3").checked) {
- 		 postString=postString+"&condition_value=3";
+	else if (document.getElementById("3").checked) {
+		conditionValue = 3
+ 		postString=postString+"&conditionValue=3";
 	}
-		if (document.getElementById("4").checked) {
- 		 postString=postString+"&condition_value=4";
+	else if (document.getElementById("4").checked) {
+		conditionValue = 4
+ 		postString=postString+"&conditionValue=4";
 	}
-		if (document.getElementById("5").checked) {
- 		 postString=postString+"&condition_value=5";
+	else if (document.getElementById("5").checked) {
+		conditionValue = 5
+ 		postString=postString+"&conditionValue=5";
 	}
-		if (document.getElementById("6").checked) {
- 		 postString=postString+"&condition_value=6";
+	else if (document.getElementById("6").checked) {
+		conditionValue = 6
+ 		postString=postString+"&conditionValue=6";
 	}
 	
-
 //for the hidden field
 	//1)hold previous condition value(for comparison)
 	let previousConditionValue = document.getElementById("previousConditionValue").value;
+	if (conditionValue == previousConditionValue) {
+	    alert('The current condition is the same as previous condition');
+	} else {
+	    alert('The current condition is different than previous condition');
+	}
+
+//update previous condition value
+	document.getElementById("previousConditionValue").value = conditionValue;
+
+
+//for the hidden field
 	//2)hold ID of the asset
-	let  assetID = document.getElementById("assetID").value;
-
-	alert(previousConditionValue + " "+ assetID);
-	postString = postString + "&previousConditionValue=" + previousConditionValue + "&assetID=" + assetID;
-
-//compare 
-
+	let assetID = document.getElementById("assetID").value;
+	alert(assetID);
+	postString = postString+ "&assetID="+assetID;
 
 	processData(postString);
 
