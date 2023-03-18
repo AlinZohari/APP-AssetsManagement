@@ -4,7 +4,7 @@
 
 function loadGraph(){
 
-	//clear the graph contents just incase the graph is already loaded
+/*	//clear the graph contents just incase the graph is already loaded
 	processWindowResize();
 
 	let mapCollapse = document.getElementById('mapWrapper');
@@ -20,11 +20,15 @@ function loadGraph(){
 		bsAdwCollapse.show();
 
 		showGraph();
-
+		*/
+	// return the name of the function
+	let re = /([^(]+)@|at ([^(]+) \(/g;
+	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
+	alert("function is loadGraph and menu is called by: "+ sCallerName);
 }
 
 function showGraph(){
-
+/*
     let widtha = document.getElementById("assetDataWrapper").clientWidth*2;
     let heighta = document.getElementById("assetDataWrapper").offsetHeight;
     console.log(widtha+" "+heighta);
@@ -73,6 +77,11 @@ g.selectAll(".bar")
 	.attr("height",d=>height-y(d.properties.mag));
 
 }); 
+*/
+	// return the name of the function
+	let re = /([^(]+)@|at ([^(]+) \(/g;
+	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
+	alert("function is showGraph and menu is called by: "+ sCallerName);
 }
 
 
@@ -80,7 +89,7 @@ g.selectAll(".bar")
 //(when the user clicks on the 'button' at the top of the DIV or when the user clicks the Remove Graph menu option)
 
 function closeAssetData(){
-	let mapCollapse = document.getElementById('mapWrapper');
+/*	let mapCollapse = document.getElementById('mapWrapper');
 	let bsMapCollapse = new bootstrap.Collapse(mapCollapse, {
 		toggle: false, show:false
 	});
@@ -90,5 +99,10 @@ function closeAssetData(){
 	let bsAdwCollapse = new bootstrap.Collapse(adwCollapse, {
 		toggle: false, show:true
 	});
-	bsAdwCollapse.hide();
+	bsAdwCollapse.hide(); */
+
+		// return the name of the function
+	let re = /([^(]+)@|at ([^(]+) \(/g;
+	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
+	alert("function is closeAssetData and menu is called by: "+ sCallerName);
 }
