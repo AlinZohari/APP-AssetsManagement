@@ -1,5 +1,5 @@
 "use strict";
-function startDataUpload() {
+function saveNewAsset() {
 	alert ("start data upload");
 
 	let name = document.getElementById("name").value;
@@ -80,10 +80,7 @@ function processData(postString) {
 // create the code to process the response from the data server
 function dataUploaded(data) {
     // change the DIV to show the response
-    document.getElementById("dataUploadResult").innerHTML = JSON.stringify(data);
+    document.getElementById("responseDIV").innerHTML = JSON.stringify(data);
 }
 
 
-function saveNewAsset(data){
-	document.getElementById("responseDIV").innerHTML = JSON.stringify(data);
-}
