@@ -40,8 +40,8 @@ mymap.on('click',onMapClick);
 
 //from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
 
-let width; // NB – keep this as a global variable
-let popup; // keep this as a global variable
+let width;
+let popup; 
 let mapPoint; // store the geoJSON feature so that we can remove it if the screen is resized
 
 function setMapClickEvent() {
@@ -49,8 +49,6 @@ function setMapClickEvent() {
 width = $(window).width();
 
 // we use the bootstrap Medium and Large options for the asset location capture
-// and the small and XS options for the condition option
-// see here: https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
 	if (width < 992) {
 //the condition capture –
 //anything smaller than 992px is defined as 'medium' by bootstrap
@@ -74,6 +72,30 @@ width = $(window).width();
 	}
 }
 
+//Step3 - Setting Up the Form Pop-Up to Collect Condition Reports
+function setUpPointClick() {
+// create a geoJSON feature (in your assignment code this will be replaced
+// by an AJAX call to load the asset points on the map
+	let geojsonFeature = {
+		"type": "Feature",
+		"properties": {
+			"name": "London",
+			"popupContent": "This is where UCL is based"
+		},
+		"geometry": {
+			"type": "Point",
+			"coordinates": [-0.13263, 51.522449]
+		}
+	};
+// and add it to the map and zoom to that location
+// use the mapPoint variable so that we can remove this point layer on
+	mapPoint= L.geoJSON(geojsonFeature).addTo(mymap).bindPopup(popUpHTML);
+	mymap.setView([51.522449,-0.13263], 12)
+
+// the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
+	let popUpHTML = getPopupHTML;
+	console.log(popUpHTML);
+}
 
 
 
