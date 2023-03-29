@@ -91,7 +91,7 @@ function setUpPointClick() {
 // the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
 	let popUpHTML = getPopupHTML;
 	console.log(popUpHTML);
-	
+
 // and add it to the map and zoom to that location
 // use the mapPoint variable so that we can remove this point layer on
 	mapPoint= L.geoJSON(geojsonFeature).addTo(mymap).bindPopup(popUpHTML);
@@ -102,29 +102,32 @@ function setUpPointClick() {
 
 
 //CONDITION FORM- WINDOW SMALL
-function getPopupHTML(){
+function getPopupHTML(id){
 // (in the final assignment, all the required values for the asset pop-up will be
 //derived from feature.properties.xxx – see the Earthquakes code for how this is done)
 
-let id = "1272";
-let surname = "Ellul";
-let name = "Claire";
-let module="CEGE0043";
-let language = "English";
-let lecturetime = "6am";
+
+let title = "Asset Form";
+let assetName = " ";
+let installationDate=" ";
+let userID = "1272"
+
 let previousCondition = 3;
 
-let htmlString = "<DIV id='popup'"+ id+ "><h2>" + name + "</h2><br>";
-htmlString = htmlString + "<h3>"+surname + "</h3><br>";
-htmlString = htmlString + "<input type='radio' name='answer' id ='"+id+"_1'/>"+ module+"<br>";
-htmlString = htmlString + "<input type='radio' name='answer' id ='"+id+"_2'/>"+ language +"<br>";
-htmlString = htmlString + "<input type='radio' name='answer' id ='"+id+"_3'/>"+ lecturetime+"<br>";
-htmlString = htmlString + "<button onclick='checkCondition(" + id + ");return false;'>Submit Condition</button>";
+let htmlString = "<div id='popup'>" + "<h3>"+title+ "</h3><br>";
+htmlString = htmlString + "<h2><label for='assetName'>Asset name</label><input type='text' size='5'/></h2><br>";
+htmlString = htmlString + "<h2><label for='installationDate'>Installation Date</label><input type='text' size='5'/></h2><hr><br>";
+htmlString = htmlString + "<h2><label for='latitude'>Latitude</label><input type='text' size='3' id='latitude'/></h2><br>";
+htmlString = htmlString + "<h2><label for='longitude'>Longitude</label><input type='text' size='3' id='longitude'/></h2><br>";
+htmlString = htmlString + "<h3>"+"User ID:" + userID+ "</h3><br>";
+htmlString = htmlString + "<p>Click here to upload the data</p>";
+htmlString = htmlString + "<button onclick='checkCondition(" + id + ");return false;'>Start Data Upload</button>";
+htmlString = htmlString + "<p>The result of the upload goes here</p>";
 
 // now include a hidden element with the previous condition value
 htmlString = htmlString + "<div id=previousCondition_" + id + " hidden>"+previousCondition+"</div>";
 // and a hidden element with the ID of the asset so that we can insert the condition with the correct asset later
-htmlString = htmlString + "<div id=asset_ " + id + " hidden>"+id+"</div>";
+htmlString = htmlString + "<div id='asset_" + id + "' hidden>"+id+"</div>";
 htmlString = htmlString + "</div>";
 return htmlString;
 }
