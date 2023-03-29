@@ -77,7 +77,7 @@ width = $(window).width();
 }
 
 
-//Step3 - Setting Up the Form Pop-Up to Collect Condition Reports
+// Asset Condition Form
 function setUpPointClick() {
 // create a geoJSON feature (in your assignment code this will be replaced
 // by an AJAX call to load the asset points on the map
@@ -138,6 +138,42 @@ function getPopupHTML(){
 
 function checkCondition(){
 
+	let asset_name = document.getElementById("asset_name").value;
+	let installation_name = document.getElementById("installation_name").value;
+	let user_id = document.getElementById("user_id").value;
+
+	alert(asset_name + " "+ installation_name + " "+user_id);
+	
+	let postString = "asset_name="+asset_name +"&installation_name="+installation_name+"&user_id="+user_id;
+	
+
+// now get the radio button values
+	let conditionValue;
+	if (document.getElementById("1").checked) {
+		conditionValue = 1
+ 		postString=postString+"&conditionValue=1";
+	}
+	else if (document.getElementById("2").checked) {
+		conditionValue = 2
+		postString=postString+"&conditionValue=2";
+	}
+	else if (document.getElementById("3").checked) {
+		conditionValue = 3
+ 		postString=postString+"&conditionValue=3";
+	}
+	else if (document.getElementById("4").checked) {
+		conditionValue = 4
+ 		postString=postString+"&conditionValue=4";
+	}
+	else if (document.getElementById("5").checked) {
+		conditionValue = 5
+ 		postString=postString+"&conditionValue=5";
+	}
+	else if (document.getElementById("6").checked) {
+		conditionValue = 6
+ 		postString=postString+"&conditionValue=6";
+	}
+	
 //for the hidden field
 	//1)hold previous condition value(for comparison)
 	let previousConditionValue = document.getElementById("previousConditionValue").value;
@@ -182,6 +218,8 @@ function dataUploaded(data) {
     document.getElementById("conditionResult").innerHTML = JSON.stringify(data);
 }
 
+
+//Asset Form -large Screen
 function onMapClick(e) {
 	let formHTML = basicFormHtml();
 	popup .setLatLng(e.latlng)
