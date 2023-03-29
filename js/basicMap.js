@@ -138,13 +138,13 @@ function getPopupHTML(){
 
 function checkCondition(){
 
-	let asset_name = document.getElementById("asset_name").value;
-	let installation_name = document.getElementById("installation_name").value;
-	let user_id = document.getElementById("user_id").value;
+	let assetName = document.getElementById("assetName").value;
+	let installationDate = document.getElementById("installationDate").value;
+	let userId = document.getElementById("userId").value;
 
-	alert(asset_name + " "+ installation_name + " "+user_id);
+	alert(assetName + " "+ installationDate + " "+userId);
 	
-	let postString = "asset_name="+asset_name +"&installation_name="+installation_name+"&user_id="+user_id;
+	let postString = "assetName="+assetName +"&installationDate="+installationDate+"&userId="+userId;
 	
 
 // now get the radio button values
@@ -176,15 +176,15 @@ function checkCondition(){
 	
 //for the hidden field
 	//1)hold previous condition value(for comparison)
-	let previousConditionValue = document.getElementById("previousConditionValue").value;
-	if (conditionValue == previousConditionValue) {
+	let previousCondition = document.getElementById("previousCondition").value;
+	if (conditionValue == previousCondition) {
 	    alert('The current condition is the same as previous condition');
 	} else {
 	    alert('The current condition is different than previous condition');
 	}
 
 //update previous condition value
-	document.getElementById("previousConditionValue").value = conditionValue;
+	document.getElementById("previousCondition").value = conditionValue;
 
 
 //for the hidden field
