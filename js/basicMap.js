@@ -3,7 +3,7 @@
 let mymap; //global variable to store the map
 
 //create a custom popup as a global variable
-//let popup = L.popup();
+let popup = L.popup();
 
 //create an event detector to wait for the user's click event and then use the popup to show them where they clicked
 //note that you don't need to do any complicated maths to convert screen coordinated to real world coordinates - the Leaflet API does this for you
@@ -15,9 +15,9 @@ function onMapClick(e){
 		.setContent("You clicked the map at " + e.latlng.toString())
 		.openOn(mymap);
 
-}
+} 
 
-console.log("function to initialise and create the basemap. Also call on other functions - onMapClick(), addBasicMarkers()");
+console.log("function to initialise and create the basemap.")
 function loadLeafletMap(){
 	  if (mymap) {
     // If a map already exists, remove it from the DOM
@@ -32,16 +32,15 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 }).addTo(mymap);
 
 //now add the click event detector to the map- call on the function onMapClick
-mymap.on('click',onMapClick);
+mymap.on('click',setMapClickEvent());
 
 } //end of code lines adding the leaflet map
 
 
 
 //from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
-
 let width;
-let popup; 
+//let popup; 
 let mapPoint; // store the geoJSON feature so that we can remove it if the screen is resized
 
 function setMapClickEvent() {
@@ -72,6 +71,7 @@ width = $(window).width();
 	}
 }
 
+
 //Step3 - Setting Up the Form Pop-Up to Collect Condition Reports
 function setUpPointClick() {
 // create a geoJSON feature (in your assignment code this will be replaced
@@ -87,16 +87,21 @@ function setUpPointClick() {
 			"coordinates": [-0.13263, 51.522449]
 		}
 	};
+
+// the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
+	let popUpHTML = getPopupHTML;
+	console.log(popUpHTML);
+	
 // and add it to the map and zoom to that location
 // use the mapPoint variable so that we can remove this point layer on
 	mapPoint= L.geoJSON(geojsonFeature).addTo(mymap).bindPopup(popUpHTML);
 	mymap.setView([51.522449,-0.13263], 12)
 
-// the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
-	let popUpHTML = getPopupHTML;
-	console.log(popUpHTML);
+
 }
 
+
+//CONDITION FORM- WINDOW SMALL
 function getPopupHTML(){
 // (in the final assignment, all the required values for the asset pop-up will be
 //derived from feature.properties.xxx – see the Earthquakes code for how this is done)
@@ -124,4 +129,50 @@ htmlString = htmlString + "</div>";
 return htmlString;
 }
 
+
+function checkCondition(){
+
+//for the hidden field
+	//1)hold previous condition value(for comparison)
+	let previousConditionValue = document.getElementById("previousConditionValue").value;
+	if (conditionValue == previousConditionValue) {
+	    alert('The current condition is the same as previous condition');
+	} else {
+	    alert('The current condition is different than previous condition');
+	}
+
+//update previous condition value
+	document.getElementById("previousConditionValue").value = conditionValue;
+
+
+//for the hidden field
+	//2)hold ID of the asset
+	let assetID = document.getElementById("assetID").value;
+	alert(assetID);
+	postString = postString+ "&assetID="+assetID;
+
+	processData(postString);
+
+}
+
+//upload
+function processData(postString) {
+	alert(postString);
+
+	let serviceUrl=  document.location.origin + "/api/testCRUD";
+   $.ajax({
+    url: serviceUrl,
+    crossDomain: true,
+    type: "POST",
+    data: postString,
+    success: function(data){console.log(data); dataUploaded(data);}
+	}); 
+
+}
+
+// create the code to process the response from the data server
+function dataUploaded(data) {
+    // change the DIV to show the response
+    document.getElementById("conditionResult").innerHTML = JSON.stringify(data);
+}
 
