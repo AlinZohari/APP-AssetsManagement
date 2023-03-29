@@ -11,7 +11,7 @@ let geoLocationID;
 
 function trackLocation(){
 
-	if(navigator.geolocation){
+	/*if(navigator.geolocation){
 		// test to see if there is an active tracking and clear it if so that we don’t have multiple tracking going on
 		try {
 			(navigator.geolocation.clearWatch(geoLocationID));
@@ -35,7 +35,11 @@ function trackLocation(){
 		}
 		else {
 		document.getElementById('showLocation').innerHTML = "Geolocation is not supported by this browser.";
-	}
+	} */
+	// return the name of the function
+	let re = /([^(]+)@|at ([^(]+) \(/g;
+	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
+	alert("function is trackLocation and menu is called by: "+ sCallerName);
 }
 
 
@@ -58,6 +62,7 @@ function showPositionData(position) {
 	mymap=mymap.setView([position.coords.latitude, position.coords.longitude], 19);
 
 	console.log("marker");
+
 }
 
 
@@ -70,7 +75,7 @@ function removePositionPoints() {
 
 
 function removeTracks() {
-	// now loop through the array and remove any points
+/*	// now loop through the array and remove any points
 	// note that we start with the last point first as if you remove point 1 then point 2 becomes point 1 so
 	// a loop doesn't work
 	// also we use -1 as arrays in javascript start counting at 0
@@ -80,8 +85,12 @@ function removeTracks() {
 	// if you want to totally remove the points, you can also remove them
 	// from the array where they are stored, using the pop command
 		trackLocationLayer.pop();
-		}
+		} */
 
+	// return the name of the function
+	let re = /([^(]+)@|at ([^(]+) \(/g;
+	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
+	alert("function is removeTracks and menu is called by: "+ sCallerName);
 }
 
 
