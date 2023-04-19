@@ -60,14 +60,14 @@
 
 </head>
 
-<body onload="loadMap()" > 
+<!-- <body onload="loadMap()" > 
     <div class="container-xxl position-relative bg-white p-0">
 
 <body onresize="processWindowResize()">
-    <div class="container-fluid position-relative bg-warning p-0">
+    <div class="container-fluid position-relative bg-warning p-0"> -->
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
+        <div class="sidebar pe-3 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="#" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i></h3>
@@ -94,7 +94,7 @@
 
         <!-- Menu for Asset Location App (Large Screen (lg): browser)-->
         <!-- Nav Item - (Help Menu: This will redirect the webpage to another html)-->
-        <!-- Reference: -using window.open-->
+        <!-- Reference: https://www.w3schools.com/jsref/met_win_open.asp -using window.open-->
         <div class="nav-item dropdown d-none d-lg-block">
                         <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="window.open('https://cege0043-34.cs.ucl.ac.uk/help.html');"><i class="fa fa-cog"></i>Help</a>
         </div>
@@ -144,17 +144,16 @@
             </div>
         </div>
 
-
         </nav>
         </div>
         <!-- Sidebar End -->
 
 
         <!-- Content Start -->
-           <div id = "wrapper" class="content d-flex flex-column" >
+           <div id = "wrapper" class="content d-flex flex-column" style="min-height: 100px;">
         
             <!-- Navbar Start -->
-            <nav class="navbar bg-light navbar-expand flex-top py-0 px-4">
+            <nav class="navbar bg-light navbar-expand flex-top py-0 px-4" style="margin-bottom: 0px;">
                 <a href="#" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                 </a>
@@ -166,19 +165,8 @@
                 </form>
                 <div class="navbar-nav align-items-right ms-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="#" class="nav-link collapsed">
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Help Menu</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Help 1</h6>
-                                <small>Data Collection</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Help 2</h6>
-                                <small>Admin Functionality</small>
                             </a>
                         </div>
                     </div>
@@ -188,9 +176,9 @@
                             <span class="d-none d-lg-inline-flex">uceszoh</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Placeholder for My Profile');">My Profile</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Placeholder for Settings');">Settings</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Placeholder for Log out');">Log Out</a>
                         </div>
                     </div>
 
@@ -198,29 +186,24 @@
             </nav><!-- Navbar End -->
 
 
-<div class="container-fluid px-0">
+<div class="container-fluid py-0 px-0">
   <div class="row d-flex">
     <div class="col d-flex">
 
-            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="margin-top:65px;z-order:0">
-                <div id="mapid" style="height:calc(100% - 65px);">
+            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="height:100%;margin-top: 0px;">
+                <div id="mapid" style="height:100%;margin-top: 0px;">
                 </div><!-- map id -->
-                </div><!-- map wrapper -->
+            </div><!-- map wrapper -->
 
-            <div id="assetDataWrapperWrapper" class="col vh-100 collapse hide" style="background-color:lightgray; margin-top:65px;z-order:0">
-                <div id="assetDataWrapper" style="height:calc(100% - 65px);">
-                </div> <!-- asset data wrapper -->
-            </div> <!-- asset data wrapper wrapper wrapper -->
- 
     </div> <!-- col d-flex -->
-</div> <!-- row d-flex -->
+  </div> <!-- row d-flex -->
 </div> <!-- container-fluid-->
-
-
 
 
 </div> <!-- end of content -->
 </div> 
+
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
