@@ -92,10 +92,11 @@
         <hr class="sidebar-divider">
         
 
-        <!--Menu for Asset Location App (Large Screen (lg): browser)-->
-        <!-- Nav Item - (L2: Daily Reporting Rates Graph - All Users)-->
+        <!-- Menu for Asset Location App (Large Screen (lg): browser)-->
+        <!-- Nav Item - (Help Menu: This will redirect the webpage to another html)-->
+        <!-- Reference: -using window.open-->
         <div class="nav-item dropdown d-none d-lg-block">
-                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="help()"><i class="fa fa-cog"></i>Help</a>
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="window.open('https://cege0043-34.cs.ucl.ac.uk/help.html');"><i class="fa fa-cog"></i>Help</a>
         </div>
 
         <!-- Nav Item - (L1: List of Assets in Best Condition)-->
@@ -110,7 +111,7 @@
 
 
 
-        <!--Menu for Condition App (Small Screen(xs,sm): phone)-->
+        <!-- Menu for Condition App (Small Screen(xs,sm): phone)-->
         <!-- Nav Item - (S1: User Ranking)-->
         <div class="nav-item dropdown d-sm-block d-md-none">
                         <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="userRaking()"><i class="fa fa-users"></i>User Ranking</a>
