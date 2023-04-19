@@ -50,13 +50,10 @@
     <script src="js/leaflet.awesome-markers.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/basicMap.js"></script> <!--maybe can delete this-->
-    <script src="js/getLocation.js"></script> <!--maybe can delete this-->
-    <script src="js/getDistance.js"></script> <!--maybe can delete this-->
     <script src="js/trackLocation.js"></script>
     <script src="js/centennial.js"></script>
     <script src="js/graph.js"></script>
     <script src="js/utilities.js"></script> <!--THIS REALLY NOT SURE maybe can delete this-->
-    <script src="js/uploadData.js"></script> <!--maybe can delete this-->
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
@@ -65,13 +62,6 @@
 
 <body onload="loadMap()" > 
     <div class="container-xxl position-relative bg-white p-0">
-        <!--  Probs can delete this too Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
 
 <body onresize="processWindowResize()">
     <div class="container-fluid position-relative bg-warning p-0">
@@ -102,33 +92,25 @@
         <hr class="sidebar-divider">
         
 
-        <!-- Nav Item - Pages Collapse Menu (Menu11 - screen maximised,laptop/desktop: Large Screen Only)-->
-        <div class="nav-item dropdown d-none d-xl-block">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 11</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu12" onclick="showAlert(id)">Menu 12</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu13" onclick="showAlert(id)">Menu 13</a>
-            </div>
+        <!--Menu for Asset Location App (large Screen: browser)-->
+
+        <!-- Nav Item - Pages Collapse Menu (L2: Daily Reporting Rates Graph - All Users)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="help()"><i class="fa fa-cog"></i>Help</a>
         </div>
 
-
-        <!-- Nav Item - Pages Collapse Menu (Menu14 - small screen, mobile device)-->
-        <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 14</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu15" onclick="showAlert(id)">Menu 15</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu16" onclick="showAlert(id)">Menu 16</a>
+        <!-- Nav Item - Pages Collapse Menu (L1: List of Assets in Best Condition)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="assetInGreatCondition()"><i class="fa fa-table"></i>List of Assets in Best Condition </a>
             </div>
-          </div>
 
-        <!-- Nav Item - Pages Collapse Menu (Menu5 - default always gonna be there)-->
-        <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 5</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu6" onclick="showAlert(id)">Menu 6</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Menu 7</a>
+        <!-- Nav Item - Pages Collapse Menu (L2: Daily Reporting Rates Graph - All Users)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="dailyParticipationRates()"><i class="fa fa-signal"></i>Graph of Daily Reporting Rates for All Users</a>
             </div>
-          </div>
+
+
+
 
         <!-- Nav Item - Pages Collapse Menu (Menu8 - small screen, mobile device)-->
         <div class="nav-item dropdown d-sm-none">
@@ -148,30 +130,6 @@
             </div>
           </div>
 
-
-        <!--Nav Item - Pages Collapse Menu (Centennial - default always gonna be there - this need to be adjust to only open in maximised and phone)-->
-        <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Centennial</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadBuildings" onclick="getBuildingsData()">Load buildings</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="removeBuildings" onclick="removeBuildingsData()">Remove buildings</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadCables" onclick="getEthernetCablesData()">Load ethernet cables</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="removeCables" onclick="removeEthernetCablesData()">Remove ethernet cables</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadRooms" onclick="getRoomsData()">Load rooms</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="removeRooms" onclick="removeRoomsData()">Remove rooms</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadSensors" onclick="getSensorsData()">Load sensors</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="mremoveSensors" onclick="removeSensorsData()">Remove sensors</a>
-            </div>
-          </div>
-
-        <!-- Nav Item - Pages Collapse Menu (Graph - screen maximised,laptop/desktop)-->
-        <div class="nav-item dropdown d-none d-lg-block">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Graph</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu12" onclick="loadGraph()">Show Graph</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu13" onclick="closeAssetData()">Remove Graph</a>
-            </div>
-        </div>
 
 
         </nav>
