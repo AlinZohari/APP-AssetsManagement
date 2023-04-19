@@ -59,12 +59,11 @@
 
 
 </head>
-
-<!-- <body onload="loadMap()" > 
+<body onload="loadMap()" > 
     <div class="container-xxl position-relative bg-white p-0">
 
 <body onresize="processWindowResize()">
-    <div class="container-fluid position-relative bg-warning p-0"> -->
+    <div class="container-fluid position-relative bg-warning p-0">
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-3 pb-3">
@@ -114,7 +113,7 @@
         <!-- Menu for Condition App (Small Screen(xs,sm): phone)-->
         <!-- Nav Item - (S1: User Ranking)-->
         <div class="nav-item dropdown d-sm-block d-md-none">
-                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="userRaking()"><i class="fa fa-users"></i>User Ranking</a>
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="userRanking()"><i class="fa fa-users"></i>User Ranking</a>
         </div>
         
         <!-- Nav Item - Pages Collapse Menu (S2: CLossest Asset -Add and Remove Layer)-->
@@ -191,8 +190,8 @@
     <div class="col d-flex">
 
         <!--MapWrapper and mapid DIV-->
-            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="height: 100%;margin-top: 0px;">
-                <div id="mapid" style="height: 100%;margin-top: 0px;">
+            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="top: 0; bottom: 0; height: 120%; width: 100%;">
+                <div id="mapid" style="top: 0; bottom: 0; height: 120%; width: 100%;">
                 </div><!-- map id -->
             </div><!-- map wrapper -->
 
@@ -206,7 +205,10 @@
                 <button type="button" class="close" label= "Close" style= "background-color: white; text-align: center; width:100px ; right:0%; top: 0%;" onclick="closeGraph()">Close</button>
             </div>
 
-        
+        <!--hidden latitude and Longitude DIV-->
+        <div id="latitude" hidden></div>
+        <div id="longitude" hidden></div>
+
     </div> <!-- col d-flex -->
   </div> <!-- row d-flex -->
 </div> <!-- container-fluid-->
@@ -239,6 +241,7 @@
 //loading the leaflet map and Eartquake (AFTER)
 document.addEventListener('DOMContentLoaded', function(){
     loadMap();
+    userId();
 
 },false);
 
@@ -250,8 +253,5 @@ function loadMap(){
 
 
 </script>
-
-
 </body>
-
 </html>
