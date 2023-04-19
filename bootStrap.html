@@ -92,8 +92,7 @@
         <hr class="sidebar-divider">
         
 
-        <!--Menu for Asset Location App (large Screen: browser)-->
-
+        <!--Menu for Asset Location App (Large Screen (lg): browser)-->
         <!-- Nav Item - Pages Collapse Menu (L2: Daily Reporting Rates Graph - All Users)-->
         <div class="nav-item dropdown d-none d-lg-block">
                         <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="help()"><i class="fa fa-cog"></i>Help</a>
@@ -111,25 +110,33 @@
 
 
 
-
-        <!-- Nav Item - Pages Collapse Menu (Menu8 - small screen, mobile device)-->
-        <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 8</a>            
+        <!--Menu for Condition App (Small Screen(xs,sm): phone)-->
+        <!-- Nav Item - Pages Collapse Menu (S2: CLossest Asset -Add and Remove Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-map-marker"></i>Closest Assets</a>            
             <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu9" onclick="showAlert(id)">Menu 9</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu10" onclick="showAlert(id)">Menu 10</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="addLayerClosestAssets" onclick="addLayerClosestAssets()">Add Layer</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeLayerClosestAssets" onclick="removeLayerClosestAssets()">Remove Layer</a>
             </div>
           </div>
 
-        <!-- Nav Item - Pages Collapse Menu (Menu Track Location - small screen, mobile device)-->
-        <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Track Location</a>            
+        <!-- Nav Item - Pages Collapse Menu (S3: Last 3 Reports (colour coded) -Add and Remove Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-map-marker"></i>Last 5 Reports</a>            
             <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="switchOn" onclick="trackLocation()">Switch Tracking On</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="swithOff" onclick="removeTracks()">Switch Tracking Off</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="addLayerLastFiveReports" onclick="addLayerLastFiveReports()">Add Layer</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeLayerLastFiveReports" onclick="removeLayerLastFiveReports()">Remove Layer</a>
             </div>
-          </div>
+        </div>
 
+        <!-- Nav Item - Pages Collapse Menu (S4: Not Rated In the Last 3 days -Add and Remove Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-map-marker"></i>Not Rated: Last 3 days</a>            
+            <div class="dropdown-menu bg-transparent border-0">
+              <a class="dropdown-item" class="dropdown-item" href="#" id="addLayerNotRated" onclick="addLayerNotRated()">Add Layer</a>
+              <a class="dropdown-item" class="dropdown-item" href="#" id="removeLayerNotRated" onclick="removeLayerNotRated()">Remove Layer</a>
+            </div>
+        </div>
 
 
         </nav>
