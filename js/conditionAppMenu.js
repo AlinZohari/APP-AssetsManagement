@@ -49,7 +49,7 @@ function addLayerClosestAssets(){
 
         //alert if there are a layer that is still on
         if (mymap.hasLayer(closestAssetsLayer)){ //hasLayer reference: https://leafletjs.com/reference.html#map-methods-for-layers-and-controls
-            alert("Closest Assets Layer are already loaded");
+            alert("Five Closest Assets had already been loaded");
         }
         else{
             //if no layer alrdy loaded then continue with ajax query
@@ -83,3 +83,15 @@ function addLayerClosestAssets(){
 }//end of addLayerClosestAssets()
 
 
+//-------------------------------
+//S2: removeLayerClosestAssets()
+function removeLayerClosestAssets(){
+
+    if(mymap.hasLayer(closestAssetsLayer) == true){  
+        mymap.removeLayer(closestAssetsLayer);
+    }
+    
+    else {
+        alert("There are no layer to remove" );
+    }
+}
