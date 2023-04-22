@@ -94,7 +94,7 @@ function removeLayerClosestAssets(){
     }
     
     else {
-        alert("There are no Closest Assets Layer to remove" );
+        alert("There are no Closest Assets Layer to be remove" );
     }
 }
 
@@ -170,9 +170,10 @@ function removeLayerLastFiveReports(){
         mymap.removeLayer(lastFiveReportsLayer);
     }
     else {
-        alert("There are no Last Five Report Layer to remove" );
+        alert("There are no Last Five Report Layer to be remove" );
     }
 }
+
 
 
 //-----------------------------------------------------------------
@@ -216,3 +217,16 @@ function removeLayerLastFiveReports(){
     }); 
     };
 };// end of addLayerNotRated() function
+
+//------------------------
+//S4: removeLayerNotRated()
+function removeLayerNotRated(){
+
+    if(mymap.hasLayer(notRatedLayer) == true){
+
+        mymap.removeLayer(notRatedLayer);
+    }
+    else {
+        alert("There are no Condition Report Missing Layer to be remove" );
+    }
+}
