@@ -34,6 +34,8 @@ function userRanking(){
     });//end of ajax query
 };//end of userRanking function
 
+
+
 //-----------------------------------------------------------------
 //S2: addLayerClosestAssets()
 function addLayerClosestAssets(){
@@ -49,7 +51,7 @@ function addLayerClosestAssets(){
 
         //alert if there are a layer that is still on
         if (mymap.hasLayer(closestAssetsLayer)){ //hasLayer reference: https://leafletjs.com/reference.html#map-methods-for-layers-and-controls
-            alert("Five Closest Assets had already been loaded");
+            alert("Five Closest Assets Layer had already been loaded");
         }
         else{
             //if no layer alrdy loaded then continue with ajax query
@@ -83,7 +85,7 @@ function addLayerClosestAssets(){
 }//end of addLayerClosestAssets()
 
 
-//-------------------------------
+//------------------------
 //S2: removeLayerClosestAssets()
 function removeLayerClosestAssets(){
 
@@ -95,3 +97,66 @@ function removeLayerClosestAssets(){
         alert("There are no layer to remove" );
     }
 }
+
+
+
+//-----------------------------------------------------------------
+//S2: addLayerLastFiveReports() - colour coded (6 markers)
+function addLayerLastFiveReports(){
+
+	let serviceUrl = document.location.origin + "/api/lastFiveConditionReports/" + user_id; 
+
+    //alert if there are a layer that is still on
+    if (mymap.hasLayer(lastFiveReportsLayer)){
+            alert("Last Five Reports Layer had already been loaded");
+    }
+     else{
+        
+        $.ajax({
+            url: serviceUrl,
+            crossDomain: true,
+            success: function(result){
+
+            let lastFiveReports = result[0];
+            console.log(lastFiveReports);
+	
+            var testMarkerGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
+            var testMarkerBeige = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'beige'});
+            var testMarkerOrange = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'orange'});
+            var testMarkerLightRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
+            var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'});
+            var testMarkerWhite = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'white'});
+
+
+            //add the JSON layer onto the map - it will appear using the colour coded icons
+            lastFiveReportsLayer = L.geoJson(lastFiveReports, {pointToLayer: function(feature, latlng) {
+                    
+                if (feature.properties.condition_description == "Element is in very good condition")
+                        {return L.marker(latlng, {icon:testMarkerGreen}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+
+                else if (feature.properties.condition_description == "Some aesthetic defects, needs minor repair")
+                        {return L.marker(latlng, {icon:testMarkerBeige}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+
+                else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
+                        {return L.marker(latlng, {icon:testMarkerOrange}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+
+                else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
+                        {return L.marker(latlng, {icon:testMarkerLightRed}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+
+                else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
+                        {return L.marker(latlng, {icon:testMarkerRed}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                else 
+                        {return L.marker(latlng, {icon:testMarkerWhite}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                
+                }, //end to inner function
+            }).addTo(mymap);
+
+        lastFiveReportsLayer.addData(lastFiveReports);
+
+            //change the map zoom so that all the data is shown
+            mymap.fitBounds(lastFiveReportsLayer.getBounds());
+            
+         }
+        }); 
+    };
+};
