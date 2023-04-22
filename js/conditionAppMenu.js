@@ -116,15 +116,15 @@ function addLayerLastFiveReports(){
             url: serviceUrl,
             crossDomain: true,
             success: function(result){
-
+                
             let lastFiveReports = result[0];
             console.log(lastFiveReports);
 	
-            var testMarkerGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
-            var testMarkerBeige = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'beige'});
+            var testMarkerDarkGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkgreen'});
+            var testMarkerGreen= L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
+            var testMarkerYellow = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'yellow'}); //probs dont have yellow
             var testMarkerOrange = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'orange'});
-            var testMarkerLightRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
-            var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'});
+            var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
             var testMarkerWhite = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'white'});
 
 
@@ -132,31 +132,31 @@ function addLayerLastFiveReports(){
             lastFiveReportsLayer = L.geoJson(lastFiveReports, {pointToLayer: function(feature, latlng) {
                     
                 if (feature.properties.condition_description == "Element is in very good condition")
-                        {return L.marker(latlng, {icon:testMarkerGreen}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                        {return L.marker(latlng, {icon:testMarkerDarkGreen}).bindPopup("Condition Description: "+ feature.properties.condition_description);}
 
                 else if (feature.properties.condition_description == "Some aesthetic defects, needs minor repair")
-                        {return L.marker(latlng, {icon:testMarkerBeige}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                        {return L.marker(latlng, {icon:testMarkerGreen}).bindPopup("Condition Description: " + feature.properties.condition_description);}
 
                 else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
-                        {return L.marker(latlng, {icon:testMarkerOrange}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                        {return L.marker(latlng, {icon:testMarkerYellow}).bindPopup("Condition Description: " + feature.properties.condition_description);}
 
                 else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
-                        {return L.marker(latlng, {icon:testMarkerLightRed}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                        {return L.marker(latlng, {icon:testMarkerOrange}).bindPopup("Condition Description: " + feature.properties.condition_description);}
 
                 else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
-                        {return L.marker(latlng, {icon:testMarkerRed}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                        {return L.marker(latlng, {icon:testMarkerRed}).bindPopup("Condition Description: " + feature.properties.condition_description);}
                 else 
-                        {return L.marker(latlng, {icon:testMarkerWhite}).bindPopup("Condition Description:   <b>" +  feature.properties.condition_description + "</b>");}
+                //Unknown
+                        {return L.marker(latlng, {icon:testMarkerWhite}).bindPopup("Condition Description: " + feature.properties.condition_description);}
                 
                 }, //end to inner function
-            }).addTo(mymap);
+                }).addTo(mymap);
+                lastFiveReportsLayer.addData(lastFiveReports);
 
-        lastFiveReportsLayer.addData(lastFiveReports);
+                //change the map zoom so that all the data is shown
+                mymap.fitBounds(lastFiveReportsLayer.getBounds());
+                }
 
-            //change the map zoom so that all the data is shown
-            mymap.fitBounds(lastFiveReportsLayer.getBounds());
-            
-         }
         }); 
     };
 };
