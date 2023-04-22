@@ -23,7 +23,6 @@ function assetsInGreatCondition(){
 
 document.getElementById("tableWrapper").style.top = "300px"; 
 document.getElementById("tableWrapper").style.top="15%"; 
-console.log(tableWrapper.style.top);
 
 const width= document.getElementById("tableWrapper").offsetWidth;
 const height = document.getElementById("tableWrapper").offsetHeight;
@@ -101,7 +100,7 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
                 } // end of the for loop
                 
                 //does a close button really necessary? or just by clicking to places other than the tableWrapper
-                tableHTML +='<td> <button type="button class="close" label= "Close" style= "background-color: white; text-align: center; width:100px ; right:0%; top: 0%;" onclick="closeTable();"> X </button></td>';
+                tableHTML +='<td> <button type="button" class="close" label= "Close" style= "background-color: white; text-align: center; width:100px ; right:0%; top: 0%;" onclick="closeTable();"> X </button></td>';
                 //Reference: https://stackoverflow.com/questions/51380509/add-buttons-in-a-dynamically-generated-table-with-js 
 
                 // close the table
@@ -113,7 +112,7 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
         });
 
         table = true;}
-        else (table == true){
+        else {
             alert("Table: List of Assets in Best Condition had already been loaded")
         }
 }
