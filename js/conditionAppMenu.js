@@ -21,7 +21,7 @@ function userRanking(){
     let serviceUrl = document.location.origin + "api/userRanking/" + user_id;
     $.ajax({
         url:serviceUrl,
-        crossDomain:true,
+        crossDomain: true,
         success:function(result){
             //getting the rank from the array_to_json
             var ranking = data[0].array_to_json[0].rank;
@@ -33,5 +33,53 @@ function userRanking(){
         }//end of inner function
     });//end of ajax query
 };//end of userRanking function
+
+//-----------------------------------------------------------------
+//S2: addLayerClosestAssets()
+function addLayerClosestAssets(){
+
+    //latitude and longitude
+    let latitude = document.getElementById('latitude').innerHTML;
+    let longitude = document.getElementById('longitude').innerHTML;
+    
+    console.log(latitude);
+    console.log(longitude);
+
+    let serviceUrl = document.location.origin + "api/userFiveClosestAssets/" + latitude + "/" + longitude;
+
+        //alert if there are a layer that is still on
+        if (mymap.hasLayer(closestAssetsLayer)){ //hasLayer reference: https://leafletjs.com/reference.html#map-methods-for-layers-and-controls
+            alert("Closest Assets Layer are already loaded");
+        }
+        else{
+            //if no layer alrdy loaded then continue with ajax query
+            $.ajax({
+                url: serviceUrl,
+                crossDomain: true,
+                success: function(result){
+                    console.log(result);
+                    
+                    var closestAssets = result[0];
+                    console.log(closestAssets);
+        
+                    //adding the JSON layers onto the map - default icons
+                    closestAssetsLayer = L.geoJson(closestAsset, {pointToLayer: function(feature, latlng) {
+
+                                //returning the asset_id, asset_name and installation_name as pop up when clicking on the marker
+                                return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("<b> Asset ID: " +feature.properties.id+
+                                "<br>", "Asset Name: " +feature.properties.asset_name+
+                                "<br>", "Installation Date: " +feature.properties.installation_date+ "</b>");
+                        },
+                    }).addTo(mymap);
+                    
+                    closestAssetLayer.addData(closestAsset);
+        
+                    //map zoom to include all 5 markers
+                    mymap.fitBounds(closestAssetLayer.getBounds());            
+                    }//end of the inner function
+            
+            }); //end of ajax query
+        }
+}//end of addLayerClosestAssets()
 
 
