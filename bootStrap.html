@@ -50,34 +50,23 @@
     <script src="js/leaflet.awesome-markers.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/basicMap.js"></script> <!--maybe can delete this-->
-    <script src="js/getLocation.js"></script> <!--maybe can delete this-->
-    <script src="js/getDistance.js"></script> <!--maybe can delete this-->
     <script src="js/trackLocation.js"></script>
     <script src="js/centennial.js"></script>
     <script src="js/graph.js"></script>
     <script src="js/utilities.js"></script> <!--THIS REALLY NOT SURE maybe can delete this-->
-    <script src="js/uploadData.js"></script> <!--maybe can delete this-->
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
 
 </head>
-
 <body onload="loadMap()" > 
     <div class="container-xxl position-relative bg-white p-0">
-        <!--  Probs can delete this too Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
 
 <body onresize="processWindowResize()">
     <div class="container-fluid position-relative bg-warning p-0">
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
+        <div class="sidebar pe-3 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="#" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i></h3>
@@ -102,77 +91,63 @@
         <hr class="sidebar-divider">
         
 
-        <!-- Nav Item - Pages Collapse Menu (Menu11 - screen maximised,laptop/desktop: Large Screen Only)-->
-        <div class="nav-item dropdown d-none d-xl-block">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 11</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu12" onclick="showAlert(id)">Menu 12</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu13" onclick="showAlert(id)">Menu 13</a>
-            </div>
-        </div>
-
-
-        <!-- Nav Item - Pages Collapse Menu (Menu14 - small screen, mobile device)-->
-        <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 14</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu15" onclick="showAlert(id)">Menu 15</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu16" onclick="showAlert(id)">Menu 16</a>
-            </div>
-          </div>
-
-        <!-- Nav Item - Pages Collapse Menu (Menu5 - default always gonna be there)-->
-        <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 5</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu6" onclick="showAlert(id)">Menu 6</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu7" onclick="showAlert(id)">Menu 7</a>
-            </div>
-          </div>
-
-        <!-- Nav Item - Pages Collapse Menu (Menu8 - small screen, mobile device)-->
-        <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Menu 8</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu9" onclick="showAlert(id)">Menu 9</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu10" onclick="showAlert(id)">Menu 10</a>
-            </div>
-          </div>
-
-        <!-- Nav Item - Pages Collapse Menu (Menu Track Location - small screen, mobile device)-->
-        <div class="nav-item dropdown d-sm-none">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Track Location</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="switchOn" onclick="trackLocation()">Switch Tracking On</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="swithOff" onclick="removeTracks()">Switch Tracking Off</a>
-            </div>
-          </div>
-
-
-        <!--Nav Item - Pages Collapse Menu (Centennial - default always gonna be there - this need to be adjust to only open in maximised and phone)-->
-        <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Centennial</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadBuildings" onclick="getBuildingsData()">Load buildings</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="removeBuildings" onclick="removeBuildingsData()">Remove buildings</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadCables" onclick="getEthernetCablesData()">Load ethernet cables</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="removeCables" onclick="removeEthernetCablesData()">Remove ethernet cables</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadRooms" onclick="getRoomsData()">Load rooms</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="removeRooms" onclick="removeRoomsData()">Remove rooms</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="loadSensors" onclick="getSensorsData()">Load sensors</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="mremoveSensors" onclick="removeSensorsData()">Remove sensors</a>
-            </div>
-          </div>
-
-        <!-- Nav Item - Pages Collapse Menu (Graph - screen maximised,laptop/desktop)-->
+        <!-- Menu for Asset Location App (Large Screen (lg): browser)-->
+        <!-- Nav Item - (Help Menu: This will redirect the webpage to another html)-->
+        <!-- Reference: https://www.w3schools.com/jsref/met_win_open.asp -using window.open-->
         <div class="nav-item dropdown d-none d-lg-block">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Graph</a>            
-            <div class="dropdown-menu bg-transparent border-0">
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu12" onclick="loadGraph()">Show Graph</a>
-              <a class="dropdown-item" class="dropdown-item" href="#" id="menu13" onclick="closeAssetData()">Remove Graph</a>
-            </div>
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="window.open('https://cege0043-34.cs.ucl.ac.uk/help.html');"><i class="fa fa-cog"></i>Help</a>
         </div>
 
+        <!-- Nav Item - (L1: List of Assets in Best Condition)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="assetInGreatCondition()"><i class="fa fa-table"></i>List of Assets in Best Condition </a>
+            </div>
+
+        <!-- Nav Item - (L2: Daily Reporting Rates Graph - All Users)-->
+        <div class="nav-item dropdown d-none d-lg-block">
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="dailyParticipationRates()"><i class="fa fa-signal"></i>Graph of Daily Reporting Rates for All Users</a>
+            </div>
+
+
+
+        <!-- Menu for Condition App (Small Screen(xs,sm): phone)-->
+        <!-- Nav Item - (S1: User Ranking)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+                        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="userRanking()"><i class="fa fa-users"></i>User Ranking</a>
+        </div>
+        
+        <!-- Nav Item - Pages Collapse Menu (S2:Closest Asset - Add Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+            <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="addLayerClosestAssets()"><i class="fa fa-map-marker"></i>Closest Assets - Add Layer</a>    
+        </div>
+      
+        <!-- Nav Item - Pages Collapse Menu (S2:Closest Asset - Remove Layer)-->
+       <div class="nav-item dropdown d-sm-block d-md-none">
+        <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="removeLayerClosestAssets()"><i class="fa fa-map-marker"></i>Closest Assets - Remove Layer</a>    
+         </div>
+
+
+        <!-- Nav Item - Pages Collapse Menu (S3: Last 3 Reports (colour coded) -Add Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+            <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="addLayerLastFiveReports()"><i class="fa fa-map-marker"></i>Last 5 Reports - Add Layer</a>    
+        </div>
+
+
+        <!-- Nav Item - Pages Collapse Menu (S3: Last 3 Reports (colour coded) -Remove Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+            <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="removeLayerLastFiveReports()"><i class="fa fa-map-marker"></i>Last 5 Reports - Remove Layer</a>    
+        </div>
+
+
+        <!-- Nav Item - Pages Collapse Menu (S4: Not Rated In the Last 3 days -Add Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+            <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="addLayerNotRated()"><i class="fa fa-map-marker"></i>Not Rated: Last 3 days - Add Layer</a>    
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu (S4: Not Rated In the Last 3 days -Remove Layer)-->
+        <div class="nav-item dropdown d-sm-block d-md-none">
+            <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" onclick="removeLayerNotRated()"><i class="fa fa-map-marker"></i>Not Rated: Last 3 days - Remove Layer</a>    
+        </div>
 
         </nav>
         </div>
@@ -180,10 +155,10 @@
 
 
         <!-- Content Start -->
-           <div id = "wrapper" class="content d-flex flex-column" >
+           <div id = "wrapper" class="content d-flex flex-column" style="min-height: 100px;">
         
             <!-- Navbar Start -->
-            <nav class="navbar bg-light navbar-expand flex-top py-0 px-4">
+            <nav class="navbar bg-light navbar-expand flex-top py-0 px-4" style="margin-bottom: 0px;">
                 <a href="#" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                 </a>
@@ -195,19 +170,8 @@
                 </form>
                 <div class="navbar-nav align-items-right ms-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="#" class="nav-link collapsed">
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Help Menu</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Help 1</h6>
-                                <small>Data Collection</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Help 2</h6>
-                                <small>Admin Functionality</small>
                             </a>
                         </div>
                     </div>
@@ -217,9 +181,9 @@
                             <span class="d-none d-lg-inline-flex">uceszoh</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Placeholder for My Profile');">My Profile</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Placeholder for Settings');">Settings</a>
+                            <a href="#" class="dropdown-item" onclick="alert('Placeholder for Log out');">Log Out</a>
                         </div>
                     </div>
 
@@ -227,29 +191,39 @@
             </nav><!-- Navbar End -->
 
 
-<div class="container-fluid px-0">
+<div class="container-fluid py-0 px-0">
   <div class="row d-flex">
     <div class="col d-flex">
 
-            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="margin-top:65px;z-order:0">
-                <div id="mapid" style="height:calc(100% - 65px);">
+        <!--MapWrapper and mapid DIV-->
+            <div id="mapWrapper" class="col vh-100 collapse show" aria-expanded="true" style="top: 0; bottom: 0; height: 120%; width: 100%;">
+                <div id="mapid" style="top: 0; bottom: 0; height: 120%; width: 100%;">
                 </div><!-- map id -->
-                </div><!-- map wrapper -->
+            </div><!-- map wrapper -->
 
-            <div id="assetDataWrapperWrapper" class="col vh-100 collapse hide" style="background-color:lightgray; margin-top:65px;z-order:0">
-                <div id="assetDataWrapper" style="height:calc(100% - 65px);">
-                </div> <!-- asset data wrapper -->
-            </div> <!-- asset data wrapper wrapper wrapper -->
- 
+        <!--Table Wrapper DIV for L1: List of Assets in Best Condition-->
+            <div id="tableWrapper" class="h-100 w-100 d-flex flex-column" style="background-color:white; text-align:center; position:absolute;">
+            <button type="button" class="close" label= "Close" style= "background-color: white; text-align: center; width:100px ; right:0%; top: 0%;" onclick="closeTable()">Close</button>
+            </div>
+
+        <!--Graph Wrapper DIV for L2: Graph of Daily Reporting Rates Graph - All Users-->
+            <div id="graphWrappper" class="h-100 w-100 d-flex flex-column" style="background-color: white; text-align: center; position:absolute"><b>Daily Reporting Rates Graph for All Users</b>
+                <button type="button" class="close" label= "Close" style= "background-color: white; text-align: center; width:100px ; right:0%; top: 0%;" onclick="closeGraph()">Close</button>
+            </div>
+
+        <!--hidden latitude and Longitude DIV-->
+        <div id="latitude" hidden></div>
+        <div id="longitude" hidden></div>
+
     </div> <!-- col d-flex -->
-</div> <!-- row d-flex -->
+  </div> <!-- row d-flex -->
 </div> <!-- container-fluid-->
-
-
 
 
 </div> <!-- end of content -->
 </div> 
+
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -273,6 +247,7 @@
 //loading the leaflet map and Eartquake (AFTER)
 document.addEventListener('DOMContentLoaded', function(){
     loadMap();
+    userId();
 
 },false);
 
@@ -284,8 +259,5 @@ function loadMap(){
 
 
 </script>
-
-
 </body>
-
 </html>
