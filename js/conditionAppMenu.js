@@ -94,7 +94,7 @@ function removeLayerClosestAssets(){
     }
     
     else {
-        alert("There are no layer to remove" );
+        alert("There are no Closest Assets Layer to remove" );
     }
 }
 
@@ -116,7 +116,7 @@ function addLayerLastFiveReports(){
             url: serviceUrl,
             crossDomain: true,
             success: function(result){
-                
+
             let lastFiveReports = result[0];
             console.log(lastFiveReports);
 	
@@ -160,3 +160,16 @@ function addLayerLastFiveReports(){
         }); 
     };
 };
+
+//------------------------
+//S3: removeLayerLastFiveReports()
+function removeLayerLastFiveReports(){
+
+    if(mymap.hasLayer(lastFiveReportsLayer) == true){
+
+        mymap.removeLayer(lastFiveReportsLayer);
+    }
+    else {
+        alert("There are no Last Five Report Layer to remove" );
+    }
+}
