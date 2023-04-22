@@ -1,4 +1,7 @@
-/**This file contain the function for the Menu for Condition App (Small Screen).
+"use strict";
+
+/**
+ * This file contain the function for the Menu for Condition App (Small Screen).
  * This include function:
  * S1: userRanking()
  * S2: addLayerClosestAssets()
@@ -18,7 +21,9 @@ let notRatedLayer; //endpoint: /conditionReportMissing/:user_id
 //-----------------------------------------------------------------
 //S1: userRanking()
 function userRanking(){
+
     let serviceUrl = document.location.origin + "api/userRanking/" + user_id;
+
     $.ajax({
         url:serviceUrl,
         crossDomain: true,
