@@ -32,7 +32,7 @@ function userRanking(){
 
         }//end of inner function
     });//end of ajax query
-};//end of userRanking function
+};//end of userRanking() function
 
 
 
@@ -82,7 +82,7 @@ function addLayerClosestAssets(){
             
             }); //end of ajax query
         }
-}//end of addLayerClosestAssets()
+}//end of addLayerClosestAssets() function
 
 
 //------------------------
@@ -101,7 +101,7 @@ function removeLayerClosestAssets(){
 
 
 //-----------------------------------------------------------------
-//S2: addLayerLastFiveReports() - colour coded (6 markers)
+//S3: addLayerLastFiveReports() - colour coded (6 markers)
 function addLayerLastFiveReports(){
 
 	let serviceUrl = document.location.origin + "/api/lastFiveConditionReports/" + user_id; 
@@ -153,13 +153,13 @@ function addLayerLastFiveReports(){
                 }).addTo(mymap);
                 lastFiveReportsLayer.addData(lastFiveReports);
 
-                //change the map zoom so that all the data is shown
+                //map zoom so that all the data is shown
                 mymap.fitBounds(lastFiveReportsLayer.getBounds());
                 }
 
         }); 
     };
-};
+};//end of addLayerLastFiveReports() function
 
 //------------------------
 //S3: removeLayerLastFiveReports()
@@ -173,3 +173,46 @@ function removeLayerLastFiveReports(){
         alert("There are no Last Five Report Layer to remove" );
     }
 }
+
+
+//-----------------------------------------------------------------
+//S4: addLayerNotRated() 
+ // function to show assets not rated in last 3 days     
+ function addLayerNotRated(){
+    
+    let serviceUrl = document.location.origin + "/api/conditionReportMissing/" + user_id; 
+        
+    if (mymap.hasLayer(notRatedLayer)){
+            alert("Condition Report Missing Layer had already been loaded");
+        }
+        else{
+      $.ajax({
+        url: serviceUrl,
+        crossDomain: true,
+        success: function(result){
+            console.log(result);
+            
+            var notRated = result[0];
+            console.log(notRated);
+
+            var testMarkerGray = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'gray'});
+
+            //add the JSON layer onto the map - it will appear to be gray
+            notRatedLayer = L.geoJson(notRated, {
+                pointToLayer: function(feature, latlng) {
+
+                    return L.marker(latlng, {icon:testMarkerGray}).bindPopup("<b> Asset ID: " +feature.properties.id+
+                    "<br> Asset Name: " +feature.properties.asset_name+
+                    "<br> Latest Condition Report Date: " +feature.properties.latest_condition_report_date+ 
+                    "<br> Condition Description: " +feature.properties.condition_description+ "</b>");
+                },
+            }).addTo(mymap);
+            notRatedLayer.addData(notRated);
+
+            //map zoom so that all the data is shown
+            mymap.fitBounds(notRatedLayer.getBounds());
+        }//end of inner function
+    
+    }); 
+    };
+};// end of addLayerNotRated() function
