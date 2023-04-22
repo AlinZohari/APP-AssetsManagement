@@ -24,7 +24,7 @@ function userRanking(){
         crossDomain: true,
         success:function(result){
             //getting the rank from the array_to_json
-            var ranking = data[0].array_to_json[0].rank;
+            var ranking = result[0].array_to_json[0].rank;
             console.log(ranking);
 
             //return the user ranking as an alert
@@ -63,19 +63,19 @@ function addLayerClosestAssets(){
                     console.log(closestAssets);
         
                     //adding the JSON layers onto the map - default icons
-                    closestAssetsLayer = L.geoJson(closestAsset, {pointToLayer: function(feature, latlng) {
+                    closestAssetsLayer = L.geoJson(closestAssets, {pointToLayer: function(feature, latlng) {
 
                                 //returning the asset_id, asset_name and installation_name as pop up when clicking on the marker
                                 return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("<b> Asset ID: " +feature.properties.id+
-                                "<br>", "Asset Name: " +feature.properties.asset_name+
-                                "<br>", "Installation Date: " +feature.properties.installation_date+ "</b>");
+                                "<br> Asset Name: " +feature.properties.asset_name+
+                                "<br> Installation Date: " +feature.properties.installation_date+ "</b>");
                         },
                     }).addTo(mymap);
                     
-                    closestAssetLayer.addData(closestAsset);
+                    closestAssetsLayer.addData(closestAssets);
         
                     //map zoom to include all 5 markers
-                    mymap.fitBounds(closestAssetLayer.getBounds());            
+                    mymap.fitBounds(closestAssetsLayer.getBounds());            
                     }//end of the inner function
             
             }); //end of ajax query
