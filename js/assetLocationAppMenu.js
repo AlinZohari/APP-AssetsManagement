@@ -166,7 +166,9 @@ function dailyParticipationRates(){
 
         //sorting the data to the days of the week -when the array_to_json is fetch its not in order
         //Reference: https://copyprogramming.com/howto/how-to-sort-a-nested-object-based-on-key-name
+        
         const sorter = {
+            // using lower case to make the keys in the sorter object consistent with the casing of the day property.
             "monday": 1,
             "tuesday": 2,
             "wednesday": 3,
@@ -200,7 +202,7 @@ function dailyParticipationRates(){
             
             //to achieve the functionality of L2: bar graph showing:-
             //  1) how many reports have been submitted 
-            //  2) how many reports have been submitted with the worst condition values
+            //  2) how many reports have been submitted with the worst condition values/ Reports with condition 'not working'
             
             
             // this is done by stacking the bar graph
