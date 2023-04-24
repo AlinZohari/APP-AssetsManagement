@@ -6,26 +6,29 @@
  * 
  * Basic functionality of the bootStrap.html:
  * - loadLeafMap()
- * - onMapClick() :will trigger basicFormHtml
+ * - setMapClickEvent() : getting the window size
+ * - setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
+ * - onMapClick() : parts of the basicFormHtml -getting the latlng from user's click on map
  * 
  * Creating the html for the two forms:
  * - basicFormHtml (latlng): asset creation form
- * - getPopupHTML (feature): 
+ * - getPopupHTML (feature): condition assesment form
+ * 
+ * Checking the previous condition of the condition assesment
+ *  - checkCondition() : giving alert when the condition assement submitted has changed or not been changed
  * 
  * Saving the data inserted in the form:
- * 
- * 
+ *  - saveNewAsset() : saving new asset by putting it to postString and relay to dataUploaded
+ *  - saveCondition() : (endpoint: /insertConditionInformation)
  * 
  * Uploading the data inserted in the form to the server:
+ *  - dataUploaded() : (endpoints: /insertAssetPoint)
  * 
- * 
- * Other Functions:
- * 	Checking the previous condition of the condition assesment
- * 	Counting the number of reports the user submitted -this will appear as alert whenever user submit their report
- *  Quality check?
- * 
- * 
- * 
+ * Uploading to the server AND alert: Counting the number of reports the user submitted -this will appear as alert whenever user submit their report:
+ *  - countSubmission() :(endpoint: /userConditionReports)
+ *  
+ * Quality check?: (accesory to make sure users dont put blank when completing the asset form creating :typing parts)
+ * - checkText()
  * 
  */
 
