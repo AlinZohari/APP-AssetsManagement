@@ -1,113 +1,111 @@
 "use strict";
 
 /**
- * THIS IS THE MAIN FILE TO MAKE THE FUNCTIONS IN BOOTSTAP WORK
+ * THIS IS THE MAIN FILE TO MAKE THE FUNCTIONS IN BOOTSTRAP WORK
  * The function include:
  * 
- * Basic functionality of the bootStrap.html:
+ * Basic functionality for the bootStrap.html:
  * - loadLeafMap()
  * - setMapClickEvent() : getting the window size
- * - setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
- * - onMapClick() : parts of the basicFormHtml -getting the latlng from user's click on map
  * 
- * Creating the html for the two forms:
- * - basicFormHtml (latlng): asset creation form
- * - getPopupHTML (feature): condition assesment form
+ * Functions to make Asset Creation Form works (In Order):
+ * 1) onMapClick() : getting the latlng from user's click on map
+ * 2) basicFormHtml(latlng) : asset creation form
+ * 3) checkText() : as an accesory and quality check to make sure users dont put blank when completing the asset form creating :typing parts
+ * 4) saveNewAsset() : saving new asset by putting it to postString and relay to dataUploaded
+ * 5) dataUploaded() : (endpoints: /insertAssetPoint)
  * 
- * Checking the previous condition of the condition assesment
- *  - checkCondition() : giving alert when the condition assement submitted has changed or not been changed
- * 
- * Saving the data inserted in the form:
- *  - saveNewAsset() : saving new asset by putting it to postString and relay to dataUploaded
- *  - saveCondition() : (endpoint: /insertConditionInformation)
- * 
- * Uploading the data inserted in the form to the server:
- *  - dataUploaded() : (endpoints: /insertAssetPoint)
- * 
- * Uploading to the server AND alert: Counting the number of reports the user submitted -this will appear as alert whenever user submit their report:
- *  - countSubmission() :(endpoint: /userConditionReports)
- *  
- * Quality check?: (accesory to make sure users dont put blank when completing the asset form creating :typing parts)
- * - checkText()
+ * Functions to make Condition Assesment Form works (In Order):
+ * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
+ * 2) getPopupHTML(feature) : condition assesment form, also will trigger checkCondition() function
+ * 3) checkCondition() : giving alert when the condition assement submitted has changed or not been changed
+ * 4) saveCondition() : (endpoint: /insertConditionInformation)
+ * 5) countSubmission() :Uploading to the server AND alerting the num_reports the user had submitted so far (endpoint: /userConditionReports)
  * 
  */
 
-
-let mymap; //global variable to store the map
-
-//create a custom popup as a global variable
+//global variable
+let mymap;
+let width; //from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
+let mapPoint; //store the geoJSON feature so that we can remove it if the screen is resized
 let popup = L.popup();
+let assetLayer;
+let conditionLayer;
+
+
+
+//--------------------------------------------------------------------------------------------------------------
+/**
+ * Basic Functionality for the bootStrap.html
+ *  loadLeafMap()
+ *  setMapClickEvent()
+ */
+
+// loadLeafMap() -------------------------------------------
+console.log("function to initialise and create the basemap.")
+function loadLeafletMap(){
+	if (mymap) {
+		mymap.remove();
+  	}
+
+	//initialize a new map
+	mymap = L.map('mapid').setView([51.505,-0.09],13);
+	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+		maxZoom:19,
+		attribution:'&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		
+	}).addTo(mymap);
+
+	//now add the click event detector to the map
+	mymap.on('click',setMapClickEvent());
+
+} //end of loadLeafMap() function
+
+// setMapClickEvent() -----------------------------------------
+/**
+ * this function need to include:
+ * - what form would pop up depending on the screen size, 
+ * - marker from setUpPointClick function need to appear in small screen 
+ * - refreshing the page in interval to make sure all the points appear
+ * - making the table close and the graph close
+*/
+function setMapClickEvent() {
+	// get the window width
+	width = $(window).width();
+	
+	// <992 is Medium and Large
+	if (width < 992) {
+		
+		if (mapPoint){
+			mymap.removeLayer(mapPoint);
+		}
+
+			mymap.off('click',onMapClick) //asset creation
+				setUpPointClick(); //condition assesment
+	}
+		else {
+			if (mapPoint){
+				mymap.removeLayer(mapPoint);
+			}
+		mymap.on('click', onMapClick); //asset creation pop-up
+		}
+	}
+
 
 //create an event detector to wait for the user's click event and then use the popup to show them where they clicked
 //note that you don't need to do any complicated maths to convert screen coordinated to real world coordinates - the Leaflet API does this for you
-
 console.log("function to show the coordinates latlong on click event");
 function onMapClick(e){
-	/*popup
 		.setLatLng(e.latlng)
 		.setContent("You clicked the map at " + e.latlng.toString())
-		.openOn(mymap);*/
-		// return the name of the function
-	let re = /([^(]+)@|at ([^(]+) \(/g;
-	let aRegexResult = re.exec(new Error().stack);
-	let sCallerName = aRegexResult[1] || aRegexResult[2];
-	alert("function is onMapClick and menu is called by: "+ sCallerName);
-
+		.openOn(mymap);
 } 
 
-console.log("function to initialise and create the basemap.")
-function loadLeafletMap(){
-	  if (mymap) {
-    // If a map already exists, remove it from the DOM
-    mymap.remove();
-  }
-
-  //initialize a new map
-mymap = L.map('mapid').setView([51.505,-0.09],13);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-	maxZoom:19,
-	attribution:'&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(mymap);
-
-//now add the click event detector to the map- call on the function onMapClick
-mymap.on('click',setMapClickEvent());
-
-} //end of code lines adding the leaflet map
 
 
 
-//from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
-let width;
-//let popup; 
-let mapPoint; // store the geoJSON feature so that we can remove it if the screen is resized
 
-function setMapClickEvent() {
-// get the window width
-width = $(window).width();
 
-// we use the bootstrap Medium and Large options for the asset location capture
-	if (width < 992) {
-//the condition capture –
-//anything smaller than 992px is defined as 'medium' by bootstrap
-// remove the map point if it exists
-		if (mapPoint){
-			mymap.removeLayer(mapPoint);
-		}
-		// cancel the map onclick event using off ..
-		mymap.off('click',onMapClick)
-		// set up a point with click functionality
-		// so that anyone clicking will add asset condition information
-		setUpPointClick();
-	}
-	else { // the asset creation page
-		// remove the map point if it exists
-		if (mapPoint){
-			mymap.removeLayer(mapPoint);
-		}
-	// the on click functionality of the MAP should pop up a blank asset creation form
-	mymap.on('click', onMapClick);
-	}
-}
 
 
 //Step3 - Setting Up the Form Pop-Up to Collect Condition Reports
