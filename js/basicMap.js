@@ -1,5 +1,33 @@
 "use strict";
 
+/**
+ * THIS IS THE MAIN FILE TO MAKE THE FUNCTIONS IN BOOTSTAP WORK
+ * The function include:
+ * 
+ * Basic functionality of the bootStap.html:
+ * 
+ * 
+ * Creating the html for the two forms:
+ * 
+ * 
+ * Saving the data inserted in the form:
+ * 
+ * 
+ * 
+ * Uploading the data inserted in the form to the server:
+ * 
+ * 
+ * Other Functions:
+ * 	Checking the previous condition of the condition assesment
+ * 	Counting the number of reports the user submitted -this will appear as alert whenever user submit their report
+ *  Quality check?
+ * 
+ * 
+ * 
+ * 
+ */
+
+
 let mymap; //global variable to store the map
 
 //create a custom popup as a global variable
