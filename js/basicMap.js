@@ -1,5 +1,35 @@
 "use strict";
 
+/**
+ * THIS IS THE MAIN FILE TO MAKE THE FUNCTIONS IN BOOTSTAP WORK
+ * The function include:
+ * 
+ * Basic functionality of the bootStrap.html:
+ * - loadLeafMap()
+ * - onMapClick() :will trigger basicFormHtml
+ * 
+ * Creating the html for the two forms:
+ * - basicFormHtml (latlng): asset creation form
+ * - getPopupHTML (feature): 
+ * 
+ * Saving the data inserted in the form:
+ * 
+ * 
+ * 
+ * Uploading the data inserted in the form to the server:
+ * 
+ * 
+ * Other Functions:
+ * 	Checking the previous condition of the condition assesment
+ * 	Counting the number of reports the user submitted -this will appear as alert whenever user submit their report
+ *  Quality check?
+ * 
+ * 
+ * 
+ * 
+ */
+
+
 let mymap; //global variable to store the map
 
 //create a custom popup as a global variable
