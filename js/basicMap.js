@@ -4,11 +4,13 @@
  * THIS IS THE MAIN FILE TO MAKE THE FUNCTIONS IN BOOTSTAP WORK
  * The function include:
  * 
- * Basic functionality of the bootStap.html:
- * 
+ * Basic functionality of the bootStrap.html:
+ * - loadLeafMap()
+ * - onMapClick() :will trigger basicFormHtml
  * 
  * Creating the html for the two forms:
- * 
+ * - basicFormHtml (latlng): asset creation form
+ * - getPopupHTML (feature): 
  * 
  * Saving the data inserted in the form:
  * 
