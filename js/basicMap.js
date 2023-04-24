@@ -29,9 +29,13 @@ let mymap;
 let width; //from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
 let mapPoint; //store the geoJSON feature so that we can remove it if the screen is resized
 let popup = L.popup();
+
 let assetLayer;
 let conditionLayer;
 
+//mapPoint in previously are change to:
+let phone;
+let desktop;
 
 
 //--------------------------------------------------------------------------------------------------------------
@@ -63,7 +67,7 @@ function loadLeafletMap(){
 
 // setMapClickEvent() -----------------------------------------
 /**
- * this function need to include:
+ * this function will includes:
  * - what form would pop up depending on the screen size, 
  * - marker from setUpPointClick function need to appear in small screen 
  * - refreshing the page in interval to make sure all the points appear
@@ -73,24 +77,62 @@ function setMapClickEvent() {
 	// get the window width
 	width = $(window).width();
 	
-	// <992 is Medium and Large
-	if (width < 992) {
-		
-		if (mapPoint){
-			mymap.removeLayer(mapPoint);
-		}
+	//Reference: https://getbootstrap.com/docs/4.0/layout/grid/
+	// when the screen is small
+	if (width < 992) { 
 
-			mymap.off('click',onMapClick) //asset creation
-				setUpPointClick(); //condition assesment
-	}
-		else {
-			if (mapPoint){
-				mymap.removeLayer(mapPoint);
+		if(phone == 1){
+			return false;
+		}
+		   
+		else { 
+			mymap.off('click', onMapClick);
+			if (assetLayer){
+				 mymap.removeLayer(assetLayer);// removing assets layer as soon as the window is resized to large
+	
 			}
-		mymap.on('click', onMapClick); //asset creation pop-up
-		}
-	}
 
+		    //When the screen is large on desktop this functions is called
+			setUpPointClick(); //condition assessment
+			trackLocation();
+			
+			closeGraph();
+			closeTable();
+
+		   phone = 1;
+		   desktop = 0;
+	
+			}
+		}
+	
+		 
+	//else of the (width < 922)		
+	else {
+		if(desktop == 1 ){
+			return false;
+		}
+			
+		else{
+		if  (conditionLayer){
+			mymap.removeLayer(conditionLayer);}//removing condition layer soon as the window is resized to small
+			mymap.on('click', onMapClick);//asset creation form
+
+			//When the screen is small on phone this functions is called - closed
+				if  (closestAssetsLayer){
+			mymap.removeLayer(closestAssetsLayer);}
+			if  (lastFiveReportsLayer){
+			mymap.removeLayer(lastFiveReportsLayer);}
+			if  ( notRatedLayer ){
+			mymap.removeLayer( notRatedLayer );}  
+
+				phone = 0;
+				desktop = 1;
+	
+	
+			}
+		}
+}//end of setMapClickEvent() function
+	 
 
 //create an event detector to wait for the user's click event and then use the popup to show them where they clicked
 //note that you don't need to do any complicated maths to convert screen coordinated to real world coordinates - the Leaflet API does this for you
