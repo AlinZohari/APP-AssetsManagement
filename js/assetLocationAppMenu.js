@@ -265,3 +265,12 @@ function dailyParticipationRates(){
     }
 
 };// end of dailyParticipationRates() function
+
+//--------------------
+function closeGraph() { 
+    if (graph == true){
+	document.getElementById("graphWrapper").style.top = "-9999px"; 
+    graph = false;}
+
+}
+
