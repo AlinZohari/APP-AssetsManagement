@@ -237,10 +237,15 @@ function dataUploaded(postString) {
 		mymap.removeLayer(assetLayer);}
 	},
 	
+	//when error from the database - meaning the asset name is not unique
+	//Reference: https://stackoverflow.com/questions/1637019/how-to-get-the-jquery-ajax-error-response-text
+	error : function(){
+        alert("Unique Error. This asset name already exists. Try using different name");
+    }
 
-	}); 
+	}); //end of ajax request query
 
-}
+} //end of dtaUploaded() function
 
 
 
