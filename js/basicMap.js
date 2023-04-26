@@ -173,7 +173,8 @@ function basicFormHtml() {
 	'<label for="longitude">Longitude</label><input type="text" size="25" id="longitude"/><br />'+
 	''+
 	''+
-	'<button id="saveAsset" onclick="checkText()">Save Asset</button>'
+	//button
+	'<button id="saveAsset" onclick="checkText()">Submit Asset</button>'
 	
 	return mylet;
 }
@@ -286,6 +287,8 @@ function setUpPointClick() {
 		//adding condition form as pop up by clickong on point to all the assets created by a specific user.
 		conditionLayer = L.geoJson(json, {
 			pointToLayer: function(feature, latlng) {
+				
+				// the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
 
 				if (feature.properties.condition_description == "Element is in very good condition")
 					{var popUpHTML = getPopupHTML(feature); 
@@ -325,47 +328,42 @@ function setUpPointClick() {
 };//end of setUpPointClick() function
 
 
-// the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
-	let popUpHTML = getPopupHTML;
-	console.log(popUpHTML);
+// getPopupHTML(feature() -------------------------------------------
+function getPopupHTML(feature){
 
-// and add it to the map and zoom to that location
-// use the mapPoint variable so that we can remove this point layer on
-	mapPoint= L.geoJSON(geojsonFeature).addTo(mymap).bindPopup(popUpHTML);
-	mymap.setView([51.522449,-0.13263], 12)
-}
+	let asset_id = feature.properties.asset_id;
+	let asset_name = feature.properties.asset_name;
+    let installation_date = feature.properties.installation_date;
+    let previous_condition = feature.properties.condition_description;
+    let condition;
+
+	let htmlString = "<div id='popup" + id + "'><h2>" + title + "</h2><br>";
+
+	htmlString += "<label for='assetName'>Asset Name</label><input type='text' size='25' id='assetName' value='" + asset_name + "'/><br />";
+	htmlString += "<label for='installationDate'>Installation Date</label><input type='text' size='25' id='installationDate' value='" + installation_date + "'/><br />";
+
+	htmlString += "<input type='radio' name='conditionValue' id='1' value='1' />1: Element is in very good condition<br />";
+	htmlString += "<input type='radio' name='conditionValue' id='2' value='2'/>2: Some aesthetic defects, needs minor repair<br />";
+	htmlString += "<input type='radio' name='conditionValue' id='3' value='3' />3: Functional degradation of some parts, needs maintenance<br />";
+	htmlString += "<input type='radio' name='conditionValue' id='4' value='4' />4: Not working and maintenance must be done as soon as reasonably possible<br />";
+	htmlString += "<input type='radio' name='conditionValue' id='5' value='5' />5: Not working and needs immediate, urgent maintenance<br />";
+	htmlString += "<input type='radio' name='conditionValue' id='6' value='6' />6: Unknown<br />";
+
+	//button
+	htmlString += "<button onclick='checkCondition(" + asset_id + ");return false;'>Submit Condition</button>";
+
+	//hidden element previous_condition and asset_id
+	htmlString += "<div id = 'previous_condition" + asset_id + "' hidden>" + previous_condition + "</div>";
+	htmlString += "<div id = 'asset_id" + asset_id  + "' hidden>" + asset_id + "</div>";
+	
+	htmlString += "</div>";
+
+	return htmlString;
+
+}//end of getPopupHTML() function
 
 
-function getPopupHTML(){
-  let id = "1272"; // this will be the asset ID
-  let title = "Condition Asset Form";
-  let assetName = " ";
-  let installationDate = " ";
-  let userID = "123"
-  let conditionValue = "1";
-  let previousCondition = 3;
-
-  let htmlString = "<div id='popup" + id + "'><h2>" + title + "</h2><br>";
-  htmlString += "<label for='assetName'>Asset Name</label><input type='text' size='25' id='assetName' value='" + assetName + "'/><br />";
-  htmlString += "<label for='installationDate'>Installation Date</label><input type='text' size='25' id='installationDate' value='" + installationDate + "'/><br />";
-  htmlString += "<label for=\"userId\">User Id</label><input type=\"text\" size=\"25\" id=\"userId\"/><br />";
-  htmlString += "<p>Condition Value</p>";
-  htmlString += "<input type='radio' name='conditionValue' id='1' value='1' />1- As new or in good serviceable condition<br />";
-  htmlString += "<input type='radio' name='conditionValue' id='2' value='2'/>2- Deteriorating, evidence of high usage, age, additional maintenance costs and inefficiency<br />";
-  htmlString += "<input type='radio' name='conditionValue' id='3' value='3' />3- Requires replacement within 5 years<br />";
-  htmlString += "<input type='radio' name='conditionValue' id='4' value='4' />4- In poor condition, overdue for replacement<br />";
-  htmlString += "<input type='radio' name='conditionValue' id='5' value='5' />5- Unable to determine condition (e.g. as item is hidden)<br />";
-  htmlString += "<input type='radio' name='conditionValue' id='6' value='6' />6- Item does not exist<br />";
-  htmlString += "<button onclick='checkCondition(" + id + ");return false;'>Submit Condition</button>";
-  // now include a hidden element with the previous condition value
-  htmlString += "<div id='previousCondition_" + id + "' hidden>" + previousCondition + "</div>";
-  // and a hidden element with the ID of the asset so that we can insert the condition with the correct asset later
-  htmlString += "<div id='asset_" + id + "' hidden>" + id + "</div>";
-  htmlString += "</div>";
-
-  return htmlString;
-}
-
+// checkCondition() -------------------------------------------
 function checkCondition(){
 
 //for the hidden field
@@ -380,14 +378,13 @@ function checkCondition(){
 //update previous condition value
 	document.getElementById("previousConditionValue").value = conditionValue;
 
-
 //for the hidden field
 	//2)hold ID of the asset
 	let assetID = document.getElementById("assetID").value;
 	alert(assetID);
 	postString = postString+ "&assetID="+assetID;
 
-	processData(postString);
+	processCondition(postString);
 
 }
 
