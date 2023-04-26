@@ -364,18 +364,18 @@ function getPopupHTML(feature){
 
 // checkCondition() -------------------------------------------
 function checkCondition(asset_id) {
-	var condition_description;
-	var condition;
+	let condition_description;
+	let condition;
 
-	var asset_name = document.getElementById("asset_name_" + asset_id).innerHTML;
-	var installation_date = document.getElementById("installation_date_" + asset_id).innerHTML;
-	var asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
-	var previous_condition = document.getElementById("previous_condition" + asset_id).innerHTML;
-	var postString = "asset_id=" + asset_id + "&asset_name=" + asset_name + "&installation_date=" + installation_date + "&user_id=" + user_id;
+	let asset_name = document.getElementById("asset_name_" + asset_id).innerHTML;
+	let installation_date = document.getElementById("installation_date_" + asset_id).innerHTML;
+	let asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
+	let previous_condition = document.getElementById("previous_condition" + asset_id).innerHTML;
+	let postString = "asset_id=" + asset_id + "&asset_name=" + asset_name + "&installation_date=" + installation_date + "&user_id=" + user_id;
   
-	var conditions = [];
+	let conditions = [];
 	for (var i = 1; i <= 5; i++) {
-	  var condition = document.getElementById("condition" + asset_id + "_" + i);
+	  let condition = document.getElementById("condition" + asset_id + "_" + i);
 	  if (condition.checked) {
 		conditions.push({
 		  value: condition.id.split('_').slice(-1),
