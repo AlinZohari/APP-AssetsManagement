@@ -83,3 +83,5 @@ function removeTracks() {
 		trackLocationLayer.pop();
 		}
 }
+
+//need to add A2:userAssets

@@ -45,7 +45,7 @@ let desktop;
  *  setMapClickEvent()
  */
 
-// loadLeafMap() -------------------------------------------
+// loadLeafletMap() -------------------------------------------
 console.log("function to initialise and create the basemap.")
 function loadLeafletMap(){
 	if (mymap) {
@@ -63,7 +63,7 @@ function loadLeafletMap(){
 	//now add the click event detector to the map
 	mymap.on('click',setMapClickEvent());
 
-} //end of loadLeafMap() function
+} //end of loadLeafletMap() function
 
 // setMapClickEvent() -----------------------------------------
 /**
