@@ -123,7 +123,7 @@ function setMapClickEvent() {
 			if  (lastFiveReportsLayer){
 			mymap.removeLayer(lastFiveReportsLayer);}
 			if  ( notRatedLayer ){
-			mymap.removeLayer( notRatedLayer );}  
+			mymap.removeLayer(notRatedLayer);}  
 
 				phone = 0;
 				desktop = 1;
@@ -134,17 +134,49 @@ function setMapClickEvent() {
 }//end of setMapClickEvent() function
 	 
 
-//create an event detector to wait for the user's click event and then use the popup to show them where they clicked
-//note that you don't need to do any complicated maths to convert screen coordinated to real world coordinates - the Leaflet API does this for you
-console.log("function to show the coordinates latlong on click event");
-function onMapClick(e){
-		.setLatLng(e.latlng)
-		.setContent("You clicked the map at " + e.latlng.toString())
-		.openOn(mymap);
-} 
 
+//--------------------------------------------------------------------------------------------------------------
+/**
+ * Functions to make Asset Creation Form works (In Order):
+ * 1) onMapClick() : getting the latlng from user's click on map
+ * 2) basicFormHtml(latlng) : asset creation form
+ * 3) checkText() : as an accesory and quality check to make sure users dont put blank when completing the asset form creating :typing parts
+ * 4) saveNewAsset() : saving new asset by putting it to postString and relay to dataUploaded
+ * 5) dataUploaded() : (endpoints: /insertAssetPoint)
+ */
 
+// onMapClick() -------------------------------------------
+function onMapClick(e) {
+	let formHTML = basicFormHtml();
+	popup 
+	.setLatLng(e.latlng)
+	.setContent("You clicked the map at " + e.latlng.toString()+"<br>"+formHTML)
+	.openOn(mymap);
+}
 
+// basicFormHtml() -------------------------------------------
+function basicFormHtml() {
+
+	//getting the user latlng when they click on map
+	let latitude = latlng.lat;
+	let longitude = latlng.lng;
+
+	let mylet = '<p> Asset Creation Form <p>'+
+	''+
+	''+
+	'<label for="Assetname">Asset Name</label><input type="text" size="25" id="assetName"/><br />'+
+	'<label for="installationDate">Installation Date</label><input type="text" size="25" id="installationDate"/><br />'+
+	''+
+	''+
+	'<hr>'+
+	'<label for="latitude">Latitude</label><input type="text" size="25" id="latitude"/><br />'+
+	'<label for="longitude">Longitude</label><input type="text" size="25" id="longitude"/><br />'+
+	''+
+	''+
+	'<button id="saveAsset" onclick="checkText()">Save Asset</button>'
+	
+	return mylet;
+}
 
 
 
@@ -255,36 +287,7 @@ function dataUploaded(data) {
     document.getElementById("conditionResult").innerHTML = JSON.stringify(data);
 }
 
-function onMapClick(e) {
-	let formHTML = basicFormHtml();
-	popup .setLatLng(e.latlng)
-	.setContent("You clicked the map at " + e.latlng.toString()+"<br>"+formHTML)
-	.openOn(mymap);
-}
 
-function basicFormHtml() {
-	let mylet = '<p> Asset Creation Form <p>'+
-	'<label for="Assetname">Asset Name</label><input type="text" size="25" id="assetName"/><br />'+
-	'<label for="installationDate">Installation Date</label><input type="text" size="25" id="installationDate"/><br />'+
-	''+
-	''+
-	'<hr>'+
-	'<label for="latitude">Latitude</label><input type="text" size="25" id="latitude"/><br />'+
-	'<label for="longitude">Longitude</label><input type="text" size="25" id="longitude"/><br />'+
-	''+
-	''+
-	'<p>Click here to upload the data</p>'+
-	'<button id="startUpload" onclick="startDataUpload()">Start Data Upload</button>'+
-	'<br />'+
-	'<div id="dataUploadResult">The result of the upload goes here</div>'+
-	'<br />'+
-	''+
-	''+
-	'<hr>'+
-	'<label for="deleteID">Delete ID</label><input type="text" size="25" id="deleteID"/><br />'+
-	'<button id="startDelete" onclick="deleteRecord()">Delete Record</button>'+
-	'<div id="dataDeleteResult">The result of the upload goes here</div>';
-	
-	return mylet;
-}
+
+
 
