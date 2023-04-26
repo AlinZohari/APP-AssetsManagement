@@ -225,12 +225,19 @@ function dataUploaded(postString) {
     crossDomain: true,
     type: "POST",
     data: postString,
+
     success: function(data){
 		console.log(data);
 	alert("New Asset Submitted \n" +JSON.stringify(data));
 	console.log("New Asset Submitted")
 
-	}
+	//removing the asset creation form when form is submitted
+	mymap.removeLayer(popup);
+	if (mymap.hasLayer(assetLayer)){
+		mymap.removeLayer(assetLayer);}
+	},
+	
+
 	}); 
 
 }
