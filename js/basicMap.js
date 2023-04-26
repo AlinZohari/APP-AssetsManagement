@@ -255,7 +255,7 @@ function dataUploaded(postString) {
 /**
  * Functions to make Condition Assesment Form works (In Order):
  * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
- * 2) getPopupHTML(feature) : condition assesment form, also will trigger checkCondition() function
+ * 2) getPopupHTML(feature) : condition assesment form
  * 3) checkCondition() : giving alert when the condition assement submitted has changed or not been changed
  * 4) processCondition() : (endpoint: /insertConditionInformation) ---adapted from processData() from previously
  * 5) countSubmission() :Uploading to the server AND alerting the num_reports the user had submitted so far (endpoint: /userConditionReports)
@@ -335,19 +335,18 @@ function getPopupHTML(feature){
 	let asset_name = feature.properties.asset_name;
     let installation_date = feature.properties.installation_date;
     let previous_condition = feature.properties.condition_description;
-    let condition;
 
 	let htmlString = "<div id='popup" + id + "'><h2>" + title + "</h2><br>";
 
 	htmlString += "<label for='assetName'>Asset Name</label><input type='text' size='25' id='assetName' value='" + asset_name + "'/><br />";
 	htmlString += "<label for='installationDate'>Installation Date</label><input type='text' size='25' id='installationDate' value='" + installation_date + "'/><br />";
 
-	htmlString += "<input type='radio' name='conditionValue' id='1' value='1' />1: Element is in very good condition<br />";
-	htmlString += "<input type='radio' name='conditionValue' id='2' value='2'/>2: Some aesthetic defects, needs minor repair<br />";
-	htmlString += "<input type='radio' name='conditionValue' id='3' value='3' />3: Functional degradation of some parts, needs maintenance<br />";
-	htmlString += "<input type='radio' name='conditionValue' id='4' value='4' />4: Not working and maintenance must be done as soon as reasonably possible<br />";
-	htmlString += "<input type='radio' name='conditionValue' id='5' value='5' />5: Not working and needs immediate, urgent maintenance<br />";
-	htmlString += "<input type='radio' name='conditionValue' id='6' value='6' />6: Unknown<br />";
+	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_1 value='Element is in very good condition' />1: Element is in very good condition<br />";
+	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_2 value='Some aesthetic defects, needs minor repair'/>2: Some aesthetic defects, needs minor repair<br />";
+	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_3 value='Functional degradation of some parts, needs maintenance' />3: Functional degradation of some parts, needs maintenance<br />";
+	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_4 value='Not working and maintenance must be done as soon as reasonably possible' />4: Not working and maintenance must be done as soon as reasonably possible<br />";
+	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_5 value='Not working and needs immediate, urgent maintenance' />5: Not working and needs immediate, urgent maintenance<br />";
+	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_6 value='Unknown' />6: Unknown<br />";
 
 	//button
 	htmlString += "<button onclick='checkCondition(" + asset_id + ");return false;'>Submit Condition</button>";
@@ -364,29 +363,44 @@ function getPopupHTML(feature){
 
 
 // checkCondition() -------------------------------------------
-function checkCondition(){
+function checkCondition(asset_id) {
+	var condition_description;
+	var condition;
 
-//for the hidden field
-	//1)hold previous condition value(for comparison)
-	let previousConditionValue = document.getElementById("previousConditionValue").value;
-	if (conditionValue == previousConditionValue) {
-	    alert('The current condition is the same as previous condition');
-	} else {
-	    alert('The current condition is different than previous condition');
+	var asset_name = document.getElementById("asset_name_" + asset_id).innerHTML;
+	var installation_date = document.getElementById("installation_date_" + asset_id).innerHTML;
+	var asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
+	var previous_condition = document.getElementById("previous_condition" + asset_id).innerHTML;
+	var postString = "asset_id=" + asset_id + "&asset_name=" + asset_name + "&installation_date=" + installation_date + "&user_id=" + user_id;
+  
+	var conditions = [];
+	for (var i = 1; i <= 5; i++) {
+	  var condition = document.getElementById("condition" + asset_id + "_" + i);
+	  if (condition.checked) {
+		conditions.push({
+		  value: condition.id.split('_').slice(-1),
+		  description: condition.value
+		});
+	  }
 	}
-
-//update previous condition value
-	document.getElementById("previousConditionValue").value = conditionValue;
-
-//for the hidden field
-	//2)hold ID of the asset
-	let assetID = document.getElementById("assetID").value;
-	alert(assetID);
-	postString = postString+ "&assetID="+assetID;
+  
+	if (conditions.length > 0) {
+	  condition = conditions[0].value;
+	  condition_description = conditions[0].description;
+	}
+  
+	// compare condition to previous condition
+	if (condition != previous_condition) {
+	  alert('Condition assement submitted of the asset has changed\n Previous Condition: ' + previous_condition + "\n New Condition: " + condition_description);
+	} else {
+	  alert('Condition assesment submitted has not changed\n Previous Condition: ' + previous_condition + "\n New Condition: " + condition_description);
+	}
+  
+	postString = postString + "&previous_condition=" + previous_condition + "&condition=" + condition + "&condition_description=" + condition_description;
 
 	processCondition(postString);
-
-}
+  }
+  
 
 
 
