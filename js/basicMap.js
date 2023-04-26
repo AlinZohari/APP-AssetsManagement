@@ -245,30 +245,85 @@ function dataUploaded(postString) {
 
 	}); //end of ajax request query
 
-} //end of dtaUploaded() function
+} //end of dataUploaded() function
 
 
 
 
+//--------------------------------------------------------------------------------------------------------------
+/**
+ * Functions to make Condition Assesment Form works (In Order):
+ * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
+ * 2) getPopupHTML(feature) : condition assesment form, also will trigger checkCondition() function
+ * 3) checkCondition() : giving alert when the condition assement submitted has changed or not been changed
+ * 4) processCondition() : (endpoint: /insertConditionInformation) ---adapted from processData() from previously
+ * 5) countSubmission() :Uploading to the server AND alerting the num_reports the user had submitted so far (endpoint: /userConditionReports)
+ */
 
-
-
-
-//Step3 - Setting Up the Form Pop-Up to Collect Condition Reports
+// setUpPointClick() -------------------------------------------
+//Setting Up the Form Pop-Up to Collect Condition Reports
 function setUpPointClick() {
-// create a geoJSON feature (in your assignment code this will be replaced
-// by an AJAX call to load the asset points on the map
-	let geojsonFeature = {
-		"type": "Feature",
-		"properties": {
-			"name": "London",
-			"popupContent": "This is where UCL is based"
-		},
-		"geometry": {
-			"type": "Point",
-			"coordinates": [-0.13263, 51.522449]
-		}
-	};
+
+	let serviceUrl=  document.location.origin + "/api/userAssets/" + user_id;
+
+	// by an AJAX call to load the asset points on the map
+	$.ajax({
+		url: serviceUrl,
+		crossDomain: true,
+		success: function(result){
+		console.log(result); //checking the data
+	
+		var testMarkerDarkGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkgreen'});
+		var testMarkerGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
+		var testMarkerYellow = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'yellow'});
+		var testMarkerOrange = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'orange'});
+		var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
+		var testMarkerWhite = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'white'});
+
+		json = result[0];
+		console.log(json);
+
+		//adding condition form as pop up by clickong on point to all the assets created by a specific user.
+		conditionLayer = L.geoJson(json, {
+			pointToLayer: function(feature, latlng) {
+
+				if (feature.properties.condition_description == "Element is in very good condition")
+					{var popUpHTML = getPopupHTML(feature); 
+					return L.marker(latlng, {icon:testMarkerDarkGreen}).bindPopup(popUpHTML);}
+
+				else if (feature.properties.condition_description == "Some aesthetic defects, needs minor repair")
+					{var popUpHTML = getPopupHTML(feature); 
+					return L.marker(latlng, {icon:testMarkerGreen}).bindPopup(popUpHTML);}
+
+				else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
+					{var popUpHTML = getPopupHTML(feature); 
+					return L.marker(latlng, {icon:testMarkerYellow}).bindPopup(popUpHTML);}
+
+				else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
+					{var popUpHTML = getPopupHTML(feature); 
+					return L.marker(latlng, {icon:testMarkerOrange}).bindPopup(popUpHTML);}
+
+				else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
+					{var popUpHTML = getPopupHTML(feature); 
+					return L.marker(latlng, {icon:testMarkerRed}).bindPopup(popUpHTML);}
+
+				else //Unknown
+					{var popUpHTML = getPopupHTML(feature); 
+					return L.marker(latlng, {icon:testMarkerWhite}).bindPopup(popUpHTML);}
+
+				}, //pointToLayer
+
+			
+		}).addTo(mymap);
+		conditionLayer.addData(json);
+
+		//changing the map zoom
+		mymap.fitBounds(conditionLayer.getBounds());
+
+		} //success function in the ajax request
+	});// end os ajax request
+};//end of setUpPointClick() function
+
 
 // the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
 	let popUpHTML = getPopupHTML;
