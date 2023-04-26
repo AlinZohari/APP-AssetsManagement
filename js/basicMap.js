@@ -432,5 +432,24 @@ function processCondition(postString){
 }; //end of the processCondition() function
 
 
+// countSubmission() -------------------------------------------
+//simultaneously when the user submit Condition Report an alert will pop up to tell how many report has been submitted so far
+function countSubmission(){
 
+	let serviceUrl=  document.location.origin + "/api/userConditionReports/" + user_id;
+        
+    $.ajax({
+		url: serviceUrl,
+		crossDomain: true,
+		success: function(result){
+			console.log(result);
+
+		let count;
+		count = result[0].array_to_json[0].num_reports;
+		console.log(count);
+
+    	alert("You have submitted " + count + " reports");
+		}
+	});
+}; //end of function countSubmission()
 
