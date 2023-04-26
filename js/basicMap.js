@@ -19,7 +19,7 @@
  * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
  * 2) getPopupHTML(feature) : condition assesment form, also will trigger checkCondition() function
  * 3) checkCondition() : giving alert when the condition assement submitted has changed or not been changed
- * 4) saveCondition() : (endpoint: /insertConditionInformation)
+ * 4) processCondition() : (endpoint: /insertConditionInformation) ---adapted from processData() from previously
  * 5) countSubmission() :Uploading to the server AND alerting the num_reports the user had submitted so far (endpoint: /userConditionReports)
  * 
  */
@@ -141,7 +141,7 @@ function setMapClickEvent() {
  * 1) onMapClick() : getting the latlng from user's click on map
  * 2) basicFormHtml(latlng) : asset creation form
  * 3) checkText() : as an accesory and quality check to make sure users dont put blank when completing the asset form creating :typing parts
- * 4) saveNewAsset() : saving new asset by putting it to postString and relay to dataUploaded
+ * 4) processAsset() : processing the new insert asset, putting it to postString and relay to dataUploaded
  * 5) dataUploaded() : (endpoints: /insertAssetPoint)
  */
 
@@ -164,8 +164,8 @@ function basicFormHtml() {
 	let mylet = '<p> Asset Creation Form <p>'+
 	''+
 	''+
-	'<label for="Assetname">Asset Name</label><input type="text" size="25" id="assetName"/><br />'+
-	'<label for="installationDate">Installation Date</label><input type="text" size="25" id="installationDate"/><br />'+
+	'<label for="Assetname">Asset Name</label><input type="text" size="25" id="asset_name"/><br />'+
+	'<label for="installationDate">Installation Date</label><input type="text" size="25" id="installation_date"/><br />'+
 	''+
 	''+
 	'<hr>'+
@@ -180,8 +180,8 @@ function basicFormHtml() {
 
 // checkText() -------------------------------------------
 function checkText(){
-    let asset_name = document.getElementById("assetName").value;
-    let installation_date = document.getElementById("installationDate").value;
+    let asset_name = document.getElementById("asset_name").value;
+    let installation_date = document.getElementById("installation_date").value;
 
     if 
         (asset_name == "" || asset_name == null){
@@ -199,6 +199,46 @@ function checkText(){
 
     }
 }
+
+// processAsset() -------------------------------------------
+// processing the data inserted by user and  giving them to dataUploaded() function to be upload to the server
+function processAsset() {
+
+	let asset_name = document.getElementById("asset_name").value;
+	let installation_date = document.getElementById("installation_date").value;
+	let latitude = document.getElementById("latitude").innerHTML;
+	let longitude = document.getElementById("longitude").innerHTML;
+	
+	var postString = "asset_name="+asset_name +"&installation_date="+installation_date+"&latitude="+latitude +"&longitude="+longitude +"&user_id="+user_id;
+
+	dataUploaded(postString);
+}
+
+// dataUploaded() -------------------------------------------
+function dataUploaded(postString) {
+	alert(postString);
+
+	let serviceUrl=  document.location.origin + "/api/inserAssetPoint";
+
+   $.ajax({
+	url: serviceUrl,
+    crossDomain: true,
+    type: "POST",
+    data: postString,
+    success: function(data){
+		console.log(data);
+	alert("New Asset Submitted \n" +JSON.stringify(data));
+	console.log("New Asset Submitted")
+
+	}
+	}); 
+
+}
+
+
+
+
+
 
 
 
@@ -226,8 +266,6 @@ function setUpPointClick() {
 // use the mapPoint variable so that we can remove this point layer on
 	mapPoint= L.geoJSON(geojsonFeature).addTo(mymap).bindPopup(popUpHTML);
 	mymap.setView([51.522449,-0.13263], 12)
-
-
 }
 
 
@@ -286,26 +324,7 @@ function checkCondition(){
 
 }
 
-//upload
-function processData(postString) {
-	alert(postString);
 
-	let serviceUrl=  document.location.origin + "/api/testCRUD";
-   $.ajax({
-    url: serviceUrl,
-    crossDomain: true,
-    type: "POST",
-    data: postString,
-    success: function(data){console.log(data); dataUploaded(data);}
-	}); 
-
-}
-
-// create the code to process the response from the data server
-function dataUploaded(data) {
-    // change the DIV to show the response
-    document.getElementById("conditionResult").innerHTML = JSON.stringify(data);
-}
 
 
 
