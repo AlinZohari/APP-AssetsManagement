@@ -402,8 +402,34 @@ function checkCondition(asset_id) {
   }
   
 
+// processCondition() -------------------------------------------
+//this will send the report to the server, close the form, and calling setUpPointClick() function to change the colour of the marker depending on the condition
+function processCondition(postString){
 
+    let serviceUrl=  document.location.origin + "/api/insertConditionInformation";
 
+   $.ajax({
+    url: serviceUrl,
+    crossDomain: true,
+    type: "POST",
+    data: postString,
+    success: function(data){
+		console.log(data);
+
+        alert("Condition Assesment Submitted."+  "\n" + JSON.stringify(data));
+        console.log("Condition Assesment Submitted");
+
+        countSubmission();  //function to tell the user the number of report submitted by the user
+
+		//closing the Condition Assesment Form when it is successful submitted
+        mymap.closePopup();
+		//removing the conditionLayer
+        mymap.removeLayer(conditionLayer);
+        setUpPointClick();//changing the colour for the report that just been submitted
+        
+    }
+	}); //end of ajax request query 
+}; //end of the processCondition() function
 
 
 
