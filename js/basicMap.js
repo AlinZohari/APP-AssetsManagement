@@ -178,7 +178,27 @@ function basicFormHtml() {
 	return mylet;
 }
 
+// checkText() -------------------------------------------
+function checkText(){
+    let asset_name = document.getElementById("assetName").value;
+    let installation_date = document.getElementById("installationDate").value;
 
+    if 
+        (asset_name == "" || asset_name == null){
+        alert("Asset Name field cannot be blank");
+        return false;
+    }
+    else if 
+        (installation_date == "" || installation_date == null){
+        alert("Installation Date field cannot be blank");
+        return false;
+    }
+    else{
+        saveNewAsset();
+        return true;
+
+    }
+}
 
 
 
