@@ -16,11 +16,20 @@
  * 5) dataUploaded() : (endpoints: /insertAssetPoint)
  * 
  * Functions to make Condition Assesment Form works (In Order):
- * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
+ * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: /userId)
  * 2) getPopupHTML(feature) : condition assesment form, also will trigger checkCondition() function
  * 3) checkCondition() : giving alert when the condition assement submitted has changed or not been changed
  * 4) processCondition() : (endpoint: /insertConditionInformation) ---adapted from processData() from previously
  * 5) countSubmission() :Uploading to the server AND alerting the num_reports the user had submitted so far (endpoint: /userConditionReports)
+ * 
+ * 
+ * endpoints list that will be use:
+ * - /userId : setPointClick()
+ * A0 - /conditionDetails : 
+ * A1 - /insertAssetPoint : dataUploaded() -uploading asset creation to the server
+ * A1 - /insertConditionInformation : processCondition()
+ * A2 - /userAssets/:user_id : 
+ * A3 - /userConditionReports/:user_id ; countSubmission()
  * 
  */
 
@@ -61,7 +70,7 @@ function loadLeafletMap(){
 	}).addTo(mymap);
 
 	//now add the click event detector to the map
-	mymap.on('click',setMapClickEvent());
+	mymap.on('click',setMapClickEvent);
 
 } //end of loadLeafletMap() function
 
@@ -219,7 +228,7 @@ function processAsset() {
 function dataUploaded(postString) {
 	alert(postString);
 
-	let serviceUrl=  document.location.origin + "/api/inserAssetPoint";
+	let serviceUrl=  document.location.origin + "/api/insertAssetPoint";
 
    $.ajax({
 	url: serviceUrl,
@@ -254,7 +263,7 @@ function dataUploaded(postString) {
 //--------------------------------------------------------------------------------------------------------------
 /**
  * Functions to make Condition Assesment Form works (In Order):
- * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userAssets/:user_id)
+ * 1) setUpPointClick() : setting up Form Pop-Up to Collect Condition Reports of the user (endpoints: userId)
  * 2) getPopupHTML(feature) : condition assesment form
  * 3) checkCondition() : giving alert when the condition assement submitted has changed or not been changed
  * 4) processCondition() : (endpoint: /insertConditionInformation) ---adapted from processData() from previously
@@ -265,26 +274,27 @@ function dataUploaded(postString) {
 //Setting Up the Form Pop-Up to Collect Condition Reports
 function setUpPointClick() {
 
-	let serviceUrl=  document.location.origin + "/api/userAssets/" + user_id;
+	let serviceUrl=  document.location.origin + "/api/userAssets/"+ user_id;
 
 	// by an AJAX call to load the asset points on the map
 	$.ajax({
 		url: serviceUrl,
 		crossDomain: true,
+		async: false,
 		success: function(result){
 		console.log(result); //checking the data
 	
 		var testMarkerDarkGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkgreen'});
 		var testMarkerGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
-		var testMarkerYellow = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'yellow'});
+		var testMarkerDarkRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'});
 		var testMarkerOrange = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'orange'});
 		var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
 		var testMarkerWhite = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'white'});
 
-		json = result[0];
+		let json = result[0]; 
 		console.log(json);
 
-		//adding condition form as pop up by clickong on point to all the assets created by a specific user.
+		//adding condition form as pop up by clicking on point to all the assets created by a specific user.
 		conditionLayer = L.geoJson(json, {
 			pointToLayer: function(feature, latlng) {
 				
@@ -300,7 +310,7 @@ function setUpPointClick() {
 
 				else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
 					{var popUpHTML = getPopupHTML(feature); 
-					return L.marker(latlng, {icon:testMarkerYellow}).bindPopup(popUpHTML);}
+					return L.marker(latlng, {icon:testMarkerDarkRed}).bindPopup(popUpHTML);}
 
 				else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
 					{var popUpHTML = getPopupHTML(feature); 
@@ -324,6 +334,7 @@ function setUpPointClick() {
 		mymap.fitBounds(conditionLayer.getBounds());
 
 		} //success function in the ajax request
+
 	});// end os ajax request
 };//end of setUpPointClick() function
 
@@ -369,7 +380,7 @@ function checkCondition(asset_id) {
 
 	let asset_name = document.getElementById("asset_name_" + asset_id).innerHTML;
 	let installation_date = document.getElementById("installation_date_" + asset_id).innerHTML;
-	let asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
+	//let asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
 	let previous_condition = document.getElementById("previous_condition" + asset_id).innerHTML;
 	let postString = "asset_id=" + asset_id + "&asset_name=" + asset_name + "&installation_date=" + installation_date + "&user_id=" + user_id;
   

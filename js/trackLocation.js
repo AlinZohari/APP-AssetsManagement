@@ -14,7 +14,8 @@
 //global variable------------------------
 
 let trackLocationLayer = []; // create an array to store all the location tracking points
-let geoLocationID; // store the ID of the location tracker so that it can be used to switch the location tracking off
+let geoLocationID;// store the ID of the location tracker so that it can be used to switch the location tracking off
+let user_id; 
 
 
 function trackLocation(){
@@ -61,10 +62,12 @@ function showPositionData(position) {
 		mymap.removeLayer(trackLocationLayer[trackLocationLayer.length-1]);
 	}
 
-	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
-				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
-	mymap=mymap.setView([position.coords.latitude, position.coords.longitude], 19);
-	console.log("marker");
+	document.getElementById('latitude').innerHTML = position.coords.latitude; 
+	document.getElementById('longitude').innerHTML = position.coords.longitude;
+	console.log(document.getElementById('latitude').innerHTML);
+
+	trackLocationLayer.push(L.marker([position.coords.latitude,position.coords.longitude]).addTo(mymap));
+	console.log("getting latlng");
 
 }
 
@@ -84,20 +87,20 @@ function removeTracks() {
 	// also we use -1 as arrays in javascript start counting at 0
 	for (let i=trackLocationLayer.length-1; i > -1;i--) {
 		console.log("removing point " +i + " which has coordinates " + trackLocationLayer[i].getLatLng());
-		mymap.removeLayer(trackLocationLayer[i]);
-	// if you want to totally remove the points, you can also remove them
-	// from the array where they are stored, using the pop command
-		trackLocationLayer.pop();
-		}
+		mymap.removeLayer(trackLocationLayer[i]);}
+	
+		trackLocationLayer = []; // clear the array outside the loop
+		
 }
 
-// userAssets (endpoint: userAssets/:user_id) --------------------------------------------------------------
-function userAssets(){
+// userId (endpoint: userId) --------------------------------------------------------------
+function userId(){
 
-	let serviceUrl = document.location.origin + "api/userAssets" +user_id;
+	let serviceUrl = document.location.origin + "/api/userId";
 
 	$.ajax({
 		url: serviceUrl,
+		async: false,
 		crossDomain: true,
 		success: function(result){
 			user_id = result.user_id;
