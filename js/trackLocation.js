@@ -84,4 +84,18 @@ function removeTracks() {
 		}
 }
 
-//need to add A2:userAssets
+// A2:userAssets (endpoint: userAssets/:user_id) --------------------------------------------------------------
+function userAssets(){
+
+	let serviceUrl = document.location.origin + "api/userAssets" +user_id;
+
+	$.ajax({
+		url: serviceUrl,
+		crossDomain: true,
+		success: function(result){
+			user_id = result.user_id;
+			console.log(user_id);
+		}
+     });
+};
+
