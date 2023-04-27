@@ -280,7 +280,7 @@ function setUpPointClick() {
 	$.ajax({
 		url: serviceUrl,
 		crossDomain: true,
-		async: false,
+		async: false, //need to use this async. same as in userId function
 		success: function(result){
 		console.log(result); //checking the data
 	
@@ -298,8 +298,7 @@ function setUpPointClick() {
 		conditionLayer = L.geoJson(json, {
 			pointToLayer: function(feature, latlng) {
 				
-				// the on click functionality of the POINT should pop up partially populated condition form so that the user can select the condition they require
-
+				
 				if (feature.properties.condition_description == "Element is in very good condition")
 					{var popUpHTML = getPopupHTML(feature); 
 					return L.marker(latlng, {icon:testMarkerDarkGreen}).bindPopup(popUpHTML);}
@@ -335,11 +334,11 @@ function setUpPointClick() {
 
 		} //success function in the ajax request
 
-	});// end os ajax request
+	});// end of ajax request
 };//end of setUpPointClick() function
 
 
-// getPopupHTML(feature() -------------------------------------------
+// getPopupHTML(feature) -------------------------------------------
 function getPopupHTML(feature){
 
 	let asset_id = feature.properties.asset_id;
@@ -347,10 +346,10 @@ function getPopupHTML(feature){
     let installation_date = feature.properties.installation_date;
     let previous_condition = feature.properties.condition_description;
 
-	let htmlString = "<div id='popup" + id + "'><h2>" + title + "</h2><br>";
+	let htmlString = "<div id='popup" + asset_id + "'><h2>" + asset_name + "</h2><br>";
 
-	htmlString += "<label for='assetName'>Asset Name</label><input type='text' size='25' id='assetName' value='" + asset_name + "'/><br />";
-	htmlString += "<label for='installationDate'>Installation Date</label><input type='text' size='25' id='installationDate' value='" + installation_date + "'/><br />";
+	htmlString += "<label for='assetName'>Asset Name</label><input type='text' size='25' id='asset_name' value='" + asset_name + "'/><br />";
+	htmlString += "<label for='installationDate'>Installation Date</label><input type='text' size='25' id='installation_date' value='" + installation_date + "'/><br />";
 
 	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_1 value='Element is in very good condition' />1: Element is in very good condition<br />";
 	htmlString += "<input type='radio' name='condition' id='condition" + asset_id + "_2 value='Some aesthetic defects, needs minor repair'/>2: Some aesthetic defects, needs minor repair<br />";
@@ -378,10 +377,10 @@ function checkCondition(asset_id) {
 	let condition_description;
 	let condition;
 
-	let asset_name = document.getElementById("asset_name_" + asset_id).innerHTML;
-	let installation_date = document.getElementById("installation_date_" + asset_id).innerHTML;
+	let asset_name = document.getElementById(asset_name).innerHTML;
+	let installation_date = document.getElementById(installation_date).innerHTML;
 	//let asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
-	let previous_condition = document.getElementById("previous_condition" + asset_id).innerHTML;
+	let previous_condition = document.getElementById(previous_condition).innerHTML;
 	let postString = "asset_id=" + asset_id + "&asset_name=" + asset_name + "&installation_date=" + installation_date + "&user_id=" + user_id;
   
 	let conditions = [];
