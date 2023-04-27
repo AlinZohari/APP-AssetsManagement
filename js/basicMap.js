@@ -377,10 +377,10 @@ function checkCondition(asset_id) {
 	let condition_description;
 	let condition;
 
-	let asset_name = document.getElementById(asset_name).innerHTML;
-	let installation_date = document.getElementById(installation_date).innerHTML;
+	let asset_name = document.getElementById("asset_name" + asset_id).innerHTML;
+	let installation_date = document.getElementById("installation_date" + asset_id).innerHTML;
 	//let asset_id = document.getElementById("asset_id" + asset_id).innerHTML;
-	let previous_condition = document.getElementById(previous_condition).innerHTML;
+	let previous_condition = document.getElementById("previous_condition" + asset_id).innerHTML;
 	let postString = "asset_id=" + asset_id + "&asset_name=" + asset_name + "&installation_date=" + installation_date + "&user_id=" + user_id;
   
 	let conditions = [];
