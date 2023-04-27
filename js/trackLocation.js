@@ -1,12 +1,20 @@
 "use strict"
 
+/**
+ * This file will contain function as follows:
+ * - trackLocation()
+ * - errorPosition()
+ * - showPositionData()
+ * - removePositionData()
+ * - removeTracks()
+ * - userAssets()
+ * 
+ */
 
+//global variable------------------------
 
-// create an array to store all the location tracking points
-let trackLocationLayer = [];
-
-// store the ID of the location tracker so that it can be used to switch the location tracking off
-let geoLocationID;
+let trackLocationLayer = []; // create an array to store all the location tracking points
+let geoLocationID; // store the ID of the location tracker so that it can be used to switch the location tracking off
 
 
 function trackLocation(){
@@ -56,7 +64,6 @@ function showPositionData(position) {
 	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
 				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
 	mymap=mymap.setView([position.coords.latitude, position.coords.longitude], 19);
-
 	console.log("marker");
 
 }
@@ -84,7 +91,7 @@ function removeTracks() {
 		}
 }
 
-// A2:userAssets (endpoint: userAssets/:user_id) --------------------------------------------------------------
+// userAssets (endpoint: userAssets/:user_id) --------------------------------------------------------------
 function userAssets(){
 
 	let serviceUrl = document.location.origin + "api/userAssets" +user_id;
