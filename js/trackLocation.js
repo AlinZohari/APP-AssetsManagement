@@ -1,17 +1,26 @@
 "use strict"
 
+/**
+ * This file will contain function as follows:
+ * - trackLocation()
+ * - errorPosition()
+ * - showPositionData()
+ * - removePositionData()
+ * - removeTracks()
+ * - userAssets()
+ * 
+ */
 
+//global variable------------------------
 
-// create an array to store all the location tracking points
-let trackLocationLayer = [];
-
-// store the ID of the location tracker so that it can be used to switch the location tracking off
-let geoLocationID;
+let trackLocationLayer = []; // create an array to store all the location tracking points
+let geoLocationID;// store the ID of the location tracker so that it can be used to switch the location tracking off
+let user_id; 
 
 
 function trackLocation(){
 
-	/*if(navigator.geolocation){
+	if(navigator.geolocation){
 		// test to see if there is an active tracking and clear it if so that we don’t have multiple tracking going on
 		try {
 			(navigator.geolocation.clearWatch(geoLocationID));
@@ -35,11 +44,7 @@ function trackLocation(){
 		}
 		else {
 		document.getElementById('showLocation').innerHTML = "Geolocation is not supported by this browser.";
-	} */
-	// return the name of the function
-	let re = /([^(]+)@|at ([^(]+) \(/g;
-	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
-	alert("function is trackLocation and menu is called by: "+ sCallerName);
+	}
 }
 
 
@@ -57,11 +62,12 @@ function showPositionData(position) {
 		mymap.removeLayer(trackLocationLayer[trackLocationLayer.length-1]);
 	}
 
-	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude]).bindPopup("<b>"+"This is your location" + "<br>Latitude: " + position.coords.latitude +
-				"<br>Longitude: " + position.coords.longitude + "<b>").addTo(mymap));
-	mymap=mymap.setView([position.coords.latitude, position.coords.longitude], 19);
+	document.getElementById('latitude').innerHTML = position.coords.latitude; 
+	document.getElementById('longitude').innerHTML = position.coords.longitude;
+	console.log(document.getElementById('latitude').innerHTML);
 
-	console.log("marker");
+	trackLocationLayer.push(L.marker([position.coords.latitude,position.coords.longitude]).addTo(mymap));
+	console.log("getting latlng");
 
 }
 
@@ -75,95 +81,31 @@ function removePositionPoints() {
 
 
 function removeTracks() {
-/*	// now loop through the array and remove any points
+	// now loop through the array and remove any points
 	// note that we start with the last point first as if you remove point 1 then point 2 becomes point 1 so
 	// a loop doesn't work
 	// also we use -1 as arrays in javascript start counting at 0
 	for (let i=trackLocationLayer.length-1; i > -1;i--) {
 		console.log("removing point " +i + " which has coordinates " + trackLocationLayer[i].getLatLng());
-		mymap.removeLayer(trackLocationLayer[i]);
-	// if you want to totally remove the points, you can also remove them
-	// from the array where they are stored, using the pop command
-		trackLocationLayer.pop();
-		} */
-
-	// return the name of the function
-	let re = /([^(]+)@|at ([^(]+) \(/g;
-	let aRegexResult = re.exec(new Error().stack); let sCallerName = aRegexResult[1] || aRegexResult[2];
-	alert("function is removeTracks and menu is called by: "+ sCallerName);
+		mymap.removeLayer(trackLocationLayer[i]);}
+	
+		trackLocationLayer = []; // clear the array outside the loop
+		
 }
 
+// userId (endpoint: userId) --------------------------------------------------------------
+function userId(){
 
+	let serviceUrl = document.location.origin + "/api/userId";
 
-/*
-let trackLocationLayer=[]; //array to store location
-let geoLocationID; // store id of location tracker
-
-function trackLocation() {
-
-	if (navigator.geolocation){
-		// test to see if there is an active tracking and clear if so to avoid multiple tracking
-		try {
-			(navigator.geolocation.clearWatch(geoLocationID));
+	$.ajax({
+		url: serviceUrl,
+		async: false,
+		crossDomain: true,
+		success: function(result){
+			user_id = result.user_id;
+			console.log(user_id);
 		}
-		catch(e){
-			console.log(e);
-		}
-		
-		removeTracks(); // clear any existing data from map
-		
-		// Parameters
-		const options = {
-			enableHighAccuracy:true,
-			maximumAge: 30000,
-			timeout: 27000
-		};
-		// Action:showPostion; Error:errorPostion; Parameters:Options
-		geoLocationID = navigator.geolocation.watchPosition(showPosition,errorPosition, options);
-	}
-	
-	else {
-		document.getElementByID('showLocation').innerHTML="Geolocation is not supported by dis browser.";
-	}
-}
+     });
+};
 
-function errorPosition(error){
-	alert(error)
-}
-
-function showPosition(position){
-	
-	// customise marker
-	let testMarkerGreen = L.AwesomeMarkers.icon({
-        icon: 'play',
-        markerColor: 'green'
-        });
-		
-	// add new point into array with 'push'
-	trackLocationLayer.push(L.marker([position.coords.latitude, position.coords.longitude],{icon:testMarkerGreen}).addTo(mymap));
-	// set bound to user location 
-	mymap=mymap.setView([position.coords.latitude, position.coords.longitude],13);
-
-}
-
-function removePositionPoints(){
-	
-	// disable location tracking so new point wont be added with removing old points
-	navigator.geolocation.clearWatch(geoLocationID);
-	
-	removeTracks();
-}
-
-function removeTracks(){
-	// Loop through arrawy to remove any points
-	for (let i=trackLocationLayer.length-1;i>-1;i--){
-		
-		console.log("removing point"+i +"which has coordinates"+trackLocationLayer[i].getLatLng());
-		
-		mymap.removeLayer(trackLocationLayer[i]);
-		
-		//Remove points using pop
-		trackLocationLayer.pop();
-	}
-}
-*/

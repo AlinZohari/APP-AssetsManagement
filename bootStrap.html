@@ -48,11 +48,8 @@
 
     <!-- calling Javascript -->
     <script src="js/leaflet.awesome-markers.js"></script>
-    <script src="js/menu.js"></script>
-    <script src="js/basicMap.js"></script> <!--maybe can delete this-->
+    <script src="js/basicMap.js"></script> <!-- Main: loadLeafletMap, setMapClickEvent, basicFormHtml: asset creation form, getPopHTML: condition assesment form, setUpPointClick: loading the assetspoint, etc -->
     <script src="js/trackLocation.js"></script>
-    <script src="js/centennial.js"></script>
-    <script src="js/graph.js"></script>
     <script src="js/utilities.js"></script> <!--THIS REALLY NOT SURE maybe can delete this-->
     <script src="js/conditionAppMenu.js"></script>
     <script src="js/assetLocationAppMenu.js"></script>
@@ -244,20 +241,20 @@
 <!--the following script will load the map and set the default view and zoom, as wel as loading the basemap title -->
 <script>
 
-"use strict";
-//code to load the map when the page is loaded
-//loading the leaflet map and Eartquake (AFTER)
-document.addEventListener('DOMContentLoaded', function(){
-    loadMap();
-    userId();
-
-},false);
-
 function loadMap(){
     loadLeafletMap();
     window.addEventListener('resize', setMapClickEvent);
     setMapClickEvent();
 }//end of loadMap
+
+//code to load the map when the page is loaded
+//loading the leaflet map and Eartquake (AFTER)
+document.addEventListener('DOMContentLoaded', function(){
+    userId();
+    loadMap();
+
+},false);
+
 
 
 </script>
