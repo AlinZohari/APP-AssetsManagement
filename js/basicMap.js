@@ -166,10 +166,9 @@ function setMapClickEvent() {
 			setUpPointClick(); //condition assessment
 			trackLocation();
 			
-			//time out
+			//time out -by calling the closestPointForm
+			setTimeout(closestPointForm,100);
 		
-
-
 			closeGraph();
 			closeTable();
 
@@ -190,6 +189,11 @@ function setMapClickEvent() {
 		if  (conditionLayer){
 			mymap.removeLayer(conditionLayer);}//removing condition layer soon as the window is resized to small
 			mymap.on('click', onMapClick);//asset creation form
+			
+			//loading asset that the user have created so far and 
+			loadAssetPoint();
+			removePositionPoints(); // and also will remove the tracks
+
 
 			//When the screen is small on phone this functions is called - closed
 				if  (closestAssetsLayer){
@@ -310,6 +314,9 @@ function dataUploaded(postString) {
 	mymap.removeLayer(popup);
 	if (mymap.hasLayer(assetLayer)){
 		mymap.removeLayer(assetLayer);}
+
+		//to show the point that recently been created immediately
+		loadAssetPoint();
 	},
 	
 	//when error from the database - meaning the asset name is not unique
