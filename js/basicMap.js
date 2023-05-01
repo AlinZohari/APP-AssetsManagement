@@ -166,8 +166,11 @@ function setMapClickEvent() {
 			setUpPointClick(); //condition assessment
 			trackLocation();
 			
-			//time out -by calling the closestPointForm
-			setTimeout(closestPointForm,100);
+			//setTimeout : executes a function after a specifies delay in miliseconds
+			//closestPointForm function which pop up when user is within a specific dstance of an asset point based on calculate Distance function are delayed for 300 milliseconds 
+			//reason: to ensure that all the necessary data (user location tracked and points plotted) is loaded before the closetPointForm is executed
+			//Reference: https://javascript.info/settimeout-setinterval
+			setTimeout(closestPointForm,300);
 		
 			closeGraph();
 			closeTable();
@@ -196,7 +199,7 @@ function setMapClickEvent() {
 
 
 			//When the screen is small on phone this functions is called - closed
-				if  (closestAssetsLayer){
+				if  (closestAssetsLayer){ //closestAssetsLayer is from condition Menu S2 -userFiveClosestAssets
 			mymap.removeLayer(closestAssetsLayer);}
 			if  (lastFiveReportsLayer){
 			mymap.removeLayer(lastFiveReportsLayer);}
