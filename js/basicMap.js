@@ -37,6 +37,7 @@
 //global variable
 let mymap;
 let width; //from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
+let height;
 let mapPoint; //store the geoJSON feature so that we can remove it if the screen is resized
 let popup = L.popup();
 
@@ -58,12 +59,16 @@ let desktop;
 // loadLeafletMap() -------------------------------------------
 console.log("function to initialise and create the basemap.")
 function loadLeafletMap(){
+	$("#mapWrapper").addClass("show");
+	$("#tableWrapper").removeClass("show");
+	$("#graphWrappper").removeClass("show");
+
 	if (mymap) {
 		mymap.remove();
   	}
 
 	//initialize a new map
-	mymap = L.map('mapid').setView([51.505,-0.09],13);
+	mymap = L.map('mapid').setView([51.505,-0.09],9);
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
 		maxZoom:19,
 		attribution:'&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -93,11 +98,11 @@ function loadAssetPoint(){
 			icon: 'play', markerColor: 'blue'});
 		
 
-			assets = result[0];
+			let assets = result[0];
 			console.log(assets);
 
 		//add the JSON layer onto the map - it will appear using the default icons, blue
-		assetPointLayer = L.geoJson(assets, {
+		assetLayer = L.geoJson(assets, {
 			pointToLayer: function(feature, latlng) {
 
 				if (feature.properties.condition_description == "Element is in very good condition")

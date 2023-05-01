@@ -16,9 +16,13 @@
 //Reference: Claire Ellul's ucl-geospatial/cege0043-app-examples repository
 // Week 9: Branch- week9-datatables
 
-let table = false;
+let table = 0;
 
 function assetsInGreatCondition(){
+    $("#mapWrapper").removeClass("show");
+    $("#tableWrapper").addClass("show");
+    $("#graphWrappper").removeClass("show");
+
     if (table == false){
 
 document.getElementById("tableWrapper").style.top = "300px"; 
@@ -26,11 +30,13 @@ document.getElementById("tableWrapper").style.top="15%";
 
 const widtha= document.getElementById("tableWrapper").offsetWidth;
 const heighta = document.getElementById("tableWrapper").offsetHeight;
-console.log(width +", "+height); 
+console.log(widtha +" "+heighta); 
 
-document.getElementById("tableWrapper").innerHTML= document.getElementById("tableWrapper").innerHTML+'<div class="h-75 w-75"><svg width="'+widtha+'" height="'+heighta+'"></svg></div>'
+document.getElementById("tableWrapper").innerHTML= document.getElementById("tableWrapper").innerHTML+'<div class="h-75 w-75"><svg width="'+widtha+'" height="'+heighta+'" id="svg2"></svg></div>'
 
-    let serviceUrl =  document.location.origin + "api/assetsInGreatCondition";
+let layers = [];
+
+    let serviceUrl =  document.location.origin + "/api/assetsInGreatCondition";
         
         $.ajax({ 
             url: serviceUrl,
@@ -38,7 +44,7 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
             success: function(result){
             console.log(result);
 
-            var features = result[0].array_to_json;
+            let features = result[0].array_to_json;
 
             // building the table
             let tableHTML = `
@@ -57,7 +63,7 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
             `;
             
             //loop
-            for (i=0;i< features.length;i++) {
+            for (let i=0;i< features.length;i++) {
                 // add a new row
                 tableHTML += "<tr>";
 
@@ -97,10 +103,10 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
                 //close the row
                 tableHTML +="</tr>";
 
-                } // end of the for loop
+                } // end of for loop
                 
                 //does a close button really necessary? or just by clicking to places other than the tableWrapper
-                tableHTML +='<td> <button type="button" class="close" label= "Close" style= "background-color: white; text-align: center; width:100px ; right:0%; top: 0%;" onclick="closeTable();"> X </button></td>';
+                tableHTML +='<td> <button type="button" class="close" aria-label= "Close" style= "background-color: white; text-align: center; color: black; width:100px ; right:0%; top: 0%; font-size:12pt; height:30px; position:absolute;" onclick="closeTable();"> X </button></td>';
                 //Reference: https://stackoverflow.com/questions/51380509/add-buttons-in-a-dynamically-generated-table-with-js 
 
                 // close the table
@@ -111,7 +117,7 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
                 }
         });
 
-        table = true;}
+        table = 1;}
         else {
             alert("List of Assets in Best Condition had already been loaded")
         }
@@ -119,9 +125,9 @@ document.getElementById("tableWrapper").innerHTML= document.getElementById("tabl
 
 //--------------------
 function closeTable() { 
-    if (table == true){
+    if (table == 1){
 	document.getElementById("tableWrapper").style.top = "-9999px"; 
-    table = false;}
+    table = 0;}
 
 }
 
@@ -134,7 +140,10 @@ let dailyParticipationRatesLayer;
 let graph = false;
 
 function dailyParticipationRates(){
-   
+    $("#mapWrapper").removeClass("show");
+    $("#tableWrapper").removeClass("show");
+    $("#graphWrappper").addClass("show");
+
     if (graph == false){
         
         document.getElementById("graphWrapper").style.top = "300px"; 
@@ -157,7 +166,7 @@ function dailyParticipationRates(){
         y1      = d3.scaleLinear().rangeRound([height, 0]), //not sure whats the  y1 do
         g       = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-        let serviceUrl =  document.location.origin + "api/dailyParticipationRates";
+        let serviceUrl =  document.location.origin + "/api/dailyParticipationRates";
 
         // download the data and create the graph -but in this case of bragraph we need to sort the days of the week
         d3.json(dailyReportingLayer).then(data => {

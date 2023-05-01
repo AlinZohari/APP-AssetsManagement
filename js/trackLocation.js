@@ -22,7 +22,7 @@ let user_id;
 function trackLocation(){
 
 	if(navigator.geolocation){
-		geoLocationID = navigator.geolocation.watchPosition(showPositionData, errorPosition, options);
+		geoLocationID = navigator.geolocation.watchPosition(showPositionData);
 		}
 		else {
 		document.getElementById('showLocation').innerHTML = "Geolocation is not supported by this browser.";
