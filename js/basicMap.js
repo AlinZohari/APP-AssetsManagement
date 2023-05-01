@@ -89,7 +89,7 @@ function loadAssetPoint(){
 			console.log(result);
 
 			//loading it without any colour different but still having its condition
-			var testMarkerBlue = L.AwesomeMarkers.icon({
+			let testMarkerBlue = L.AwesomeMarkers.icon({
 			icon: 'play', markerColor: 'blue'});
 		
 
@@ -361,9 +361,9 @@ function setUpPointClick() {
 	
 		var testMarkerDarkGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkgreen'});
 		var testMarkerGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
-		var testMarkerDarkRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'});
 		var testMarkerOrange = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'orange'});
 		var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
+		var testMarkerDarkRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'});
 		var testMarkerWhite = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'white'});
 
 		let json = result[0]; 
@@ -384,15 +384,15 @@ function setUpPointClick() {
 
 				else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
 					{var popUpHTML = getPopupHTML(feature); 
-					return L.marker(latlng, {icon:testMarkerDarkRed}).bindPopup(popUpHTML);}
+					return L.marker(latlng, {icon:testMarkerOrange}).bindPopup(popUpHTML);}
 
 				else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
 					{var popUpHTML = getPopupHTML(feature); 
-					return L.marker(latlng, {icon:testMarkerOrange}).bindPopup(popUpHTML);}
+					return L.marker(latlng, {icon:testMarkerRed}).bindPopup(popUpHTML);}
 
 				else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
 					{var popUpHTML = getPopupHTML(feature); 
-					return L.marker(latlng, {icon:testMarkerRed}).bindPopup(popUpHTML);}
+					return L.marker(latlng, {icon:testMarkerDarkRed}).bindPopup(popUpHTML);}
 
 				else //Unknown
 					{var popUpHTML = getPopupHTML(feature); 
