@@ -144,9 +144,9 @@ function addLayerLastFiveReports(){
 	
             var testMarkerDarkGreen = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkgreen'});
             var testMarkerGreen= L.AwesomeMarkers.icon({icon: 'play', markerColor: 'green'});
-            var testMarkerDarkRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'}); //probs dont have yellow
             var testMarkerOrange = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'orange'});
             var testMarkerRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'red'});
+            var testMarkerDarkRed = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'darkred'});
             var testMarkerWhite = L.AwesomeMarkers.icon({icon: 'play', markerColor: 'white'});
 
 
@@ -160,13 +160,13 @@ function addLayerLastFiveReports(){
                         {return L.marker(latlng, {icon:testMarkerGreen}).bindPopup("Condition Description: " + feature.properties.condition_description);}
 
                 else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
-                        {return L.marker(latlng, {icon:testMarkerDarkRed}).bindPopup("Condition Description: " + feature.properties.condition_description);}
-
-                else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
                         {return L.marker(latlng, {icon:testMarkerOrange}).bindPopup("Condition Description: " + feature.properties.condition_description);}
 
-                else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
+                else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
                         {return L.marker(latlng, {icon:testMarkerRed}).bindPopup("Condition Description: " + feature.properties.condition_description);}
+
+                else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
+                        {return L.marker(latlng, {icon:testMarkerDarkRed}).bindPopup("Condition Description: " + feature.properties.condition_description);}
                 else 
                 //Unknown
                         {return L.marker(latlng, {icon:testMarkerWhite}).bindPopup("Condition Description: " + feature.properties.condition_description);}
