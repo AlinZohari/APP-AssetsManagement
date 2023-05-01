@@ -46,6 +46,11 @@ function userRanking(){
 //S2: addLayerClosestAssets()
 function addLayerClosestAssets(){
 
+    //first, check is the conditionLayer is still open, if so remove them, so this menu can work properly
+    if(mymap.hasLayer(conditionLayer)){
+        mymap.removeLayer(conditionLayer);
+    }
+
     //latitude and longitude
     let latitude = document.getElementById('latitude').innerHTML;
     let longitude = document.getElementById('longitude').innerHTML;
@@ -54,6 +59,9 @@ function addLayerClosestAssets(){
     console.log(longitude);
 
     let serviceUrl = document.location.origin + "api/userFiveClosestAssets/" + latitude + "/" + longitude;
+
+    //making the marker - default blue
+    let testMarkerBlue = L.AwesomeMarkers.icon({icon:'play', markerColor: 'blue'});
 
         //alert if there are a layer that is still on
         if (mymap.hasLayer(closestAssetsLayer)){ //hasLayer reference: https://leafletjs.com/reference.html#map-methods-for-layers-and-controls
@@ -97,8 +105,11 @@ function removeLayerClosestAssets(){
 
     if(mymap.hasLayer(closestAssetsLayer) == true){  
         mymap.removeLayer(closestAssetsLayer);
+        
+        //add back the condition Layer -the standard one back to the map
+        mymap.addLayer(conditionLayer);
+        mymap.fitBounds(conditionLayer.getBounds());
     }
-    
     else {
         alert("There are no Closest Assets Layer to be remove" );
     }
@@ -109,6 +120,11 @@ function removeLayerClosestAssets(){
 //-----------------------------------------------------------------
 //S3: addLayerLastFiveReports() - colour coded (6 markers)
 function addLayerLastFiveReports(){
+
+    //first, check is the conditionLayer is still open, if so remove them, so this menu can work properly
+    if(mymap.hasLayer(conditionLayer)){
+        mymap.removeLayer(conditionLayer);
+    }
 
 	let serviceUrl = document.location.origin + "/api/lastFiveConditionReports/" + user_id; 
 
@@ -172,8 +188,11 @@ function addLayerLastFiveReports(){
 function removeLayerLastFiveReports(){
 
     if(mymap.hasLayer(lastFiveReportsLayer) == true){
-
         mymap.removeLayer(lastFiveReportsLayer);
+
+        //add back the condition Layer -the standard one back to the map
+        mymap.addLayer(conditionLayer);
+        mymap.fitBounds(conditionLayer.getBounds());
     }
     else {
         alert("There are no Last Five Report Layer to be remove" );
@@ -187,6 +206,11 @@ function removeLayerLastFiveReports(){
  // function to show assets not rated in last 3 days     
  function addLayerNotRated(){
     
+    //first, check is the conditionLayer is still open, if so remove them, so this menu can work properly
+    if(mymap.hasLayer(conditionLayer)){
+        mymap.removeLayer(conditionLayer);
+    }
+
     let serviceUrl = document.location.origin + "/api/conditionReportMissing/" + user_id; 
         
     if (mymap.hasLayer(notRatedLayer)){
@@ -229,8 +253,11 @@ function removeLayerLastFiveReports(){
 function removeLayerNotRated(){
 
     if(mymap.hasLayer(notRatedLayer) == true){
-
         mymap.removeLayer(notRatedLayer);
+
+    //add back the condition Layer -the standard one back to the map
+    mymap.addLayer(conditionLayer);
+    mymap.fitBounds(conditionLayer.getBounds());
     }
     else {
         alert("There are no Condition Report Missing Layer to be remove" );
