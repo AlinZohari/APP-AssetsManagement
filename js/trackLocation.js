@@ -107,3 +107,33 @@ function calculateDistance(lat1, lon1, lat2, lon2,unit){
 	return dist;
 
 }
+
+//making the form pop when user is close to a specific distance
+//adapting the function getDistanceFromPoint(position) in the getDistance.js
+
+function closestPointForm(){
+
+	let minDistance = 100000000000;
+	let closestFormPoint = 0;
+
+	//using the user latitude and longitude
+	let userLat = document.getElementById('latitude').innerHTML;
+	let userLng = document.getElementById('longitude').innerHTML;
+
+	conditionPointLayer.eachLayer(function(layer) {
+	let distance = calculateDistance(userLat,userLng,layer.getLatLng().lat, layer.getLatLng().lng, 'K');
+	if (distance < minDistance){
+	minDistance = distance;
+	closestPointForm = layer.feature.properties.asset_id;
+	}
+	});
+	console.log(closestPointForm);
+
+	// showing  popup for the closest point
+	conditionLayer.eachLayer(function(layer) {
+	if (layer.feature.properties.asset_id == closestPointForm){
+	layer.openPopup();
+	}
+	});
+	
+}  
