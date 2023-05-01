@@ -6,6 +6,7 @@
  * 
  * Basic functionality for the bootStrap.html:
  * - loadLeafMap()
+ * - loadAssetPoint(): this is to load all the asset point that have been created as soon as possible onto the map will be use in setMapClickEvent() and dataUploaded - when creating the asset to make the asset appear
  * - setMapClickEvent() : getting the window size
  * 
  * Functions to make Asset Creation Form works (In Order):
@@ -74,6 +75,66 @@ function loadLeafletMap(){
 
 } //end of loadLeafletMap() function
 
+
+//loadAssetPoint() -------------------------------------------
+function loadAssetPoint(){
+    
+	let serviceUrl = document.location.origin + "/api/userAssets/"+user_id;
+	
+		$.ajax({
+			url: serviceUrl,
+			async: false,
+			crossDomain: true,
+			success: function(result){
+			console.log(result);
+
+			//loading it without any colour different but still having its condition
+			var testMarkerBlue = L.AwesomeMarkers.icon({
+			icon: 'play', markerColor: 'blue'});
+		
+
+			assets = result[0];
+			console.log(assets);
+
+		//add the JSON layer onto the map - it will appear using the default icons, blue
+		assetPointLayer = L.geoJson(assets, {
+			pointToLayer: function(feature, latlng) {
+
+				if (feature.properties.condition_description == "Element is in very good condition")
+					{
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:   <b>" + feature.properties.condition_description +"</b>");}
+
+				else if (feature.properties.condition_description == "Some aesthetic defects, needs minor repair")
+					{
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+
+				else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
+					{ 
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+
+				else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
+					{ 
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+
+				else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
+					{
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+
+				else //Unknown
+					{
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information: <b> No condition captured </b>");}
+			},
+
+		}).addTo(mymap);
+
+		//changing map zoom so that all the data is shown
+		mymap.fitBounds(assetLayer.getBounds());
+		
+		}//end of inner function
+	}); //end og ajax request
+}// end of loadAssetPoint() function
+
+
 // setMapClickEvent() -----------------------------------------
 /**
  * this function will includes:
@@ -105,6 +166,10 @@ function setMapClickEvent() {
 			setUpPointClick(); //condition assessment
 			trackLocation();
 			
+			//time out
+		
+
+
 			closeGraph();
 			closeTable();
 
