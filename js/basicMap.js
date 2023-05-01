@@ -100,27 +100,27 @@ function loadAssetPoint(){
 
 				if (feature.properties.condition_description == "Element is in very good condition")
 					{
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:   <b>" + feature.properties.condition_description +"</b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Asset Name: " +feature.properties.asset_name+ "<br>Installation Date: " +feature.properties.installation_date+ "<br>Latest Condition Information:   <b>" + feature.properties.condition_description +"</b>");}
 
 				else if (feature.properties.condition_description == "Some aesthetic defects, needs minor repair")
 					{
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Asset Name: " +feature.properties.asset_name+ "<br>Installation Date: " +feature.properties.installation_date+ "<br>Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
 
 				else if (feature.properties.condition_description == "Functional degradation of some parts, needs maintenance")
 					{ 
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Asset Name: " +feature.properties.asset_name+ "<br>Installation Date: " +feature.properties.installation_date+ "<br>Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
 
 				else if (feature.properties.condition_description == "Not working and maintenance must be done as soon as reasonably possible")
 					{ 
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Asset Name: " +feature.properties.asset_name+ "<br>Installation Date: " +feature.properties.installation_date+ "<br>Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
 
 				else if (feature.properties.condition_description == "Not working and needs immediate, urgent maintenance")
 					{
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Asset Name: " +feature.properties.asset_name+ "<br>Installation Date: " +feature.properties.installation_date+ "<br>Latest Condition Information:  <b>" +feature.properties.condition_description +"</b>");}
 
 				else //Unknown
 					{
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information: <b> Unknown</b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Asset Name: " +feature.properties.asset_name+ "<br>Installation Date: " +feature.properties.installation_date+ "<br>Latest Condition Information: <b> Unknown</b>");}
 			},
 
 		}).addTo(mymap);
