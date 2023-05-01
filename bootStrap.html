@@ -199,6 +199,7 @@
             
                         <div id="tableWrapper" class="col vh-100 collapse hide" style="background-color: white; text-align:center ; overflow-y:scroll;">
                             <div id="tableDataWrapper" style="height:calc(100% - 65px);">
+                                <button type="button" class="close" aria-label= "Close" style= "background-color: white; text-align: center; color: black; width:100px ; right:0%; top: 0%; font-size:12pt; height:30px; position:absolute;" onclick="closeTable();"> X </button>
                                 <!-- table data goes here -->
                             </div> <!-- table data wrapper -->
                         </div> <!-- table data wrapper wrapper wrapper -->
@@ -206,6 +207,7 @@
                         <div id="graphWrapper" class="col vh-100 collapse hide" style="background-color: white; text-align:center;">
                             <div><b> Daily Reporting Rates of all users for past week </b></div>
                             <div id="graphDataWrapper" style="height:calc(100% - 65px);">
+                                <button type="button" class="close" aria-label= "Close" style= "background-color: white; text-align: center; color: black; width:100px ; right:0%; top: 0%; font-size:12pt; height:30px; position:absolute;" onclick="closeGraph();"> X </button>
                                 <!-- graph data goes here -->
                             </div> <!-- graph data wrapper -->
                         </div> <!-- graph data wrapper wrapper wrapper -->
@@ -243,8 +245,7 @@
 
 function loadMap(){
     loadLeafletMap();
-    window.addEventListener('resize', setMapClickEvent);
-    setMapClickEvent();
+
 }//end of loadMap
 
 //code to load the map when the page is loaded

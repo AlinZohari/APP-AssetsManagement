@@ -16,7 +16,7 @@
 //Reference: Claire Ellul's ucl-geospatial/cege0043-app-examples repository
 // Week 9: Branch- week9-datatables
 
-let table = 0;
+let table = false;
 
 function assetsInGreatCondition(){
     $("#mapWrapper").removeClass("show");
@@ -125,9 +125,9 @@ let layers = [];
 
 //--------------------
 function closeTable() { 
-    if (table == 1){
+    if (table == true){
 	document.getElementById("tableWrapper").style.top = "-9999px"; 
-    table = 0;}
+    table = false;}
 
 }
 
@@ -136,8 +136,26 @@ function closeTable() {
 //L2: dailyParticipationRates() - Bar Graph
 // adapted from doing the earthquake graph in practical3 of cege0043
 
-let dailyParticipationRatesLayer;
+let dailyReportLayer;
 let graph = false;
+
+
+//fetching the json first
+function dailyReports(){
+    let dailyReportLayer =  document.location.origin + "/api/dailyParticipationRates";
+            
+    $.ajax({
+        url: dailyReportLayer,
+        crossDomain: true,
+        success: function(result){
+
+        let json = result[0].array_to_json;
+        console.log(json);
+        
+        }//end of inner function
+    });
+}
+
 
 function dailyParticipationRates(){
     $("#mapWrapper").removeClass("show");
@@ -166,10 +184,10 @@ function dailyParticipationRates(){
         y1      = d3.scaleLinear().rangeRound([height, 0]), //not sure whats the  y1 do
         g       = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-        let serviceUrl =  document.location.origin + "/api/dailyParticipationRates";
+        let dailyReportLayer =  document.location.origin + "/api/dailyParticipationRates"
 
         // download the data and create the graph -but in this case of bragraph we need to sort the days of the week
-        d3.json(dailyReportingLayer).then(data => {
+        d3.json(dailyReportLayer).then(data => {
             data = data[0].array_to_json;
             console.log(data);
 
@@ -252,20 +270,18 @@ function dailyParticipationRates(){
             //labelling the axis
             //Refrence: https://d3-graph-gallery.com/graph/custom_axis.html
 
-            // y- axis
+            svg.append("text")
+            .attr("transform", "translate(" + (widtha/3 ) + " ," + (heighta-60) + ")")
+            .style("text-anchor", "middle")
+            .text("Days");
             svg.append("text")
             .attr("transform", "rotate(-90)")
             .attr("x", -(heighta/2))
             .attr("y", 15)
             .style("text-anchor", "middle")
-            .text("Reports Number");
-            // x-axis
-            svg.append("text")
-            .attr("transform", "translate(" + (widtha/3 ) + " ," + (heighta-60) + ")")
-            .style("text-anchor", "middle")
-            .text("Day of the Week");
+            .text("Number of reports");
 
-            }); //end of d3.json
+            }) //end of d3.json
 
     graph = true;
     } //end of the if (graph == false)

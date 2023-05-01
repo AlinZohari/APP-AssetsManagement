@@ -37,7 +37,6 @@
 //global variable
 let mymap;
 let width; //from week8 oractical4 part3- Step2: Modifying the Leaflet Map Behaviour
-let height;
 let mapPoint; //store the geoJSON feature so that we can remove it if the screen is resized
 let popup = L.popup();
 
@@ -53,30 +52,24 @@ let desktop;
 /**
  * Basic Functionality for the bootStrap.html
  *  loadLeafMap()
+ *  loadAssetPoint()
  *  setMapClickEvent()
  */
 
 // loadLeafletMap() -------------------------------------------
 console.log("function to initialise and create the basemap.")
 function loadLeafletMap(){
-	$("#mapWrapper").addClass("show");
-	$("#tableWrapper").removeClass("show");
-	$("#graphWrappper").removeClass("show");
-
-	if (mymap) {
-		mymap.remove();
-  	}
 
 	//initialize a new map
-	mymap = L.map('mapid').setView([51.505,-0.09],9);
+	mymap = L.map('mapid').setView([51.505,-0.09],13);
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
-		maxZoom:19,
+		maxZoom:20,
 		attribution:'&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		
 	}).addTo(mymap);
 
-	//now add the click event detector to the map
-	mymap.on('click',setMapClickEvent);
+	window.addEventListener('resize',setMapClickEvent);
+	setMapClickEvent();
 
 } //end of loadLeafletMap() function
 
@@ -127,7 +120,7 @@ function loadAssetPoint(){
 
 				else //Unknown
 					{
-					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information: <b> No condition captured </b>");}
+					return L.marker(latlng, {icon:testMarkerBlue}).bindPopup("Latest Condition Information: <b> Unknown</b>");}
 			},
 
 		}).addTo(mymap);
@@ -233,15 +226,16 @@ function setMapClickEvent() {
 
 // onMapClick() -------------------------------------------
 function onMapClick(e) {
-	let formHTML = basicFormHtml();
+	let formHTML = basicFormHtml(e.latlng);
 	popup 
 	.setLatLng(e.latlng)
 	.setContent("You clicked the map at " + e.latlng.toString()+"<br>"+formHTML)
 	.openOn(mymap);
+	console.log("popup Form")
 }
 
 // basicFormHtml() -------------------------------------------
-function basicFormHtml() {
+function basicFormHtml(latlng) {
 
 	//getting the user latlng when they click on map
 	let latitude = latlng.lat;
@@ -255,8 +249,10 @@ function basicFormHtml() {
 	''+
 	''+
 	'<hr>'+
-	'<label for="latitude">Latitude</label><input type="text" size="25" id="latitude"/><br />'+
-	'<label for="longitude">Longitude</label><input type="text" size="25" id="longitude"/><br />'+
+    '<div id="latitude" style="display: none;">'+ latitude + '</div>' + 
+    '' +
+    '' +
+    '<div id="longitude" style="display: none;">'+ longitude + '</div>' + 
 	''+
 	''+
 	//button
@@ -281,7 +277,7 @@ function checkText(){
         return false;
     }
     else{
-        saveNewAsset();
+        processAsset();
         return true;
 
     }
