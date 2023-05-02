@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Help Guide</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+	<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">-->
+	  
 </head>
 <body>
 	<header class="bg-dark text-white py-3">
@@ -49,16 +50,20 @@
 		<p class="lead">When you click anywhere on the map an Asset Creation Form would appear as shown in figure below.
 			The app will get the Latitude and Longitude from whenever you click on the map and include it in the form.
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 1 Image" class="img-fluid mb-4">
-		
+		<img src="img/asset_form.jpg" alt="Step 1 Image" class="my-725x400">
+
 		
 		<h2 class="mb-4">Step 2: Fill in the Form</h2>
 		<p class="lead">Fill in the required fill in the form. Enter the Asset Name field and the Installation Date (YYYY-MM-DD). 
 			 An alert will come out if the asset name you enter is the same with the one that already existed. An alert
 			will also appear if you left the field blank for either Asset Name or Installation Date field. You can now submit this new created
 			asset to the database by clicking the submit button.</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 2 Image" class="img-fluid mb-4">
-			
+		<img src="img/filling_asset.jpg" alt="Step 2 Image" class="my-725x400">
+		<img src="img/blank_asset_name.jpg" alt="Step 2 Image" class="my-725x400">
+		<img src="img/blank_installation_date.jpg" alt="Step 2 Image" class="my-725x400">
+		<img src="img/alert_asset_01.jpg" alt="Step 2 Image" class="my-725x400">
+		<img src="img/alert_asset_02.jpg" alt="Step 2 Image" class="my-725x400">
+		<img src="img/unique_error.jpg" alt="Step 2 Image" class="my-725x400">
 
 		<hr class="my-5" /> <!-- horizontal divider -->
 		<h2>Condition Report and Menus (small screen)</h2>
@@ -86,9 +91,10 @@
 		<section>
 
 		<h2 class="mb-4">Step 1: Click on the Asset Marker</h2>
-		<p class="lead">When you are in the small screen, the assets that you have created will automaticlly appear.
-			You then can click to any assets that you want to enter its condition Reports</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
+		<p class="lead">When you are in the small screen, the assets that you have created will automatically appear.
+			The asset that are near to you woul pop up its Asset Condition Report Form automatically.
+			However, you can still click on any asset you have created which you want to enter its condition Reports</p>
+		<img src="img/condition_form.jpg" alt="Step 3 Image" class="my-500x400">
 
 		<h2 class="mb-4">Step 2: Click on the Condition in the Form</h2>
 		<p class="lead">The Condition Assesment Form will appear once you click on the asset
@@ -102,27 +108,27 @@
 			5- Not working and needs immediate, urgent maintenance<br>
 			6- Unknown
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
 
 		<h2 class="mb-4">Step 3: Submit the Form</h2>
 		<p class="lead">You can now submit the Condition Report Form.
 			An alert will inform you whether the condition had changed or not from previous condition for that particular asset.
 			When the condition is succesfully submitted to the database, another alert will inform you on how many reports you have submitted so far.
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
+		<img src="img/alert_compare.jpg" alt="Step 4 Image" class="my-500x400">
+		<img src="img/count_submission.jpg" alt="Step 5 Image" class="my-500x400">
 
 		<h2>Menus and Its Function (small screen)</h2>
 		<h3>User Ranking</h3>
 		<p class="lead">This menu tells your ranking based on the number of condition reports you have created in comparison to all other users
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
+		<img src="https://via.placeholder.com/600x400" alt="Step 6 Image" class="img-fluid mb-4">
 
 		<h3> Closest Asset (Add and Remove Layer)</h3>
 		<p class="lead">This menu will project onto the map layer five assets that are closest to your current location,
 			added by any user. You can add or remove the layer based on either of these menu.
 			An alert will appear if the layer had already been loaded or they are no layer on the map to be remove.
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
+		<img src="https://via.placeholder.com/600x400" alt="Step 7 Image" class="img-fluid mb-4">
 
 		<h3> Last 5 Reports (Add and Remove Layer)</h3>
 		<p class="lead">This menu will project onto the map the last five reports that you have created with the colour coded.
@@ -136,15 +142,25 @@
 
 			An alert will appear if the layer had already been loaded or they are no layer on the map to be remove.
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
+		<img src="https://via.placeholder.com/600x400" alt="Step 8 Image" class="img-fluid mb-4">
 
 		<h3> Not Rated: Last 3 days (Add and Remove Layer)</h3>
 		<p class="lead">
 			It shows the assets and its proximity alert to the assets for which no condition reports exists in the last 3 days.
 		</p>
-		<img src="https://via.placeholder.com/600x400" alt="Step 3 Image" class="img-fluid mb-4">
+		<img src="https://via.placeholder.com/600x400" alt="Step 9 Image" class="img-fluid mb-4">
 
+		<style>
+			.my-725x400 {
+			  width: 725px;
+			  height: 400px;
+			}
 
+			.my-500x400 {
+			  width: 500px;
+			  height: 400px;
+			}
+		  </style>
 
 
 	</main>
@@ -153,6 +169,6 @@
 			<p class="mb-0">&copy; CEGE0043 AlinZohari</p>
 		</div>
 	</footer>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>-->
 </body>
 </html>
