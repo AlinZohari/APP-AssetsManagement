@@ -149,7 +149,7 @@ function setMapClickEvent() {
 	// when the screen is small
 	if (width < 992) { 
 
-		if(phone == 1){
+		if(phone == true){
 			return false;
 		}
 		   
@@ -173,8 +173,8 @@ function setMapClickEvent() {
 			closeGraph();
 			closeTable();
 
-		   phone = 1;
-		   desktop = 0;
+		   phone = true;
+		   desktop = false;
 	
 			}
 		}
@@ -182,7 +182,7 @@ function setMapClickEvent() {
 		 
 	//else of the (width < 922)		
 	else {
-		if(desktop == 1 ){
+		if(desktop == true ){
 			return false;
 		}
 			
@@ -204,8 +204,8 @@ function setMapClickEvent() {
 			if  ( notRatedLayer ){
 			mymap.removeLayer(notRatedLayer);}  
 
-				phone = 0;
-				desktop = 1;
+				phone = false;
+				desktop = true;
 	
 	
 			}

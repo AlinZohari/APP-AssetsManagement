@@ -17,7 +17,9 @@
 let userRankingLayer; //endpoint: /userRanking/:user_id
 let closestAssetsLayer; //endpoint: /userFiveClosestAssets/:latitude/:longitude
 let lastFiveReportsLayer; //endpoint: /lastFiveConditionReports/:user_id
-let notRatedLayer; //endpoint: /conditionReportMissing/:user_id
+ //endpoint: /conditionReportMissing/:user_id
+//let conditionLayer; //already being declared at basicMap.js
+
 
 //-----------------------------------------------------------------
 //S1: userRanking()
@@ -39,7 +41,6 @@ function userRanking(){
         }//end of inner function
     });//end of ajax query
 };//end of userRanking() function
-
 
 
 //-----------------------------------------------------------------
@@ -64,7 +65,8 @@ function addLayerClosestAssets(){
     let testMarkerBlue = L.AwesomeMarkers.icon({icon:'play', markerColor: 'blue'});
 
         //alert if there are a layer that is still on
-        if (mymap.hasLayer(closestAssetsLayer)){ //hasLayer reference: https://leafletjs.com/reference.html#map-methods-for-layers-and-controls
+        //hasLayer reference: https://leafletjs.com/reference.html#map-methods-for-layers-and-controls
+        if (typeof closestAssetsLayer !== 'undefined' && mymap.hasLayer(closestAssetsLayer)){
             alert("Five Closest Assets Layer had already been loaded");
         }
         else{
@@ -129,8 +131,8 @@ function addLayerLastFiveReports(){
 	let serviceUrl = document.location.origin + "/api/lastFiveConditionReports/" + user_id; 
 
     //alert if there are a layer that is still on
-    if (mymap.hasLayer(lastFiveReportsLayer)){
-            alert("Last Five Reports Layer had already been loaded");
+    if (typeof lastFiveReportsLayer !== 'undefined' && mymap.hasLayer(lastFiveReportsLayer)){
+        alert("Last Five Reports Layer had already been loaded");
     }
      else{
         
@@ -200,7 +202,7 @@ function removeLayerLastFiveReports(){
 }
 
 
-
+let notRatedLayer; 
 //-----------------------------------------------------------------
 //S4: addLayerNotRated() 
  // function to show assets not rated in last 3 days     
@@ -212,8 +214,14 @@ function removeLayerLastFiveReports(){
     }
 
     let serviceUrl = document.location.origin + "/api/conditionReportMissing/" + user_id; 
-        
-    if (mymap.hasLayer(notRatedLayer)){
+   
+    if (typeof mymap === 'undefined') {
+        console.error('mymap is undefined');
+        return;
+    }
+    
+
+        if (typeof notRatedLayer !== 'undefined' && mymap.hasLayer(notRatedLayer)){
             alert("Condition Report Missing Layer had already been loaded");
         }
         else{
@@ -232,7 +240,7 @@ function removeLayerLastFiveReports(){
             notRatedLayer = L.geoJson(notRated, {
                 pointToLayer: function(feature, latlng) {
 
-                    return L.marker(latlng, {icon:testMarkerGray}).bindPopup("<b> Asset ID: " +feature.properties.id+
+                    return L.marker(latlng, {icon:testMarkerGray}).bindPopup("<b> Asset ID: " +feature.properties.asset_id+
                     "<br> Asset Name: " +feature.properties.asset_name+
                     "<br> Latest Condition Report Date: " +feature.properties.latest_condition_report_date+ 
                     "<br> Condition Description: " +feature.properties.condition_description+ "</b>");
