@@ -17,7 +17,7 @@
 let userRankingLayer; //endpoint: /userRanking/:user_id
 let closestAssetsLayer; //endpoint: /userFiveClosestAssets/:latitude/:longitude
 let lastFiveReportsLayer; //endpoint: /lastFiveConditionReports/:user_id
- //endpoint: /conditionReportMissing/:user_id
+let notRatedLayer; //endpoint: /conditionReportMissing/:user_id
 //let conditionLayer; //already being declared at basicMap.js
 
 
@@ -105,7 +105,7 @@ function addLayerClosestAssets(){
 //S2: removeLayerClosestAssets()
 function removeLayerClosestAssets(){
 
-    if(mymap.hasLayer(closestAssetsLayer) == true){  
+    if(typeof closestAssetsLayer !== 'undefined' && mymap.hasLayer(closestAssetsLayer)){  
         mymap.removeLayer(closestAssetsLayer);
         
         //add back the condition Layer -the standard one back to the map
@@ -189,7 +189,7 @@ function addLayerLastFiveReports(){
 //S3: removeLayerLastFiveReports()
 function removeLayerLastFiveReports(){
 
-    if(mymap.hasLayer(lastFiveReportsLayer) == true){
+    if(typeof lastFiveReportsLayer !== 'undefined' && mymap.hasLayer(lastFiveReportsLayer)){  
         mymap.removeLayer(lastFiveReportsLayer);
 
         //add back the condition Layer -the standard one back to the map
@@ -202,7 +202,7 @@ function removeLayerLastFiveReports(){
 }
 
 
-let notRatedLayer; 
+
 //-----------------------------------------------------------------
 //S4: addLayerNotRated() 
  // function to show assets not rated in last 3 days     
@@ -259,8 +259,8 @@ let notRatedLayer;
 //------------------------
 //S4: removeLayerNotRated()
 function removeLayerNotRated(){
-
-    if(mymap.hasLayer(notRatedLayer) == true){
+    
+    if(typeof notRatedLayer !== 'undefined' && mymap.hasLayer(notRatedLayer)){  
         mymap.removeLayer(notRatedLayer);
 
     //add back the condition Layer -the standard one back to the map
