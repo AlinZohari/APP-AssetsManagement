@@ -23,7 +23,7 @@ let notRatedLayer; //endpoint: /conditionReportMissing/:user_id
 //S1: userRanking()
 function userRanking(){
 
-    let serviceUrl = document.location.origin + "api/userRanking/" + user_id;
+    let serviceUrl = document.location.origin + "/api/userRanking/" + user_id;
 
     $.ajax({
         url:serviceUrl,
@@ -58,7 +58,7 @@ function addLayerClosestAssets(){
     console.log(latitude);
     console.log(longitude);
 
-    let serviceUrl = document.location.origin + "api/userFiveClosestAssets/" + latitude + "/" + longitude;
+    let serviceUrl = document.location.origin + "/api/userFiveClosestAssets/" + latitude + "/" + longitude;
 
     //making the marker - default blue
     let testMarkerBlue = L.AwesomeMarkers.icon({icon:'play', markerColor: 'blue'});

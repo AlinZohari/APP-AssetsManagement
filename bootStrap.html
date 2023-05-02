@@ -58,11 +58,11 @@
 
 
 </head>
-<body onload="loadMap()" > 
+<!--<body onload="loadMap()" > 
     <div class="container-xxl position-relative bg-white p-0">
 
 <body onresize="processWindowResize()">
-    <div class="container-fluid position-relative bg-warning p-0">
+    <div class="container-fluid position-relative bg-warning p-0"> -->
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-3 pb-3">
@@ -243,16 +243,16 @@
 <!--the following script will load the map and set the default view and zoom, as wel as loading the basemap title -->
 <script>
 
-function loadMap(){
-    loadLeafletMap();
+//function loadMap(){
+    //loadLeafletMap();
 
-}//end of loadMap
+//}//end of loadMap
 
 //code to load the map when the page is loaded
 //loading the leaflet map and Eartquake (AFTER)
 document.addEventListener('DOMContentLoaded', function(){
     userId();
-    loadMap();
+    loadLeafletMap();
 
 },false);
 
