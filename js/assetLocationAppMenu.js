@@ -106,7 +106,7 @@ let layers = [];
                 } // end of for loop
                 
                 //does a close button really necessary? or just by clicking to places other than the tableWrapper
-                tableHTML +='<td> <button type="button" class="close" aria-label= "Close" style= "background-color: white; text-align: center; color: black; width:100px ; right:0%; top: 0%; font-size:12pt; height:30px; position:absolute;" onclick="closeTable();"> X </button></td>';
+                tableHTML +='<td> <button type="button" class="close" aria-label="Close" style= "background-color: white; text-align: center; color: black; width: 100px;  right: 0%;top: 0%; font-size:  12pt; height: 30px; position:absolute; right:0%;" onclick="closeTable();"> Close Table </button></td>';
                 //Reference: https://stackoverflow.com/questions/51380509/add-buttons-in-a-dynamically-generated-table-with-js 
 
                 // close the table
@@ -121,6 +121,7 @@ let layers = [];
         else {
             alert("List of Assets in Best Condition had already been loaded")
         }
+
 }
 
 //--------------------
@@ -164,12 +165,13 @@ function dailyParticipationRates(){
 
     if (graph == false){
         
-        document.getElementById("graphWrapper").style.top = "300px"; 
-        document.getElementById("graphWrapper").style.top="15%"; 
+        document.getElementById("graphWrapper").style.top = "200px"; 
+        document.getElementById("graphWrapper").style.top="20%"; 
+        console.log(document.getElementById("graphWrapper").style.top);
 
         var widtha = document.getElementById("graphWrapper").offsetWidth;
         var heighta = document.getElementById("graphWrapper").offsetHeight;
-        console.log(widtha+", "+heighta);
+        console.log(widtha+" "+heighta);
 
         
         document.getElementById("graphWrapper").innerHTML=document.getElementById("graphWrapper").innerHTML+'<div class="h-75 w-75"><svg width="'+widtha+'" height="'+heighta+'" id="svg1"></svg></div>'
@@ -183,6 +185,7 @@ function dailyParticipationRates(){
         y       = d3.scaleLinear().rangeRound([height, 0]),
         y1      = d3.scaleLinear().rangeRound([height, 0]), //not sure whats the  y1 do
         g       = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
 
         let dailyReportLayer =  document.location.origin + "/api/dailyParticipationRates"
 
@@ -250,8 +253,8 @@ function dailyParticipationRates(){
             //2) reports_not_working
             g.selectAll(".bar.reports_not_working")
             .data(data)
-            .enter().
-            append("rect")
+            .enter()
+            .append("rect")
             .attr("class", "bar reports_not_working")
             .style("fill","#d42a36")
             .attr("x", d => x(d.day))
@@ -263,7 +266,7 @@ function dailyParticipationRates(){
             //Reference: https://d3-graph-gallery.com/graph/custom_legend.html
             svg.append("circle").attr("cx",(widtha/2 + 230)).attr("cy",( heighta - 50)).attr("r", 4).style("fill", "#267bd1")
             svg.append("circle").attr("cx",(widtha/2 + 230)).attr("cy",(heighta -35)).attr("r", 4).style("fill", "#d42a36")
-            svg.append("text").attr("x", (widtha/2) +280 ).attr("y", (heighta - 60)).text("Legend").style("font-size", "13px").attr("alignment-baseline","end")
+            svg.append("text").attr("x", (widtha/2) +280 ).attr("y", (heighta - 60)).text("Legend").style("font-size", "14px").attr("alignment-baseline","end")
             svg.append("text").attr("x",(widtha/2 + 240)).attr("y", (heighta - 45)).text("Reports submitted").style("font-size", "12px").attr("alignment-baseline","end")
             svg.append("text").attr("x", (widtha/2 + 240)).attr("y",(heighta - 30)).text("Reports with condition 'not working'").style("font-size", "12px").attr("alignment-baseline","end")
 
@@ -283,15 +286,13 @@ function dailyParticipationRates(){
 
             }) //end of d3.json
 
-    graph = true;
-    } //end of the if (graph == false)
 
-    else {
+    graph = true;} //end of the if (graph == false)
+    else if( graph == true) {
         alert("Graph of Daily Reporting Rates had already been loaded")
-        
     }
-
-};// end of dailyParticipationRates() function
+    
+} //end of dailyParticipationRates() function
 
 //--------------------
 function closeGraph() { 
