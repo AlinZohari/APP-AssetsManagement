@@ -1,8 +1,6 @@
 # FrontEnd: Asset Creation and Conditon Assesment Application
 *You can find the BackEnd Repository of the application [here](https://github.com/AlinZohari/RESTfulAPI-AssetsManagement)*
 
-
- 
  This is a client side of the  Asset Creation and Conditon Assesment App which consist of a leaflet map and pop up form
  either an Asset Creation Form will pop up in a large screen or a Condition Assesment Report Form in a small screen. <br>
  <br>
